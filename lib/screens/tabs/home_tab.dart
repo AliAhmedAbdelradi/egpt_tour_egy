@@ -4,12 +4,8 @@ import 'package:ept_mate/api_manager/api_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../categories/cultural/Religious_categ.dart';
-import '../categories/cultural/cultural_categ.dart';
-import '../categories/cultural/leisure_categ.dart';
-import '../categories/cultural/medical_categ.dart';
 import '../city_res_cat.dart';
-import '../tourism_res_cat.dart';
+
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -29,7 +25,7 @@ class HomeTab extends StatelessWidget {
       final cate = snapshot.data?.data ?? [];
       return SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(30),
+          padding: const EdgeInsets.all(40),
           child:
           Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             const Text("Find Your category",
@@ -38,22 +34,21 @@ class HomeTab extends StatelessWidget {
                     fontSize: 22,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.bold)),
-            const SizedBox(
-              height: 10,
+              SizedBox(
+              height:10.h,
             ),
             InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, CityResCat.routeName);
                 },
-                child: Image(
-                    image: AssetImage("assets/images/pyramids.png"))),
+                child:  Image.network(cate[0].imageLink??"")),
             SizedBox(
               height: 7.h,
             ),
             Text(cate[0].name ?? "",
                 style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 15),),
             SizedBox(
-              height: 7.h,
+              height: 10.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -63,8 +58,7 @@ class HomeTab extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, CityResCat.routeName);
                     },
-                    child: const Image(
-                        image: AssetImage("assets/images/Leisure.png")),
+                    child:  Image.network(cate[1].imageLink??""),
                   ),
                 ),
                 SizedBox(
@@ -75,14 +69,13 @@ class HomeTab extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, CityResCat.routeName);
                     },
-                    child: const Image(
-                        image: AssetImage("assets/images/Religion.png")),
+                    child: Image.network(cate[2].imageLink??""),
                   ),
                 )
               ],
             ),
             SizedBox(
-              height: 7.h,
+              height: 10.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -98,17 +91,16 @@ class HomeTab extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 7.h,
+              height: 10.h,
             ),
             Center(
                 child: InkWell(
                     onTap: () {
                       Navigator.pushNamed(context, CityResCat.routeName);
                     },
-                    child: const Image(
-                        image: AssetImage("assets/images/Medical.png")))),
+                    child:  Image.network(cate[3].imageLink??""))),
             SizedBox(
-              height: 7.h,
+              height: 10.h,
             ),
             Text(
               cate[3].name ?? "",

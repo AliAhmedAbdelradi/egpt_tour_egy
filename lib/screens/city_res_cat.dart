@@ -1,8 +1,9 @@
 import 'package:ept_mate/api_manager/api_manager.dart';
-import 'package:ept_mate/screens/places/place_det.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'categories/cultural/image_categ.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class CityResCat extends StatelessWidget {
   static const String routeName = "cityres";
@@ -79,18 +80,38 @@ class CityResCat extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, PlaceDet.routeName);
-                          },
-                          child: ImageCateg("", cate[index].name ?? "")),
+                      Row(
+                        children: [
+                          Container(
+                              width: 130.w,
+                              height: 90.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: Image.network(cate[index].imageLink ?? "")),
+                          Spacer(),
+                          Text(
+                            cate[index].name ?? "",
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.normal, color: Colors.black, fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      Center(
+                        child: Text(
+                          cate[index].description ?? "",
+                          style: GoogleFonts.poppins(),
+                        ),
+                      ),
+
+
+
+
                     ],
                   );
                 },
                 separatorBuilder: (context, index) {
                   return Divider(
-                    endIndent: 80,
-                    indent: 80,
+                    thickness: 2,
                   );
                 },
                 itemCount: cate.length,
