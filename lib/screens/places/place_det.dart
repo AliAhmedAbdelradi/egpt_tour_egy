@@ -1,9 +1,12 @@
 
 
 
+import 'package:ept_mate/api_manager/api_manager.dart';
 import 'package:ept_mate/screens/places/place_cat.dart';
 import 'package:ept_mate/screens/places/place_shape.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../Add_places/find_places.dart';
 import '../plan_type_screen/plan_type.dart';
@@ -25,10 +28,10 @@ class _PlaceDetState extends State<PlaceDet> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.popAndPushNamed(context, PlanType.routeName);
+              Navigator.pop(context);
             },
             icon: Icon(
-              Icons.cancel_outlined,
+              Icons.arrow_back,
               color: Colors.black,
               size: 30,
             )),
@@ -40,56 +43,60 @@ class _PlaceDetState extends State<PlaceDet> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, Add_places.routeName,);
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [place_shape("assets/images/pyramids_place.png")],
+      body: FutureBuilder(future: ApiManger.getPlaces(), builder: (context, snapshot) {
+        if(snapshot.connectionState==ConnectionState.waiting){
+          return Center(child: CircularProgressIndicator());
+        }
+        if(snapshot.hasError){
+          return Center(child: Text(snapshot.error.toString()));
+
+        }
+
+
+        final cate = snapshot.data?.data??[];
+
+        return   SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image(
+                image: AssetImage("assets/images/tower.png"),
+                width: 328.w,
+                height: 370.h,
               ),
-            ),
-            PlaceCat(
-              "pyramids",
-              "5.0",
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            InkWell(
-              onTap: () {},
-              child: Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [place_shape("assets/images/cairo_tower_place.png")],
+                children: [
+                  Text(cate[0].name??"",
+                      style: GoogleFonts.poppins(
+                          fontSize: 25,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
+                  Container(
+                      margin: EdgeInsets.only(left: 90), child: Text(cate[0].rate.toString()+".0"??"")),
+                  Icon(
+                    Icons.star,
+                    color: Colors.black87,
+                    size: 12,
+                  )
+                ],
               ),
-            ),
-            PlaceCat(
-              " cairo tower",
-              "5.0",
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            InkWell(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [place_shape("assets/images/EMC_place.png")],
+              SizedBox(height: 15.h),
+              Center(
+                child: Container(
+                    margin: EdgeInsets.only(left: 10.w),
+                    child: Text(
+                        cate[0].description??"",
+                        style: GoogleFonts.poppins(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w300))),
               ),
-            ),
-            PlaceCat(
-              "Egyptian museum cairo",
-              "5.0",
-            ),
-            Btn1(Color(0xFF89C9FF), Colors.white, "Back", () {
-              Navigator.pop(context);
-            })
-          ],
-        ),
-      ),
+
+            ],
+          ),
+        );
+      },)
     );
   }
 }

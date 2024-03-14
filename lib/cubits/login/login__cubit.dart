@@ -19,6 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
     DioHelper.postData(url: '/api/Adminstration/Login', data: {
       'password': password,
       'userName': userName,
+
     }).then((value) {
       userModel = UserModel.fromJson(value.data);
       Navigator(initialRoute: HomeScreen.routeName,);
@@ -27,5 +28,6 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginErrorState(error.toString()));
       print(error.toString());
     });
+
   }
 }

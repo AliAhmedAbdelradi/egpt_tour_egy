@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../screens/Add_places/find_places.dart';
@@ -24,9 +25,10 @@ import '../screens/select_city/Select_City_Screen.dart';
 import '../screens/sing_in.dart';
 import '../screens/sing_up.dart';
 import '../screens/tabs/location_tab.dart';
+import '../screens/tourism_res_cat.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
 
   // This widget is the root of  application.
   @override
@@ -64,6 +66,7 @@ class MyApp extends StatelessWidget {
             PlaceDicrip.routeName: (context) =>    PlaceDicrip(),
             RideRiquest.routeName: (context) =>    RideRiquest(),
             CityResCat.routeName: (context) =>    CityResCat(),
+
           },
         );
       },

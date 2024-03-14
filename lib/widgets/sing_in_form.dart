@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:ept_mate/model/UserModel.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -150,7 +151,9 @@ class _SingInFormState extends State<SingInForm> {
                                 formKey.currentState!.save();
                                 LoginCubit.get(context).UserLogin(
                                     emailController.text,
-                                    passwordController.text);
+                                    passwordController.text,
+
+                                );
                               } else {
                                 autoValidateMode = AutovalidateMode.always;
                                 setState(() {});
@@ -165,6 +168,7 @@ class _SingInFormState extends State<SingInForm> {
       ),
     );
   }
+
 
   void visiblePassword() {
     setState(() {

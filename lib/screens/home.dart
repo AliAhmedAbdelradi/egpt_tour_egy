@@ -1,6 +1,4 @@
 
-
-
 import 'package:ept_mate/screens/plan_type_screen/plan_type.dart';
 import 'package:ept_mate/screens/tabs/home_tab.dart';
 import 'package:ept_mate/screens/tabs/location_tab.dart';
@@ -91,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, PlanType.routeName);
+                    //Navigator.pushNamed(context, PlanType.routeName);
                   },
                 ),
               ])),
