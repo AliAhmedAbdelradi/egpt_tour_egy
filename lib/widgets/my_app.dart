@@ -19,13 +19,14 @@ import '../screens/forget_password.dart';
 import '../screens/home.dart';
 import '../screens/onboarding_screen.dart';
 import '../screens/places/place_det.dart';
+import '../screens/places_By_Cat_And_City.dart';
 import '../screens/plan_type_screen/plan_type.dart';
 import '../screens/request_ride/ride_request.dart';
 import '../screens/select_city/Select_City_Screen.dart';
 import '../screens/sing_in.dart';
 import '../screens/sing_up.dart';
 import '../screens/tabs/location_tab.dart';
-import '../screens/tourism_res_cat.dart';
+
 
 class MyApp extends StatelessWidget {
 
@@ -65,7 +66,8 @@ class MyApp extends StatelessWidget {
             SelectCity.routeName: (context) =>    SelectCity(),
             PlaceDicrip.routeName: (context) =>    PlaceDicrip(),
             RideRiquest.routeName: (context) =>    RideRiquest(),
-            CityResCat.routeName: (context) =>    CityResCat(),
+            //CityResCat.routeName: (context) =>    CityResCat(),
+           // Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
 
           },
         );

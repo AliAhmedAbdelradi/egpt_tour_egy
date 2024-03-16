@@ -1,14 +1,21 @@
 import 'package:ept_mate/api_manager/api_manager.dart';
-import 'package:ept_mate/screens/places_By_Cat_And_City.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CityResCat extends StatelessWidget {
-  static const String routeName = "cityres";
-  String categoryId;
-  CityResCat ({ required this.categoryId});
+class Places_By_cat_And_City extends StatefulWidget {
+  static String routeName = 'Places_By_cat_And_City';
+  String cityID;
+  String CategoryID;
+  Places_By_cat_And_City({ required this.CategoryID, required this.cityID});
 
+
+
+  @override
+  State<Places_By_cat_And_City> createState() => _Places_By_cat_And_CityState();
+}
+
+class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,63 +71,59 @@ class CityResCat extends StatelessWidget {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.all(30),
-          child: FutureBuilder(
-            future: ApiManger.getData(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Center(child: Text(snapshot.error.toString()));
-              }
+            padding: const EdgeInsets.all(30),
+            child: FutureBuilder(
+              future: ApiManger.getPlaceById(categoryId: widget.CategoryID,cityId: widget.cityID),
+              builder: (context, snapshot) {
+                print("111111111111111111111111111111");
+                print(snapshot.data?.data);
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Center(child: Text(snapshot.error.toString()));
+                }
 
-              final cate = snapshot.data?.data ?? [];
+                final cate = snapshot.data?.data ?? [];
 
-              return ListView.separated(
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        child: Row(
+                return ListView.separated(
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Row(
                           children: [
                             Container(
                                 width: 130.w,
                                 height: 90.h,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20)),
-                                child: Image.network(cate[index].imageLink ?? "")
-                             ),
+                                child:
+                                    Image.network(cate[index].imageLink ?? "")),
                             Spacer(),
-                            Text(
-                              cate[index].name ?? "",
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.normal, color: Colors.black, fontSize: 20),
+                            Center(
+                              child: Text(
+                                cate[index].name ?? "",
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                    fontSize: 15),
+                              ),
                             ),
                           ],
                         ),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_)=> Places_By_cat_And_City(cityID: cate[index].id.toString(),CategoryID: categoryId,)));
-                        },
-                      ),
-                      Center(
-                        child: Text(
-                          cate[index].description ?? "",
-                          style: GoogleFonts.poppins(),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    thickness: 2,
-                  );
-                },
-                itemCount: cate.length,
-              );
-            },
-          ),
-        ));
+
+
+                      ],
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      thickness: 2,
+                    );
+                  },
+                  itemCount: cate.length,
+                );
+              },
+            )));
   }
 }
