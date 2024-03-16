@@ -21,16 +21,7 @@ class PlacesModel {
   List<Data>? data;
   int? status;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['success'] = success;
-    map['message'] = message;
-    if (data != null) {
-      map['data'] = data?.map((v) => v.toJson()).toList();
-    }
-    map['status'] = status;
-    return map;
-  }
+
 
 }
 
@@ -64,17 +55,6 @@ class Data {
   int? rateCount;
   int? id;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['categoryId'] = categoryId;
-    map['cityId'] = cityId;
-    map['name'] = name;
-    map['description'] = description;
-    map['imageLink'] = imageLink;
-    map['rate'] = rate;
-    map['rateCount'] = rateCount;
-    map['id'] = id;
-    return map;
-  }
+ 
 
 }

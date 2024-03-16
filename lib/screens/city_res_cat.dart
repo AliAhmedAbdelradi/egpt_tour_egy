@@ -4,11 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CityResCat extends StatelessWidget {
+class CityResCat extends StatefulWidget {
   static const String routeName = "cityres";
   String categoryId;
   CityResCat ({ required this.categoryId});
 
+  @override
+  State<CityResCat> createState() => _CityResCatState();
+}
+
+class _CityResCatState extends State<CityResCat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +105,10 @@ class CityResCat extends StatelessWidget {
                           ],
                         ),
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (_)=> Places_By_cat_And_City(cityID: cate[index].id.toString(),CategoryID: categoryId,)));
+                          setState(() {
+                            Navigator.push(context, MaterialPageRoute(builder: (_)=> Places_By_cat_And_City(cityID: cate[index].id.toString(),CategoryID: widget.categoryId,)));
+                          });
+
                         },
                       ),
                       Center(

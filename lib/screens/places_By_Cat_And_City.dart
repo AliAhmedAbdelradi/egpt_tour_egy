@@ -84,7 +84,7 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                   return Center(child: Text(snapshot.error.toString()));
                 }
 
-                final cate = snapshot.data?.data ?? [];
+                var cate = snapshot.data?.data ?? [];
 
                 return ListView.separated(
                   itemBuilder: (context, index) {

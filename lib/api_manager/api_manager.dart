@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:ept_mate/model/CategoryModel.dart';
 import 'package:ept_mate/model/PlacesModel.dart';
@@ -60,7 +62,7 @@ class ApiManger {
     var response = await dio.get("api/Places/GetByCategoryAndCity?categoryId=${categoryId}&cityId=${cityId}");
     print("2222222222");
     print(response);
-    var  place = PlacesModel.fromJson(response.data) ;
+    var  place = PlacesModel.fromJson(jsonDecode(response.data)) ;
   print("###########");
   print(place);
     return place;
