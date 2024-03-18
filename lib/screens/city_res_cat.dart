@@ -1,20 +1,25 @@
 import 'package:ept_mate/api_manager/api_manager.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-class CityResCat extends StatelessWidget {
+class CityResCat extends StatefulWidget {
   static const String routeName = "cityres";
+
+  @override
+  State<CityResCat> createState() => _CityResCatState();
+}
+
+class _CityResCatState extends State<CityResCat> {
+  bool isvisible = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Container(
-            margin: EdgeInsets.only(top: 10),
-            width: 200.w,
+            margin: EdgeInsets.only(top: 10.h),
+            width: 300.w,
             height: 50.h,
             padding: const EdgeInsets.all(10),
             child: TextFormField(
@@ -63,7 +68,7 @@ class CityResCat extends StatelessWidget {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.all(30),
+          padding: EdgeInsets.only(top: 40.h),
           child: FutureBuilder(
             future: ApiManger.getData(),
             builder: (context, snapshot) {
@@ -76,42 +81,56 @@ class CityResCat extends StatelessWidget {
 
               final cate = snapshot.data?.data ?? [];
 
-              return ListView.separated(
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                              width: 130.w,
-                              height: 90.h,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Image.network(cate[index].imageLink ?? "")),
-                          Spacer(),
-                          Text(
-                            cate[index].name ?? "",
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.normal, color: Colors.black, fontSize: 20),
+                  return SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 250.w,
+                          height: 160.h,
+                          padding: EdgeInsets.all(20),
+
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                  image:
+                                      NetworkImage(cate[index].imageLink ?? ""),
+                                  fit: BoxFit.cover,
+                                  opacity: 0.7)),
+                          child: Column(
+                            children: [
+                              Container(
+                                  alignment: Alignment.topRight,
+                                  child:isvisible? Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.white,
+                                  ):Icon(
+                                    Icons.favorite,
+                                    color: Colors.white,
+                                  )
+
+                              ),
+                              Spacer(),
+                              Container(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Text(
+                                    cate[index].name ?? "",
+                                    style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: Colors.white),
+                                  )),
+                            ],
                           ),
-                        ],
-                      ),
-                      Center(
-                        child: Text(
-                          cate[index].description ?? "",
-                          style: GoogleFonts.poppins(),
                         ),
-                      ),
-
-
-
-
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    thickness: 2,
+                        SizedBox(height: 20,)
+                      ],
+                    ),
                   );
                 },
                 itemCount: cate.length,

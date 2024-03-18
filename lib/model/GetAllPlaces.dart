@@ -1,11 +1,11 @@
-class PlacesModel {
-  PlacesModel({
+class GetAllPlaces {
+  GetAllPlaces({
       this.success, 
       this.message, 
       this.data, 
       this.status,});
 
-  PlacesModel.fromJson(dynamic json) {
+  GetAllPlaces.fromJson(dynamic json) {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
@@ -21,16 +21,7 @@ class PlacesModel {
   List<Data>? data;
   int? status;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['success'] = success;
-    map['message'] = message;
-    if (data != null) {
-      map['data'] = data?.map((v) => v.toJson()).toList();
-    }
-    map['status'] = status;
-    return map;
-  }
+
 
 }
 
@@ -64,17 +55,6 @@ class Data {
   int? rateCount;
   int? id;
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['categoryId'] = categoryId;
-    map['cityId'] = cityId;
-    map['name'] = name;
-    map['description'] = description;
-    map['imageLink'] = imageLink;
-    map['rate'] = rate;
-    map['rateCount'] = rateCount;
-    map['id'] = id;
-    return map;
-  }
+
 
 }
