@@ -42,7 +42,7 @@ class _favouriteScreenState extends State<FavouriteScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(left: 2),
+                          margin:   EdgeInsets.only(left: 2.w),
                           child:  Column(
                             children: [
                               Text(

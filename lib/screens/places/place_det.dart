@@ -19,6 +19,7 @@ class PlaceDet extends StatefulWidget {
 
 class _PlaceDetState extends State<PlaceDet> {
 
+
   bool isvisible=true;
   @override
   Widget build(BuildContext context) {
@@ -99,7 +100,7 @@ class _PlaceDetState extends State<PlaceDet> {
                         InkWell(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return Add_places();
+                            return ScreenAddPlace();
                             },));
                           },
                           child: Container(

@@ -22,11 +22,12 @@ class HomeTab extends StatelessWidget {
         final cate = snapshot.data?.data ?? [];
         return SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: EdgeInsets.all(30),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text("Discover",
-                  style: GoogleFonts.poppins(color: Colors.black,
+              Text("Discover",
+                  style: GoogleFonts.poppins(
+                      color: Colors.black,
                       fontSize: 25,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.bold)),
@@ -81,12 +82,12 @@ class HomeTab extends StatelessWidget {
                     width: 10.w,
                   ),
                   Expanded(
-                    child:  InkWell(
+                    child: InkWell(
                       onTap: () {
                         Navigator.pushNamed(context, CityResCat.routeName);
                       },
                       child: Container(
-                        width: 40.w,
+                          width: 40.w,
                           height: 90.h,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),

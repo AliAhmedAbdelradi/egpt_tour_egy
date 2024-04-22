@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -16,15 +17,15 @@ class ShapePlanCreate extends StatelessWidget {
 
         Image(image: AssetImage(img)),
         Container(
-            margin: EdgeInsets.only(top: 15,left: 20),
+            margin: EdgeInsets.only(top: 15.h,left: 20.w),
             child: Text(txt, style: GoogleFonts.poppins(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),)),
         Container(
-            margin: EdgeInsets.only(top: 100,left: 45),
+            margin: EdgeInsets.only(top: 90.h,left: 45.w),
             child: Text(txt1, style: GoogleFonts.poppins(color: Colors.white,fontSize: 12,fontWeight: FontWeight.w600),)),
         Container(
-          width: 250,
-          height: 40,
-          margin: EdgeInsets.only(top: 140,left: 36),
+          width: 250.w,
+          height: 35.h,
+          margin: EdgeInsets.only(top: 130.h,left: 36.w),
           child: ElevatedButton(
               style: ButtonStyle(
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
@@ -40,14 +41,14 @@ class ShapePlanCreate extends StatelessWidget {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 30,
+                      width: 30.w,
                     ),
                     Icon(
                       Icons.add,
                       color: Colors.black,
                     ),
                     SizedBox(
-                      width: 15,
+                      width: 15.w,
                     ),
                     Text(
                         txt,

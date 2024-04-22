@@ -245,7 +245,7 @@ class _SelectCategoryState extends State<SelectCategory> {
                         },
                         child: Container(
                           height: 71.h,
-                          width: 265.w,
+                          width: 280.w,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10),

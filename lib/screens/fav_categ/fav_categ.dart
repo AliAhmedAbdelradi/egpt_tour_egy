@@ -13,7 +13,7 @@ class FavCateg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 356.w,
-      height: 127.h,
+      height: 131.h,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               bottomLeft:  Radius.circular(20),
@@ -54,9 +54,9 @@ class FavCateg extends StatelessWidget {
               ),
             ]),
           ),
-          SizedBox(height: 16,),
+          SizedBox(height: 16.h,),
           Container(
-            margin: EdgeInsets.only(top: 16),
+            margin: EdgeInsets.only(top: 16.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.end,

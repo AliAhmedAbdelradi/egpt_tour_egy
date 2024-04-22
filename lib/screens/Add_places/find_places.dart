@@ -5,19 +5,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../interactive_map/interactive_map.dart';
 import '../places/place_det.dart';
 import '../plan_type_screen/plan_type.dart';
 import '../request_ride/ride_request.dart';
 import '../select_city/btn1.dart';
 
-class Add_places extends StatefulWidget {
+class ScreenAddPlace extends StatefulWidget {
   static const String routeName = "add places";
 
   @override
-  State<Add_places> createState() => _Add_placesState();
+  State<ScreenAddPlace> createState() => _Add_placesState();
 }
 
-class _Add_placesState extends State<Add_places> {
+class _Add_placesState extends State<ScreenAddPlace> {
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +227,7 @@ class _Add_placesState extends State<Add_places> {
                 children: [
                   InkWell(
                     onTap: () {
-                      //  Navigator.pushNamed(context, places.routeName);
+                       Navigator.pushNamed(context, InteractiveMap.routeName);
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 13),

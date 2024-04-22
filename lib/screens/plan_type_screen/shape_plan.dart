@@ -16,12 +16,12 @@ class ShapePlan extends StatelessWidget {
 
         Image(image: AssetImage(img)),
         Container(
-            margin: EdgeInsets.only(top: 15,left: 20),
+            margin: EdgeInsets.only(top: 15.h,left: 20.w),
             child: Text(txt, style: GoogleFonts.poppins(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),)),
         Container(
-          width: 250,
-          height: 40,
-          margin: EdgeInsets.only(top: 100,left: 30),
+          width: 240.w,
+          height: 33.h,
+          margin: EdgeInsets.only(top: 95.h,left: 30.w),
           child: ElevatedButton(
               style: ButtonStyle(
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(

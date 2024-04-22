@@ -132,7 +132,7 @@ class _DateScreenState extends State<DateScreen> {
                 }),
                 Spacer(),
                 Btn(Colors.white, Color(0xFF89C9FF), "Continue", () {
-                  Navigator.pushNamed(context, Add_places.routeName);
+                  Navigator.pushNamed(context, ScreenAddPlace.routeName);
                 }),
               ],
             )

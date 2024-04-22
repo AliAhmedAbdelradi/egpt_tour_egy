@@ -1,7 +1,5 @@
-
-
-
 import 'package:ept_mate/screens/plan_type_screen/shape_plan.dart';
+import 'package:ept_mate/screens/readyTrips/raedyTrips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +21,7 @@ class PlanType extends StatelessWidget {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 HomeScreen.routeName,
-                (route) => false,
+                    (route) => false,
               );
             },
             icon: Icon(
@@ -69,7 +67,9 @@ class PlanType extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            ShapePlan("assets/images/Rectangle 5.png", "Ready made", () {}),
+            ShapePlan("assets/images/Rectangle 5.png", "Ready made", () {
+              Navigator.pushNamed(context, ReadyTrips.routeName);
+            }),
           ],
         ),
       ),

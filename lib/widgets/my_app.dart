@@ -18,9 +18,11 @@ import '../screens/details_place/place_disc.dart';
 import '../screens/favourte_screen/favourite_Screen.dart';
 import '../screens/forget_password.dart';
 import '../screens/home.dart';
+import '../screens/interactive_map/interactive_map.dart';
 import '../screens/onboarding_screen.dart';
 import '../screens/places/place_det.dart';
 import '../screens/plan_type_screen/plan_type.dart';
+import '../screens/readyTrips/raedyTrips.dart';
 import '../screens/request_ride/ride_request.dart';
 import '../screens/select_city/Select_City_Screen.dart';
 import '../screens/sing_in.dart';
@@ -59,7 +61,7 @@ class MyApp extends StatelessWidget {
             ReligiousCateg.routeName: (context) =>   const ReligiousCateg(),
             DateScreen.routeName: (context) =>   const DateScreen(),
             FavouriteScreen.routeName: (context) =>   const FavouriteScreen(),
-            Add_places.routeName: (context) =>    Add_places(),
+            ScreenAddPlace.routeName: (context) =>    ScreenAddPlace(),
             DaysCounter.routeName: (context) =>    DaysCounter(),
             PlaceDet.routeName: (context) =>    PlaceDet(),
             PlaceDic.routeName: (context) =>    PlaceDic(),
@@ -68,6 +70,8 @@ class MyApp extends StatelessWidget {
             PlaceDicrip.routeName: (context) =>    PlaceDicrip(),
             RideRiquest.routeName: (context) =>    RideRiquest(),
             CityResCat.routeName: (context) =>    CityResCat(),
+            InteractiveMap.routeName: (context) =>    InteractiveMap(),
+            ReadyTrips.routeName: (context) =>    ReadyTrips(),
 
           },
         );
