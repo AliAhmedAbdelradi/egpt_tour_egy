@@ -1,11 +1,11 @@
-class CityAfterEdit {
-  CityAfterEdit({
-      this.success, 
-      this.message, 
-      this.data, 
-      this.status,});
+class SeltectedCategoryModel {
+  SeltectedCategoryModel({
+    this.success,
+    this.message,
+    this.data,
+    this.status,});
 
-  CityAfterEdit.fromJson(Map<String,dynamic> json) {
+  SeltectedCategoryModel.fromJson(dynamic json) {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
@@ -23,15 +23,16 @@ class CityAfterEdit {
 
 
 
+
 }
 
 class Data {
   Data({
-      this.name,
-      this.description,
-      this.placesCounter,
-      this.imageLink,
-      this.id,});
+    this.name,
+    this.description,
+    this.placesCounter,
+    this.imageLink,
+    this.id,});
 
   Data.fromJson(Map<String,dynamic> json) {
     name = json['name'];

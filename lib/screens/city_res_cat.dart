@@ -69,9 +69,9 @@ class _CityResCatState extends State<CityResCat> {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.all(30),
+          padding: EdgeInsets.only(top: 40.h),
           child: FutureBuilder(
-            future: ApiManger.getData(),
+            future: ApiManger.getCity(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -82,47 +82,58 @@ class _CityResCatState extends State<CityResCat> {
 
               final cate = snapshot.data?.data ?? [];
 
-              return ListView.separated(
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 130.w,
-                                height: 90.h,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Image.network(cate[index].imageLink ?? "")
-                             ),
-                            Spacer(),
-                            Text(
-                              cate[index].name ?? "",
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.normal, color: Colors.black, fontSize: 20),
-                            ),
-                          ],
-                        ),
-                        onTap: () {
-                          setState(() {
+                  return SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
                             Navigator.push(context, MaterialPageRoute(builder: (_)=> Places_By_cat_And_City(cityID: cate[index].id.toString(),CategoryID: widget.categoryId,)));
-                          });
+                          },
+                          child: Container(
+                            width: 250.w,
+                            height: 160.h,
+                            padding: EdgeInsets.all(20),
 
-                        },
-                      ),
-                      Center(
-                        child: Text(
-                          cate[index].description ?? "",
-                          style: GoogleFonts.poppins(),
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                    image:
+                                    NetworkImage(cate[index].imageLink ?? ""),
+                                    fit: BoxFit.cover,
+                                    opacity: 0.7)),
+                            child: Column(
+                              children: [
+                                Container(
+                                    alignment: Alignment.topRight,
+                                    child: Icon(
+                                      Icons.favorite_border,
+                                      color: Colors.white,
+                                    )
+
+                                ),
+                                Spacer(),
+                                Container(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text(
+                                      cate[index].name ?? "",
+                                      style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white),
+                                    )),
+                              ],
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(
-                    thickness: 2,
+                        SizedBox(height: 20,)
+                      ],
+                    ),
                   );
                 },
                 itemCount: cate.length,

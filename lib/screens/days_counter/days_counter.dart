@@ -1,16 +1,22 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../../model/CustomizePlaces.dart';
 import '../date_screen/date_screen.dart';
 import '../plan_type_screen/plan_type.dart';
+
 import 'btn2.dart';
 import 'days_container.dart';
 
 class DaysCounter extends StatefulWidget {
   static const String routeName = "DaysCounter";
+  List<Data>data;
+  DaysCounter(this.data);
+
+
+
+
 
   @override
   State<DaysCounter> createState() => _DaysCounterState();
@@ -46,6 +52,7 @@ class _DaysCounterState extends State<DaysCounter> {
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: Column(
+
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -77,7 +84,7 @@ class _DaysCounterState extends State<DaysCounter> {
               child: Column(
                 children: [
                   contain(
-                      "Giza","$valueG",(){
+                      "","$valueG",(){
                     setState(() {
 
                     });

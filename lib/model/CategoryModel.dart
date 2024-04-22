@@ -1,9 +1,11 @@
 class CategoryModel {
+  bool ?isSlected;
   CategoryModel({
       this.success, 
       this.message, 
       this.data, 
-      this.status,});
+      this.status,
+  this.isSlected});
 
   CategoryModel.fromJson(dynamic json) {
     success = json['success'];
@@ -33,7 +35,7 @@ class Data {
       this.imageLink,
       this.id,});
 
-  Data.fromJson(dynamic json) {
+  Data.fromJson(Map<String,dynamic> json) {
     name = json['name'];
     description = json['description'];
     placesCounter = json['placesCounter'];

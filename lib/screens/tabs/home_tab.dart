@@ -45,7 +45,7 @@ class HomeTab extends StatelessWidget {
               Text(
                 cate[0].name ?? "",
                 style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold, fontSize: 15),
+                    fontWeight: FontWeight.bold, fontSize: 18),
               ),
               SizedBox(
                 height: 10.h,
@@ -65,7 +65,7 @@ class HomeTab extends StatelessWidget {
                     width: 10.w,
                   ),
                   Expanded(
-                    child: InkWell(
+                    child:  InkWell(
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (_)=> CityResCat(categoryId:cate[2].id.toString())));
                       },
@@ -92,23 +92,7 @@ class HomeTab extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10.h,
-              ),
-              Center(
-                  child: InkWell(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=> CityResCat(categoryId:cate[3].id.toString())));
-                      },
-                      child: Image.network(cate[3].imageLink ?? ""))),
-              SizedBox(
-                height: 10.h,
-              ),
-              Text(
-                cate[3].name ?? "",
-                style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold, fontSize: 15),
-              )
+
             ]),
           ),
         );

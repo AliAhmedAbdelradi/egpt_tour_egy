@@ -1,11 +1,6 @@
 
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../places/place_det.dart';
 import '../plan_type_screen/plan_type.dart';
 import '../request_ride/ride_request.dart';
 import '../select_city/btn1.dart';
@@ -184,7 +179,7 @@ class _Add_placesState extends State<Add_places> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, PlaceDet.routeName);
+
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 13),

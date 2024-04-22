@@ -1,11 +1,11 @@
-class PlaceByIDModel {
-  PlaceByIDModel({
+class GetAllPlaces {
+  GetAllPlaces({
     this.success,
     this.message,
     this.data,
     this.status,});
 
-  PlaceByIDModel.fromJson(dynamic json) {
+  GetAllPlaces.fromJson(dynamic json) {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
@@ -21,19 +21,20 @@ class PlaceByIDModel {
   List<Data>? data;
   int? status;
 
-}
 
+
+}
 
 class Data {
   Data({
-      this.categoryId,
-      this.cityId,
-      this.name,
-      this.description,
-      this.imageLink,
-      this.rate,
-      this.rateCount,
-      this.id,});
+    this.categoryId,
+    this.cityId,
+    this.name,
+    this.description,
+    this.imageLink,
+    this.rate,
+    this.rateCount,
+    this.id,});
 
   Data.fromJson(dynamic json) {
     categoryId = json['categoryId'];

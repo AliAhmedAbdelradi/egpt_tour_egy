@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../places/place_cat.dart';
-import '../places/place_shape.dart';
+
 
 class PlaceDic extends StatelessWidget {
   static const String routeName = "dic";
@@ -33,28 +32,28 @@ class PlaceDic extends StatelessWidget {
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [place_shape("assets/images/pyramids_place.png")],
+
               ),
             ),
-            PlaceCat("pyramids", "5.0",),
+
             SizedBox(height: 15.h,),
             InkWell(
               onTap: (){},
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [place_shape("assets/images/cairo_tower_place.png")],
+
               ),
             ),
-            PlaceCat(" cairo tower", "5.0",),
+
             SizedBox(height: 15.h,),
             InkWell(
               onTap: (){},
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [place_shape("assets/images/EMC_place.png")],
+
               ),
             ),
-            PlaceCat("Egyptian museum cairo", "5.0",),
+
 
           ],
         ),

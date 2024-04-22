@@ -1,17 +1,19 @@
-class PlacesModel {
-  PlacesModel({
+class CustomizePlaces {
+  CustomizePlaces({
       this.success, 
       this.message, 
       this.data, 
       this.status,});
 
-  PlacesModel.fromJson(dynamic json) {
+  CustomizePlaces.fromJson( dynamic json) {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
+        data?.add(Data.fromJson(v[0]));
+
+
       });
     }
     status = json['status'];
@@ -20,6 +22,7 @@ class PlacesModel {
   String? message;
   List<Data>? data;
   int? status;
+
 
 
 
@@ -55,6 +58,6 @@ class Data {
   int? rateCount;
   int? id;
 
- 
+
 
 }

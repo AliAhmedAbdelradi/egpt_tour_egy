@@ -1,11 +1,11 @@
-class CityAfterEdit {
-  CityAfterEdit({
+class PlaceModel {
+  PlaceModel({
       this.success, 
       this.message, 
       this.data, 
       this.status,});
 
-  CityAfterEdit.fromJson(Map<String,dynamic> json) {
+  PlaceModel.fromJson(Map<String,dynamic> json) {
     success = json['success'];
     message = json['message'];
     if (json['data'] != null) {
@@ -27,23 +27,32 @@ class CityAfterEdit {
 
 class Data {
   Data({
-      this.name,
-      this.description,
-      this.placesCounter,
-      this.imageLink,
+      this.categoryId, 
+      this.cityId, 
+      this.name, 
+      this.description, 
+      this.imageLink, 
+      this.rate, 
+      this.rateCount, 
       this.id,});
 
   Data.fromJson(Map<String,dynamic> json) {
+    categoryId = json['categoryId'];
+    cityId = json['cityId'];
     name = json['name'];
     description = json['description'];
-    placesCounter = json['placesCounter'];
     imageLink = json['imageLink'];
+    rate = json['rate'];
+    rateCount = json['rateCount'];
     id = json['id'];
   }
+  int? categoryId;
+  int? cityId;
   String? name;
   String? description;
-  int? placesCounter;
   String? imageLink;
+  int? rate;
+  int? rateCount;
   int? id;
 
 

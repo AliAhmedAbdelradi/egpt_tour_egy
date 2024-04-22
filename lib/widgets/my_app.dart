@@ -18,8 +18,6 @@ import '../screens/favourte_screen/favourite_Screen.dart';
 import '../screens/forget_password.dart';
 import '../screens/home.dart';
 import '../screens/onboarding_screen.dart';
-import '../screens/places/place_det.dart';
-import '../screens/places_By_Cat_And_City.dart';
 import '../screens/plan_type_screen/plan_type.dart';
 import '../screens/request_ride/ride_request.dart';
 import '../screens/select_city/Select_City_Screen.dart';
@@ -51,7 +49,7 @@ class MyApp extends StatelessWidget {
             const ForgetPasswordScreen(),
             PlanType.routeName: (context) =>   const PlanType(),
             CreateTrip.routeName: (context) =>   const CreateTrip(),
-            SelectCategory.routeName: (context) =>   const SelectCategory(),
+         //  SelectCategory.routeName: (context) =>   const SelectCategory(categoryId: '',),
             CulturalCateg.routeName: (context) =>   const CulturalCateg(),
             LeisureCateg.routeName: (context) =>   const LeisureCateg(),
             MedicalCateg.routeName: (context) =>   const MedicalCateg(),
@@ -59,14 +57,14 @@ class MyApp extends StatelessWidget {
             DateScreen.routeName: (context) =>   const DateScreen(),
             FavouriteScreen.routeName: (context) =>   const FavouriteScreen(),
             Add_places.routeName: (context) =>    Add_places(),
-            DaysCounter.routeName: (context) =>    DaysCounter(),
-            PlaceDet.routeName: (context) =>    PlaceDet(),
+            //DaysCounter.routeName: (context) =>    DaysCounter(),
             PlaceDic.routeName: (context) =>    PlaceDic(),
             LocationTab.routeName: (context) =>    LocationTab(),
-            SelectCity.routeName: (context) =>    SelectCity(),
+            //SelectCity.routeName: (context) =>    SelectCity(),
             PlaceDicrip.routeName: (context) =>    PlaceDicrip(),
             RideRiquest.routeName: (context) =>    RideRiquest(),
-            //CityResCat.routeName: (context) =>    CityResCat(),
+            SelectCategory.routeName: (context) =>    SelectCategory(CategoryId: '',),
+            CityResCat.routeName: (context) =>    CityResCat(categoryId: '',),
            // Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
 
           },

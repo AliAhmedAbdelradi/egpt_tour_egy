@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int index = 0;
-  List<Widget> tabs = const [
+  List<Widget> tabs =  [
     HomeTab(),
     SearchTab(),
     LocationTab(),
@@ -34,11 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: Drawer(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           backgroundColor: Colors.white,
           child: ListView(
 
-              // Important: Remove any padding from the ListView.
+            // Important: Remove any padding from the ListView.
               padding: EdgeInsets.zero,
               children: [
                 DrawerHeader(
@@ -51,11 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Row(
                     children: [
                       Icon(Icons.airplanemode_active_sharp),
-                        SizedBox(width: 10,),
-                        Text('Trip Plans',style:GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),),
+                      SizedBox(width: 10,),
+                      Text('Trip Plans',style:GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),),
                     ],
                   ),
                   onTap: () {
@@ -66,11 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Row(
                     children: [
                       Icon(Icons.favorite),
-                        SizedBox(width: 10,),
-                        Text('Favorite',style:GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),),
+                      SizedBox(width: 10,),
+                      Text('Favorite',style:GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),),
                     ],
                   ),
                   onTap: () {
@@ -81,11 +81,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Row(
                     children: [
                       Icon(Icons.settings),
-                        SizedBox(width: 10,),
-                        Text('Settings',style:GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),),
+                      SizedBox(width: 10,),
+                      Text('Settings',style:GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),),
                     ],
                   ),
                   onTap: () {
