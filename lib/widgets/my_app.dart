@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
             RideRiquest.routeName: (context) =>    RideRiquest(),
             SelectCategory.routeName: (context) =>    SelectCategory(CategoryId: '',),
             CityResCat.routeName: (context) =>    CityResCat(categoryId: '',),
+           /// DaysCounter.routeName: (context) =>    const DaysCounter(),
            // Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
 
           },

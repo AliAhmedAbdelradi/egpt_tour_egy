@@ -1,18 +1,35 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:ept_mate/model/CategoryModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../model/CityAfterEdit.dart';
 import '../model/CustomizePlaces.dart';
 import '../model/PlaceModel.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart'; // Import PrettyDioLogger
 
-class ApiManger {
-  static String Authorization =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4ZGFiYzljMy0zNmQxLTQyM2QtOTRhNC02OTJjMjY3ZTBiYTciLCJVc2VySUQiOiI4ZGFiYzljMy0zNmQxLTQyM2QtOTRhNC02OTJjMjY3ZTBiYTciLCJuYmYiOjE3MTM4MDE2NzksImV4cCI6MTcxMzgxMjQ3OSwiaWF0IjoxNzEzODAxNjc5LCJpc3MiOiJFR3lwdFRvdXJNYXRlQXBpIiwiYXVkIjoiU2VjdXJlQXBpVXNlciJ9.upuUmoZqQ57QGnqu52IQcOkem2Sb1zmLyO0I-8DUaJc';
+class ApiManager {
+  static Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(
+        'token'); // Assuming 'token' is the key for your token in SharedPreferences
+  }
+
   static Future<CityAfterEdit?> getData() async {
     Dio dio = Dio();
     String url =
         'https://egypttourmate-001-site1.etempurl.com/api/CityCategory/GetAll';
-    dio.options.headers = {'Authorization': 'bearerey $Authorization'};
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+    dio.interceptors.add(
+      PrettyDioLogger(
+        requestBody: true,
+        requestHeader: true,
+        responseHeader: true,
+      ),
+    );
+
     var response = await dio.get(url);
     var data = CityAfterEdit.fromJson(response.data);
     return data;
@@ -22,7 +39,11 @@ class ApiManger {
     Dio dio = Dio();
     String url =
         'https://egypttourmate-001-site1.etempurl.com/api/TourismCategories/GetAll';
-    dio.options.headers = {'Authorization': 'bearer $Authorization'};
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+
     var response = await dio.get(url);
     var category = CategoryModel.fromJson(response.data);
     return category;
@@ -32,7 +53,11 @@ class ApiManger {
     Dio dio = Dio();
     String url =
         'https://egypttourmate-001-site1.etempurl.com/api/CityCategory/GetAll';
-    dio.options.headers = {'Authorization': 'bearer $Authorization'};
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+
     var response = await dio.get(url);
     var city = CityAfterEdit.fromJson(response.data);
     return city;
@@ -40,29 +65,21 @@ class ApiManger {
 
   static String url = 'https://egypttourmate-001-site1.etempurl.com/';
 
-  static Future<PlaceModel?> getPlaceById(
-      {required String categoryId, required String cityId}) async {
-    BaseOptions options = BaseOptions(
-      baseUrl: url,
-      contentType: 'application/json',
-      receiveDataWhenStatusError: true,
-    );
-    Dio dio = Dio(options);
-
-    dio.options.headers = {'Authorization': 'bearer $Authorization'};
-    print(categoryId);
-    print(cityId);
+  static Future<PlaceModel?> getPlaceById({
+    required String categoryId,
+    required String cityId,
+  }) async {
+    Dio dio = Dio();
+    String url = 'https://egypttourmate-001-site1.etempurl.com/';
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
 
     var response = await dio.get(
-        "api/Places/GetByCategoryAndCity?categoryId=${categoryId}&cityId=${cityId}");
+        "$url/api/Places/GetByCategoryAndCity?categoryId=$categoryId&cityId=$cityId");
 
-    print("2222222222");
-    print(response);
     var place = PlaceModel.fromJson(jsonDecode(response.data["data"]));
-    print(place);
-
-    print("###########");
-    print(place);
     return place;
   }
 }

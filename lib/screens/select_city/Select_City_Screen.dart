@@ -1,16 +1,14 @@
-import 'package:ept_mate/screens/days_counter/days_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../api_manager/api_manager.dart';
 import '../plan_type_screen/plan_type.dart';
 import 'btn1.dart';
+import 'package:ept_mate/screens/days_counter/days_counter.dart';
 
 class SelectCity extends StatefulWidget {
   static String routeName = "select city";
-  String CategoryId;
-
-
+  final String CategoryId;
 
   SelectCity({required this.CategoryId});
 
@@ -19,292 +17,159 @@ class SelectCity extends StatefulWidget {
 }
 
 class _SelectCityState extends State<SelectCity> {
-  bool isvisible = false;
-  bool asvisible = false;
-  bool ssvisible = false;
-  bool fsvisible = false;
+  List<String> selectedCountries = []; // List to store selected countries
 
-  //late String CategoryID;
+  // Fetching state
+  bool isDataLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.popAndPushNamed(context, PlanType.routeName);
-              },
-              icon: Icon(
-                Icons.cancel_outlined,
-                color: Colors.black,
-                size: 30,
-              )),
-          actions: [
-            ImageIcon(
-              AssetImage("assets/images/logo.png"),
-              color: Colors.black,
-              size: 50,
-            )
-          ],
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.popAndPushNamed(context, PlanType.routeName);
+          },
+          icon: Icon(
+            Icons.cancel_outlined,
+            color: Colors.black,
+            size: 30,
+          ),
         ),
-        backgroundColor: Colors.white,
-        body: FutureBuilder(
-          future: ApiManger.getCity(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.hasError) {
-              return Center(child: Text("error"));
-            }
-            final cate = snapshot.data?.data ?? [];
+        actions: [
+          ImageIcon(
+            AssetImage("assets/images/logo.png"),
+            color: Colors.black,
+            size: 50,
+          )
+        ],
+      ),
+      backgroundColor: Colors.white,
+      body: FutureBuilder(
+        future: ApiManager.getCity(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text("Error"));
+          }
+          final categories = snapshot.data?.data ?? [];
 
-            return Padding(
-              padding: const EdgeInsets.all(13),
+          return Padding(
+            padding: EdgeInsets.all(13),
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("where are you going? ",
-                      style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontSize: 35,
-                          fontWeight: FontWeight.w600)),
-                  SizedBox(
-                    height: 10.h,
+                  Text(
+                    "Where are you going?",
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 35,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                  Text("Step 3",
-                      style: GoogleFonts.poppins(
-                          color: Colors.black38,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600)),
-                  SizedBox(
-                    height: 30.h,
+                  SizedBox(height: 10.h),
+                  Text(
+                    "Step 3",
+                    style: GoogleFonts.poppins(
+                      color: Colors.black38,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                  Row(
-                    children: [
-                      InkWell(
+                  SizedBox(height: 30.h),
+                  // Displaying categories
+                  Column(
+                    children: List.generate(categories.length, (index) {
+                      final category = categories[index];
+                      return InkWell(
                         onTap: () {
                           setState(() {
-                            isvisible=!isvisible;
+                            if (selectedCountries.contains(category.name)) {
+                              selectedCountries.remove(category.name);
+                            } else {
+                              selectedCountries.add(category.name??"");
+                            }
                           });
-
                         },
-                        child: Container(
-                          height: 71.h,
-                          width: 260.w,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(width: 0, color: Colors.black)),
-                          child: Row(
-                            children: [
-                              Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.network(cate[0].imageLink ?? "")),
-                              SizedBox(
-                                width: 20.w,
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 71.h,
+                              width: 260.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(width: 0, color: Colors.black),
                               ),
-                              Text(
-                                cate[0].name ?? "",
-                                style: TextStyle(fontSize: 20, color: Colors.black),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Image.network(category.imageLink ?? ""),
+                                  ),
+                                  SizedBox(width: 20.w),
+                                  Text(
+                                    category.name ?? "",
+                                    style: TextStyle(fontSize: 20, color: Colors.black),
+                                  ),
+                                ],
                               ),
-
-
-
-                            ],
-
-                          ),
+                            ),
+                            SizedBox(width: 30.w),
+                            Visibility(
+                              visible: selectedCountries.contains(category.name),
+                              child: Icon(
+                                Icons.done_all,
+                                size: 20,
+                                color: Colors.green,
+                              ),
+                            ),
+                          ],
                         ),
-
-                      ),
-                      SizedBox(
-                        width: 30.w,
-                      ),
-                      Visibility(
-                          visible: isvisible,
-                          child: Icon(
-                            Icons.done_all,
-                            size: 20,
-                            color: Colors.green,
-                          )),
-                    ],
+                      );
+                    }),
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
+                  SizedBox(height: 40.h),
                   Row(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            asvisible=!asvisible;
-                          });
-
+                      Btn1(
+                        Color(0xFF89C9FF),
+                        Colors.white,
+                        "Back",
+                            () {
+                          Navigator.pop(context);
                         },
-                        child: Container(
-                          height: 71.h,
-                          width: 265.w  ,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(width: 0, color: Colors.black)),
-                          child: Row(
-                            children: [
-                              Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.network(cate[1].imageLink ?? "")),
-                              SizedBox(
-                                width: 20.w,
-                              ),
-                              Text(
-                                cate[1].name ?? "",
-                                style: TextStyle(fontSize: 20, color: Colors.black),
-                              ),
-                              Spacer(),
-
-
-                            ],
-
-                          ),
-                        ),
-
                       ),
-                      SizedBox(
-                        width: 30.w,
-                      ),
-                      Visibility(
-                          visible: asvisible,
-                          child: Icon(
-                            Icons.done_all,
-                            size: 20,
-                            color: Colors.green,
-                          )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            ssvisible=!ssvisible;
-                          });
-
-                        },
-                        child: Container(
-                          height: 71.h,
-                          width: 265.w,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(width: 0, color: Colors.black)),
-                          child: Row(
-                            children: [
-                              Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.network(cate[2].imageLink ?? "")),
-                              SizedBox(
-                                width: 20.w,
-                              ),
-                              Text(
-                                cate[2].name ?? "",
-                                style: TextStyle(fontSize: 20, color: Colors.black),
-                              ),
-                              Spacer(),
-
-
-                            ],
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox(
-                        width: 30.w,
-                      ),
-                      Visibility(
-                          visible: ssvisible,
-                          child: Icon(
-                            Icons.done_all,
-                            size: 20,
-                            color: Colors.green,
-                          )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            fsvisible=!fsvisible;
-                          });
-
-                        },
-                        child: Container(
-                          height: 71.h,
-                          width: 265.w,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(width: 0, color: Colors.black)),
-                          child: Row(
-                            children: [
-                              Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.network(cate[3].imageLink ?? "")),
-                              SizedBox(
-                                width: 20.w,
-                              ),
-                              Text(
-                                cate[3].name ?? "",
-                                style: TextStyle(fontSize: 20, color: Colors.black),
-                              ),
-                              Spacer(),
-
-
-                            ],
-
-                          ),
-                        ),
-
-                      ),
-                      SizedBox(
-                        width: 30.w,
-                      ),
-                      Visibility(
-                          visible: fsvisible,
-                          child: Icon(
-                            Icons.done_all,
-                            size: 20,
-                            color: Colors.green,
-                          )),
-                    ],
-                  ),
-                  SizedBox(height: 40.h,),
-                  Row(
-                    children: [
-                      Btn1(Color(0xFF89C9FF), Colors.white, "Back", () {
-                        Navigator.pop(context);
-                      }),
                       Spacer(),
-                      Btn1(Colors.white, Color(0xFF89C9FF), "Continue", () {
-                        Navigator.pushNamed(context, DaysCounter.routeName);
-                      }),
+                      Btn1(
+                        Colors.white,
+                        Color(0xFF89C9FF),
+                        "Continue",
+                            () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => DaysCounter(
+                                countrySelected: selectedCountries,
+
+                                // Pass selected countries
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   )
                 ],
-
               ),
-
-
-            );
-          },
-        ));
+            ),
+          );
+        },
+      ),
+    );
   }
 }

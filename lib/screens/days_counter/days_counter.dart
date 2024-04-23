@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,21 +10,26 @@ import 'days_container.dart';
 
 class DaysCounter extends StatefulWidget {
   static const String routeName = "DaysCounter";
-  List<Data>data;
-  DaysCounter(this.data);
 
+  DaysCounter({
+    super.key,
+    required this.countrySelected,
+    this.cityId,
+    this.catId,
+  });
 
-
-
+  final List<String> countrySelected;
+  int? catId;
+  int? cityId;
 
   @override
   State<DaysCounter> createState() => _DaysCounterState();
 }
 
 class _DaysCounterState extends State<DaysCounter> {
-  int valueG=0;
-  int valueC=0;
-  int valueA=0;
+  int valueG = 0;
+  int valueC = 0;
+  int valueA = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +56,11 @@ class _DaysCounterState extends State<DaysCounter> {
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: Column(
-
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            for (int i = 0; i < widget.countrySelected.length; i++)
+              Card(child: Text("${widget.countrySelected[i]}")),
             Text("How many days are you staying?",
                 style: GoogleFonts.poppins(
                     color: Colors.black,
@@ -83,79 +88,48 @@ class _DaysCounterState extends State<DaysCounter> {
             Expanded(
               child: Column(
                 children: [
-                  contain(
-                      "","$valueG",(){
-                    setState(() {
-
-                    });
+                  contain("", "$valueG", () {
+                    setState(() {});
                     valueG++;
-
-                  },(){
+                  }, () {
                     setState(() {
-                      if(valueG>0){
+                      if (valueG > 0) {
                         valueG--;
+                      } else {
+                        valueG = 0;
                       }
-                      else {
-                        valueG=0;
-                      }
-
                     });
-
-
-                  }
-
-                  ),
+                  }),
                   SizedBox(
                     height: 20.h,
                   ),
-                  contain(
-                      "Cairo","$valueC",(){
-                    setState(() {
-
-                    });
+                  contain("Cairo", "$valueC", () {
+                    setState(() {});
                     valueC++;
-
-                  },(){
+                  }, () {
                     setState(() {
-                      if(valueC>0){
+                      if (valueC > 0) {
                         valueC--;
+                      } else {
+                        valueC = 0;
                       }
-                      else {
-                        valueC=0;
-                      }
-
                     });
-
-
-                  }
-
-                  ),
+                  }),
                   SizedBox(
                     height: 20.h,
                   ),
-                  contain(
-                    "Aswan","$valueA",(){
-                      setState(() {
-
-                      });
+                  contain("Aswan", "$valueA", () {
+                    setState(() {});
                     valueA++;
-
-                  },(){
+                  }, () {
                     setState(() {
-                 if(valueA>0){
-                   valueA--;
-                 }
-                else {
-                   valueA=0;
-            }
-
-                   });
-
-
-                  }
-
-                  ),
-
+                      if (valueA > 0) {
+                        valueA--;
+                      } else {
+                        valueA = 0;
+                      }
+                    });
+                  }),
                 ],
               ),
             ),

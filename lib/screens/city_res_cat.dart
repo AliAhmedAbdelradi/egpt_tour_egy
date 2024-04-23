@@ -71,7 +71,7 @@ class _CityResCatState extends State<CityResCat> {
         body: Padding(
           padding: EdgeInsets.only(top: 40.h),
           child: FutureBuilder(
-            future: ApiManger.getCity(),
+            future: ApiManager.getCity(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());

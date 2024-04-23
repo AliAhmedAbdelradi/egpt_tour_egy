@@ -71,7 +71,7 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
           ],
         ),
         body: FutureBuilder(
-          future: ApiManger.getPlaceById(
+          future: ApiManager.getPlaceById(
               categoryId: widget.CategoryID, cityId: widget.cityID),
           builder: (context, snapshot) {
             print(snapshot.data?.data);
