@@ -83,7 +83,8 @@ class _SelectCityState extends State<SelectCity> {
                   SizedBox(height: 30.h),
                   // Displaying categories
                   Column(
-                    children: List.generate(categories.length, (index) {
+                    children: List.generate(categories.length, (index)
+                    {
                       final category = categories[index];
                       return InkWell(
                         onTap: () {
@@ -117,7 +118,9 @@ class _SelectCityState extends State<SelectCity> {
                                     style: TextStyle(fontSize: 20, color: Colors.black),
                                   ),
                                 ],
+
                               ),
+
                             ),
                             SizedBox(width: 30.w),
                             Visibility(

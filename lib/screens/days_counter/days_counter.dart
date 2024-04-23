@@ -59,8 +59,6 @@ class _DaysCounterState extends State<DaysCounter> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            for (int i = 0; i < widget.countrySelected.length; i++)
-              Card(child: Text("${widget.countrySelected[i]}")),
             Text("How many days are you staying?",
                 style: GoogleFonts.poppins(
                     color: Colors.black,
@@ -88,7 +86,7 @@ class _DaysCounterState extends State<DaysCounter> {
             Expanded(
               child: Column(
                 children: [
-                  contain("", "$valueG", () {
+                  contain("${widget.countrySelected[0]??""}", "$valueG", () {
                     setState(() {});
                     valueG++;
                   }, () {
@@ -103,7 +101,7 @@ class _DaysCounterState extends State<DaysCounter> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  contain("Cairo", "$valueC", () {
+                  contain("${widget.countrySelected[1]??""}", "$valueC", () {
                     setState(() {});
                     valueC++;
                   }, () {
@@ -118,7 +116,7 @@ class _DaysCounterState extends State<DaysCounter> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  contain("Aswan", "$valueA", () {
+                  contain("${widget.countrySelected[2]??""}", "$valueA", () {
                     setState(() {});
                     valueA++;
                   }, () {

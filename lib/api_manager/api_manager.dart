@@ -70,7 +70,7 @@ class ApiManager {
     required String cityId,
   }) async {
     Dio dio = Dio();
-    String url = 'https://egypttourmate-001-site1.etempurl.com/';
+    String url = 'https://egypttourmate-001-site1.etempurl.com';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
@@ -78,8 +78,7 @@ class ApiManager {
 
     var response = await dio.get(
         "$url/api/Places/GetByCategoryAndCity?categoryId=$categoryId&cityId=$cityId");
-
-    var place = PlaceModel.fromJson(jsonDecode(response.data["data"]));
+    var place = PlaceModel.fromJson(response.data);
     return place;
   }
 }

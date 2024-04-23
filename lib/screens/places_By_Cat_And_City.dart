@@ -79,7 +79,7 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
               return Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
+              return Center(child: Text("no data entered"));
             }
             if (snapshot == null) {
               return Center(child: Text("No Data Entry"));

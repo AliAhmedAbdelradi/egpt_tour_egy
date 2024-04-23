@@ -4,6 +4,7 @@ import 'package:ept_mate/screens/tabs/home_tab.dart';
 import 'package:ept_mate/screens/tabs/location_tab.dart';
 import 'package:ept_mate/screens/tabs/profile_tab.dart';
 import 'package:ept_mate/screens/tabs/search_tab.dart';
+import 'package:ept_mate/weather/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,6 +61,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   onTap: () {
                     Navigator.pushNamed(context, PlanType.routeName);
+                  },
+                ),
+                ListTile(
+                  title: Row(
+                    children: [
+                      Icon(Icons.sunny,color: Colors.yellow,),
+                      SizedBox(width: 10,),
+                      Text('weather',style:GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, weatherView.routeName);
                   },
                 ),
                 ListTile(

@@ -1,5 +1,6 @@
 
 
+import 'package:ept_mate/weather/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../screens/Add_places/find_places.dart';
@@ -63,9 +64,10 @@ class MyApp extends StatelessWidget {
             //SelectCity.routeName: (context) =>    SelectCity(),
             PlaceDicrip.routeName: (context) =>    PlaceDicrip(),
             RideRiquest.routeName: (context) =>    RideRiquest(),
+            weatherView.routeName: (context) =>    weatherView(),
             SelectCategory.routeName: (context) =>    SelectCategory(CategoryId: '',),
             CityResCat.routeName: (context) =>    CityResCat(categoryId: '',),
-           /// DaysCounter.routeName: (context) =>    const DaysCounter(),
+           // DaysCounter.routeName: (context) =>    const DaysCounter(),
            // Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
 
           },

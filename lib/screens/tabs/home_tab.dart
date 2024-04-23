@@ -22,13 +22,13 @@ class HomeTab extends StatelessWidget {
         final cate = snapshot.data?.data ?? [];
         return SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(40),
+            padding: const EdgeInsets.all(30),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Text("Find Your category",
+              const Text("Discover",
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 22,
+                      fontSize: 25,
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.bold)),
               SizedBox(
@@ -92,6 +92,19 @@ class HomeTab extends StatelessWidget {
                   ),
                 ],
               ),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> CityResCat(categoryId:cate[3].id.toString())));
+                      },
+                      child: Image.network(cate[3].imageLink ?? "")),
+                  SizedBox(
+                    height: 7.h,
+                  ),
+                  Text(
+                    cate[3].name ?? "",
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
 
             ]),
           ),
