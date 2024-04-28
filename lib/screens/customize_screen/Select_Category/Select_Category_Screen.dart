@@ -1,4 +1,5 @@
-import 'package:ept_mate/model/CategoryModel.dart';
+
+import 'package:ept_mate/model/trip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,6 +22,8 @@ class SelectCategory extends StatefulWidget {
 }
 
 class _SelectCategoryState extends State<SelectCategory> {
+  Trip trip=Trip();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +117,7 @@ class _SelectCategoryState extends State<SelectCategory> {
                               Icon(Icons.close, color: Colors.white),
                         ),
                         onTap: () {
-                          String x = cate[0].id as String;
+                          trip.typeID?.add(cate[0].id??0);
                         },
                       ),
                     ],
@@ -122,8 +125,7 @@ class _SelectCategoryState extends State<SelectCategory> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  Row(
-                    children: [
+                  Row(  children: [
                       Container(
                         height: 71.h,
                         width: 300.w,
@@ -160,7 +162,7 @@ class _SelectCategoryState extends State<SelectCategory> {
                               Icon(Icons.close, color: Colors.white),
                         ),
                         onTap: () {
-                          String y = cate[1].id as String;
+                          trip.typeID?.add(cate[1].id??0);
                         },
                       )
                     ],
@@ -206,7 +208,7 @@ class _SelectCategoryState extends State<SelectCategory> {
                               const Icon(Icons.close, color: Colors.white),
                         ),
                         onTap: () {
-                          String z = cate[2].id as String;
+                          trip.typeID?.add(cate[2].id??0);
                         },
                       ),
                     ],
@@ -252,7 +254,7 @@ class _SelectCategoryState extends State<SelectCategory> {
                               Icon(Icons.close, color: Colors.white),
                         ),
                         onTap: () {
-                          String v = cate[3].id as String;
+                          trip.typeID?.add(cate[3].id??0);
                         },
                       ),
                     ],
@@ -271,7 +273,7 @@ class _SelectCategoryState extends State<SelectCategory> {
                             context,
                             MaterialPageRoute(
                                 builder: (_) =>
-                                    SelectCity(CategoryId: widget.CategoryId)));
+                                    SelectCity(trip:trip)));
                       }),
                     ],
                   )

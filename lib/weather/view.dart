@@ -59,11 +59,14 @@ class _weatherViewState extends State<weatherView> {
 
                             Image(image: AssetImage("assets/images/weather.png"),height: 100,width: 100,),
                             Text(
-                              model!.main.temp.toString(),
+                              "Temp :${model!.main.temp}",
                               style: TextStyle(color: Colors.black),
                             ),
-                            Text(model!.name,
+
+                            Text("Speed 0f wind :${model!.wind.speed}",
                                 style: TextStyle(color: Colors.black)),
+                            Text(model!.name,
+                                style: TextStyle(color: Colors.black,fontSize: 25)),
                           ],
                         ),
                     )

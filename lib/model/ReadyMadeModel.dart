@@ -1,48 +1,51 @@
-class ReadyMadeModel {
-  ReadyMadeModel({
-      this.success, 
-      this.message, 
-      this.data, 
-      this.status,});
+class ReadymadeModel {
+  ReadymadeModel({
+    required this.success,
+    required this.message,
+    required this.data,
+    required this.status,
+  });
+  late final bool success;
+  late final String message;
+  late final List<Data> data;
+  late final int status;
 
-  ReadyMadeModel.fromJson(dynamic json) {
+  ReadymadeModel.fromJson(Map<String, dynamic> json){
     success = json['success'];
     message = json['message'];
-    if (json['data'] != null) {
-      data = [];
-      json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
-      });
-    }
+    data = List.from(json['data']).map((e)=>Data.fromJson(e)).toList();
     status = json['status'];
   }
-  bool? success;
-  String? message;
-  List<Data>? data;
-  int? status;
-
-
 
 }
 
 class Data {
   Data({
-      this.name, 
-      this.duration, 
-      this.countOfPlaces, 
-      this.id,});
+    required this.id,
+    required this.name,
+    required this.duration,
+    required this.placeName,
+    required this.imageLink,
+    required this.cityName,
+    required this.dayNumber,
+  });
+  late final int id;
+  late final String name;
+  late final int duration;
+  late final String placeName;
+  late final String imageLink;
+  late final String cityName;
+  late final int dayNumber;
 
-  Data.fromJson(dynamic json) {
+  Data.fromJson(Map<String, dynamic> json){
+    id = json['id'];
     name = json['name'];
     duration = json['duration'];
-    countOfPlaces = json['countOfPlaces'];
-    id = json['id'];
+    placeName = json['placeName'];
+    imageLink = json['imageLink'];
+    cityName = json['cityName'];
+    dayNumber = json['dayNumber'];
   }
-  String? name;
-  int? duration;
-  int? countOfPlaces;
-  int? id;
-
 
 
 }

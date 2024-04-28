@@ -1,6 +1,8 @@
 
 
-
+import 'package:intl/intl.dart';
+import 'package:ept_mate/api_manager/api_manager.dart';
+import 'package:ept_mate/model/trip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,8 +12,8 @@ import '../customize_screen/Select_Category/btn.dart';
 import '../plan_type_screen/plan_type.dart';
 
 class DateScreen extends StatefulWidget {
-  const DateScreen({super.key});
-
+   DateScreen({required this.trip});
+  Trip trip;
   static const String routeName = "date";
 
   @override
@@ -21,6 +23,7 @@ class DateScreen extends StatefulWidget {
 class _DateScreenState extends State<DateScreen> {
   DateTimeRange? _dateTimeRange;
   DateTime time = DateTime.now();
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
 
   @override
   Widget build(BuildContext context) {
@@ -131,8 +134,9 @@ class _DateScreenState extends State<DateScreen> {
                   Navigator.pop(context);
                 }),
                 Spacer(),
-                Btn(Colors.white, Color(0xFF89C9FF), "Continue", () {
-                  Navigator.pushNamed(context, Add_places.routeName);
+                Btn(Colors.white, Color(0xFF89C9FF), "Continue", () async{
+                await  ApiManager.addTrip(widget.trip);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Add_places(trip: widget.trip,)));
                 }),
               ],
             )
@@ -143,7 +147,7 @@ class _DateScreenState extends State<DateScreen> {
   }
 
   selectDate(BuildContext context) async {
-    final DateTimeRange? res = await showDateRangePicker(
+    final DateTime? res = await showDatePicker(
         context: context,
         firstDate: time,
         currentDate: DateTime.now(),
@@ -153,9 +157,11 @@ class _DateScreenState extends State<DateScreen> {
   setState(() {
 
   });
-  _dateTimeRange=res;
+  _dateTimeRange=DateTimeRange(start: res, end: res.add(Duration(days:widget.trip.dayNums!.reduce((value, element) => value + element))));
 
     }
+    widget.trip.startDate=_dateTimeRange?.start;
+    widget.trip.endDate=_dateTimeRange?.end;
 
   }
 }

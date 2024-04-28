@@ -1,9 +1,11 @@
 
 
+import 'package:ept_mate/screens/readyTrips/readytrip.dart';
 import 'package:ept_mate/weather/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../screens/Add_places/find_places.dart';
+import '../screens/InteractiveMap/interactive_map.dart';
 import '../screens/categories/cultural/Religious_categ.dart';
 import '../screens/categories/cultural/cultural_categ.dart';
 import '../screens/categories/cultural/leisure_categ.dart';
@@ -55,9 +57,9 @@ class MyApp extends StatelessWidget {
             LeisureCateg.routeName: (context) =>   const LeisureCateg(),
             MedicalCateg.routeName: (context) =>   const MedicalCateg(),
             ReligiousCateg.routeName: (context) =>   const ReligiousCateg(),
-            DateScreen.routeName: (context) =>   const DateScreen(),
+           // DateScreen.routeName: (context) =>   const DateScreen(),
             FavouriteScreen.routeName: (context) =>   const FavouriteScreen(),
-            Add_places.routeName: (context) =>    Add_places(),
+            //Add_places.routeName: (context) =>    Add_places(),
             //DaysCounter.routeName: (context) =>    DaysCounter(),
             PlaceDic.routeName: (context) =>    PlaceDic(),
             LocationTab.routeName: (context) =>    LocationTab(),
@@ -67,6 +69,8 @@ class MyApp extends StatelessWidget {
             weatherView.routeName: (context) =>    weatherView(),
             SelectCategory.routeName: (context) =>    SelectCategory(CategoryId: '',),
             CityResCat.routeName: (context) =>    CityResCat(categoryId: '',),
+            Readymade.routeName: (context) =>    Readymade(),
+            InteractiveMap.routeName: (context) =>    InteractiveMap(),
            // DaysCounter.routeName: (context) =>    const DaysCounter(),
            // Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
 

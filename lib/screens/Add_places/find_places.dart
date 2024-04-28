@@ -1,12 +1,16 @@
 
+import 'package:ept_mate/screens/days_counter/days_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../model/trip.dart';
 import '../plan_type_screen/plan_type.dart';
 import '../request_ride/ride_request.dart';
 import '../select_city/btn1.dart';
 
 class Add_places extends StatefulWidget {
   static const String routeName = "add places";
+   Add_places( {required this.trip});
+  Trip trip;
 
   @override
   State<Add_places> createState() => _Add_placesState();
@@ -14,8 +18,14 @@ class Add_places extends StatefulWidget {
 
 class _Add_placesState extends State<Add_places> {
 
+
+
   @override
   Widget build(BuildContext context) {
+    int? first= widget.trip.dayNums?[0];
+    int? second= widget.trip.dayNums?[1];
+    int? third= widget.trip.dayNums?[2];
+
 
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +61,7 @@ class _Add_placesState extends State<Add_places> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("3",
+                          Text("$first",
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff89C9FF))),
                           Text("days",
@@ -78,7 +88,7 @@ class _Add_placesState extends State<Add_places> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("2",
+                            Text("$second",
                                 style: TextStyle(
                                     fontSize: 20, color: Color(0xff89C9FF))),
                             Text("days",
@@ -105,7 +115,7 @@ class _Add_placesState extends State<Add_places> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("1",
+                          Text("$third",
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff89C9FF))),
                           Text("day",
@@ -141,7 +151,7 @@ class _Add_placesState extends State<Add_places> {
                     SizedBox(
                       width: 180.w,
                     ),
-                    Text("3 days",
+                    Text("$first days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
                 ),
@@ -293,13 +303,13 @@ class _Add_placesState extends State<Add_places> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Luxor",
+                      child: Text("Sharm El Sheikh",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                     SizedBox(
-                      width: 180.w,
+                      width: 55.w,
                     ),
-                    Text("2 days",
+                    Text("$second days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
                 ),
@@ -407,13 +417,13 @@ class _Add_placesState extends State<Add_places> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Aswan",
+                      child: Text("Hurghada",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                     SizedBox(
-                      width: 180.w,
+                      width: 150.w,
                     ),
-                    Text("1 days",
+                    Text("$third days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
                 ),

@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../customize_screen/create_trip/create_trip_screen.dart';
 import '../home.dart';
+import '../readyTrips/readytrip.dart';
 
 class PlanType extends StatelessWidget {
   static const String routeName = "plan";
@@ -69,7 +70,9 @@ class PlanType extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            ShapePlan("assets/images/Rectangle 5.png", "Ready made", () {}),
+            ShapePlan("assets/images/Rectangle 5.png", "Ready made", () {
+              Navigator.pushNamed(context, Readymade.routeName);
+            }),
           ],
         ),
       ),

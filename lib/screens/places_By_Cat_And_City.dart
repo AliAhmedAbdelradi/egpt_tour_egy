@@ -1,4 +1,5 @@
 import 'package:ept_mate/api_manager/api_manager.dart';
+import 'package:ept_mate/screens/InteractiveMap/interactive_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -92,40 +93,45 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
               itemBuilder: (context, index) {
                 return Column(
                   children: [
-                    Container(
-                      width: 250.w,
-                      height: 160.h,
-                      padding: EdgeInsets.all(20),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, InteractiveMap.routeName);
+                      },
+                      child: Container(
+                        width: 250.w,
+                        height: 160.h,
+                        padding: EdgeInsets.all(20),
 
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                              image:
-                              NetworkImage(category[index].imageLink ?? ""),
-                              fit: BoxFit.cover,
-                              opacity: 0.7)),
-                      child: Column(
-                        children: [
-                          Container(
-                              alignment: Alignment.topRight,
-                              child: Icon(
-                                Icons.favorite_border,
-                                color: Colors.white,
-                              )
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                                image:
+                                NetworkImage(category[index].imageLink ?? ""),
+                                fit: BoxFit.cover,
+                                opacity: 0.7)),
+                        child: Column(
+                          children: [
+                            Container(
+                                alignment: Alignment.topRight,
+                                child: Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.white,
+                                )
 
-                          ),
-                          Spacer(),
-                          Container(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                category[index].name ?? "",
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    color: Colors.white),
-                              )),
-                        ],
+                            ),
+                            Spacer(),
+                            Container(
+                                alignment: Alignment.bottomLeft,
+                                child: Text(
+                                  category[index].name ?? "",
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.white),
+                                )),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(width: 12,),

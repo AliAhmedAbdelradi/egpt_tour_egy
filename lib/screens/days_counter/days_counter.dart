@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../model/CustomizePlaces.dart';
+import '../../model/trip.dart';
 import '../date_screen/date_screen.dart';
 import '../plan_type_screen/plan_type.dart';
 
@@ -14,11 +15,14 @@ class DaysCounter extends StatefulWidget {
   DaysCounter({
     super.key,
     required this.countrySelected,
+    required this.trip,
     this.cityId,
     this.catId,
   });
 
   final List<String> countrySelected;
+  Trip trip;
+
   int? catId;
   int? cityId;
 
@@ -138,7 +142,8 @@ class _DaysCounterState extends State<DaysCounter> {
                 }),
                 Spacer(),
                 Btn2(Colors.white, Color(0xFF89C9FF), "Continue", () {
-                  Navigator.pushNamed(context, DateScreen.routeName);
+                  widget.trip.dayNums=[valueG,valueC,valueA];
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DateScreen(trip: widget.trip,)));
                 }),
               ],
             )
