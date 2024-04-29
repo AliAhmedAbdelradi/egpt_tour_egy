@@ -5,13 +5,17 @@ class Trip {
   List<int>? placesID=[];
   List<int>? dayNums=[];
   List<int>? typeID=[];
+  List<String>? cityName=[];
+  List<String>? images=[];
   Trip({
      this.nameOfTrip,
     this.startDate,
     this.endDate,
     this.placesID,
     this.dayNums,
-    this.typeID
+    this.typeID,
+    this.cityName,
+
   });
 
   factory Trip.fromJson(Map<String, dynamic> json) {

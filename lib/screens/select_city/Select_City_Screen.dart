@@ -89,7 +89,7 @@ class _SelectCityState extends State<SelectCity> {
                     child: Column(
                       children: List.generate(categories.length, (index)
                       {
-                        final category = categories[index];
+                        final  category = categories[index];
                         return InkWell(
                           onTap: () {
 
@@ -100,6 +100,8 @@ class _SelectCityState extends State<SelectCity> {
                               } else {
                                 selectedCountries.add(category.name??"");
                                 selectedIDS.add(category.id??0);
+                                widget.trip.cityName=selectedCountries;
+
 
                               }
                             });
@@ -169,6 +171,7 @@ class _SelectCityState extends State<SelectCity> {
                               builder: (_) => DaysCounter(
                                 countrySelected: selectedCountries,
                                 trip: widget.trip,
+
 
                                 // Pass selected countries
                               ),
