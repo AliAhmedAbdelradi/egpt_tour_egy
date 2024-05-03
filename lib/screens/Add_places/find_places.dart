@@ -1,26 +1,46 @@
-
-
-
-
+import 'package:ept_mate/screens/AddPlace.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../places/place_det.dart';
+import '../../model/trip.dart';
 import '../plan_type_screen/plan_type.dart';
-import '../request_ride/ride_request.dart';
 import '../select_city/btn1.dart';
 
-class Add_places extends StatefulWidget {
+class planDetails extends StatefulWidget {
   static const String routeName = "add places";
+  String? plus = "+add place";
+  String? plus1 = "+add place";
+  String? plus2 = "+add place";
+
+  planDetails({required this.trip});
+
+
+  Trip trip;
+
 
   @override
-  State<Add_places> createState() => _Add_placesState();
+  State<planDetails> createState() => _planDetailsState();
 }
 
-class _Add_placesState extends State<Add_places> {
+class _planDetailsState extends State<planDetails> {
 
   @override
   Widget build(BuildContext context) {
+    int? first = widget.trip.dayNums?[0];
+    int? second = widget.trip.dayNums?[1];
+    int? third = widget.trip.dayNums?[2];
+    String? name1 = widget.trip.cityName?[0];
+    String? name2 = widget.trip.cityName?[1];
+    String? name3 = widget.trip.cityName?[2];
+    DateTime? start = widget.trip.startDate;
+    var date1 = start?.day;
+    var date2 = date1! + first!;
+    var date3 = date2! + second!;
+    var date4 = date3! + third!;
+    var place1 = widget.trip.placesID?[0];
+    var place2 = widget.trip.placesID?[1];
+    var place3 = widget.trip.placesID?[2];
+    print(start);
+
 
     return Scaffold(
       appBar: AppBar(
@@ -56,16 +76,18 @@ class _Add_placesState extends State<Add_places> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("3",
+                          Text("$first",
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff89C9FF))),
                           Text("days",
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff89C9FF))),
-                          Text("cairo",
-                              style: TextStyle(
-                                fontSize: 15,
-                              )),
+                          Center(
+                            child: Text("$name1",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                )),
+                          ),
                         ],
                       ),
                       height: 80.h,
@@ -83,13 +105,13 @@ class _Add_placesState extends State<Add_places> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("2",
+                            Text("$second",
                                 style: TextStyle(
                                     fontSize: 20, color: Color(0xff89C9FF))),
                             Text("days",
                                 style: TextStyle(
                                     fontSize: 20, color: Color(0xff89C9FF))),
-                            Text("Luxor",
+                            Text("$name2",
                                 style: TextStyle(
                                   fontSize: 15,
                                 )),
@@ -101,7 +123,7 @@ class _Add_placesState extends State<Add_places> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                             border:
-                                Border.all(width: 1.5, color: Colors.black))),
+                            Border.all(width: 1.5, color: Colors.black))),
                   ),
                   SizedBox(
                     width: 30.w,
@@ -110,13 +132,13 @@ class _Add_placesState extends State<Add_places> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("1",
+                          Text("$third",
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff89C9FF))),
                           Text("day",
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff89C9FF))),
-                          Text("Aswan",
+                          Text("$name3",
                               style: TextStyle(
                                 fontSize: 15,
                               )),
@@ -127,8 +149,7 @@ class _Add_placesState extends State<Add_places> {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          border:
-                              Border.all(width: 1.5, color: Colors.black)))
+                          border: Border.all(width: 1.5, color: Colors.black)))
                 ],
               ),
             ),
@@ -140,13 +161,13 @@ class _Add_placesState extends State<Add_places> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Cairo",
+                      child: Text("$name1",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                     SizedBox(
-                      width: 180.w,
+                      width: 90.w,
                     ),
-                    Text("3 days",
+                    Text("$first days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
                 ),
@@ -169,52 +190,7 @@ class _Add_placesState extends State<Add_places> {
                   Icon(Icons.calendar_month),
                   SizedBox(width: 10.w),
                   Text(
-                    "day 1",
-                    style: TextStyle(color: Colors.black87, fontSize: 25),
-                  )
-                ],
-              ),
-
-            ),
-
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, PlaceDet.routeName);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 13),
-                      child: Center(
-                          child: Text(
-                        "+ Add place",
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                      )),
-                      height: 33.h,
-                      width: 159.w,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border:
-                              Border.all(width: 1.5.w, color: Color(0xff89C9FF))),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(Icons.calendar_month),
-                  SizedBox(width: 10.w),
-                  Text(
-                    "day 2",
+                    "from ($date1) to ($date2) ",
                     style: TextStyle(color: Colors.black87, fontSize: 25),
                   )
                 ],
@@ -225,66 +201,38 @@ class _Add_placesState extends State<Add_places> {
               child: Row(
                 children: [
                   InkWell(
-                    onTap: () {
-                      //  Navigator.pushNamed(context, places.routeName);
+                    onTap: () async {
+                      var selectedData = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  AddPlace(placeID: '$place1')));
+                      setState(() {
+                        // Update the state with the selected data received from AddPlace screen
+                        // Assuming selectedData is of type String
+                        if (selectedData != null) {
+                          setState(() {
+                            widget.plus = selectedData.toString() ;
+                            print(widget.plus);
+                          });
+                        }
+                      });
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 13),
                       child: Center(
                           child: Text(
-                        "+ Add place",
-                        style:
+                            "${widget.plus}",
+                            style:
                             TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                      )),
+                          )),
                       height: 33.h,
                       width: 159.w,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          border:
-                              Border.all(width: 1.5, color: Color(0xff89C9FF))),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(Icons.calendar_month),
-                  SizedBox(width: 10.w),
-                  Text(
-                    "day 3",
-                    style: TextStyle(color: Colors.black87, fontSize: 25),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      //Navigator.pushNamed(context, places.routeName);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 13),
-                      child: Center(
-                          child: Text(
-                        "+ Add place",
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                      )),
-                      height: 33.h,
-                      width: 159.w,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border:
-                              Border.all(width: 1.5.w, color: Color(0xff89C9FF))),
+                          border: Border.all(
+                              width: 1.5.w, color: Color(0xff89C9FF))),
                     ),
                   )
                 ],
@@ -298,13 +246,13 @@ class _Add_placesState extends State<Add_places> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Luxor",
+                      child: Text("$name2",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                     SizedBox(
-                      width: 180.w,
+                      width: 110.w,
                     ),
-                    Text("2 days",
+                    Text("$second days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
                 ),
@@ -328,7 +276,7 @@ class _Add_placesState extends State<Add_places> {
                   Icon(Icons.calendar_month),
                   SizedBox(width: 10.w),
                   Text(
-                    "day 1",
+                    "from ($date2) to ($date3) ",
                     style: TextStyle(color: Colors.black87, fontSize: 25),
                   )
                 ],
@@ -339,66 +287,47 @@ class _Add_placesState extends State<Add_places> {
               child: Row(
                 children: [
                   InkWell(
-                    onTap: () {
-                      //Navigator.pushNamed(context, places.routeName);
+                    onTap: () async {
+                      var selectedData = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  AddPlace(placeID: '$place2')));
+                      setState(() {
+                        // Update the state with the selected data received from AddPlace screen
+                        // Assuming selectedData is of type String
+                        if (selectedData != null) {
+                          setState(() {
+                            widget.plus1 = selectedData.toString() ;
+                            print(widget.plus1);
+                          });
+                        }
+                      });
                     },
                     child: Container(
                       margin: EdgeInsets.only(left: 13),
                       child: Center(
-                          child: Text(
-                        "+ Add place",
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                      )),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          AddPlace(placeID: '$place2')));
+                            },
+                            child: Text(
+                              "${widget.plus1}",
+                              style:
+                              TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
+                            ),
+                          )),
                       height: 33.h,
                       width: 159.w,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          border:
-                              Border.all(width: 1.5.w, color: Color(0xff89C9FF))),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(Icons.calendar_month),
-                  SizedBox(width: 10.w),
-                  Text(
-                    "day 2",
-                    style: TextStyle(color: Colors.black87, fontSize: 25),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      // Navigator.pushNamed(context, places.routeName);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 13),
-                      child: Center(
-                          child: Text(
-                        "+ Add place",
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                      )),
-                      height: 33.h,
-                      width: 159.w,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border:
-                              Border.all(width: 1.5, color: Color(0xff89C9FF))),
+                          border: Border.all(
+                              width: 1.5.w, color: Color(0xff89C9FF))),
                     ),
                   )
                 ],
@@ -412,13 +341,13 @@ class _Add_placesState extends State<Add_places> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Aswan",
+                      child: Text("$name3",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
                     SizedBox(
-                      width: 180.w,
+                      width: 90.w,
                     ),
-                    Text("1 days",
+                    Text("$third days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
                 ),
@@ -442,7 +371,7 @@ class _Add_placesState extends State<Add_places> {
                   Icon(Icons.calendar_month),
                   SizedBox(width: 10.w),
                   Text(
-                    "day 1",
+                    "from ($date3) to ($date4) ",
                     style: TextStyle(color: Colors.black87, fontSize: 25),
                   )
                 ],
@@ -453,42 +382,59 @@ class _Add_placesState extends State<Add_places> {
               child: Row(
                 children: [
                   InkWell(
-                    onTap: () {
-                      // Navigator.pushNamed(context, places.routeName);
-                    },
+                    onTap: () {},
                     child: Container(
                       margin: EdgeInsets.only(left: 13),
                       child: Center(
-                          child: Text(
-                        "+ Add place",
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                      )),
+                          child: InkWell(
+
+                            onTap: () async {
+                              var selectedData = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          AddPlace(placeID: '$place3')));
+                              setState(() {
+                                // Update the state with the selected data received from AddPlace screen
+                                // Assuming selectedData is of type String
+                                if (selectedData != null) {
+                                  setState(() {
+                                    widget.plus2 = selectedData.toString() ;
+                                    print(widget.plus2);
+                                  });
+                                }
+                              });
+                            },
+                            child: Text(
+                              "${widget.plus2}",
+                              style:
+                              TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
+                            ),
+                          )),
                       height: 33.h,
                       width: 159.w,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           border:
-                              Border.all(width: 1.5, color: Color(0xff89C9FF))),
+                          Border.all(width: 1.5, color: Color(0xff89C9FF))),
                     ),
                   )
                 ],
               ),
             ),
-             SizedBox(height: 20.h,),
-
+            SizedBox(
+              height: 20.h,
+            ),
             Row(
               children: [
                 Btn1(Color(0xFF89C9FF), Colors.white, "Back", () {
                   Navigator.pop(context);
                 }),
                 Spacer(),
-                InkWell(
-                    onTap: (){
-                      Navigator.pushNamed(context, RideRiquest.routeName);
-                    },
-                    child: Text("Request Ride?",style: TextStyle(color: Color(0xff89C9FF), fontSize: 20),)),
+                Btn1(Color(0xFF89C9FF), Colors.white, "Save", () {
+                  Navigator.pushNamed(context, PlanType.routeName);
+                }),
               ],
             )
           ],

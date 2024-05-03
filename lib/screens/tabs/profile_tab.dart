@@ -1,9 +1,9 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../sing_in.dart';
-
+import '../sing_up.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});
@@ -34,9 +34,6 @@ class ProfileTab extends StatelessWidget {
             SizedBox(
               height: 8.h,
             ),
-
-
-
             Text(
               "user name",
               style: TextStyle(
@@ -186,18 +183,30 @@ class ProfileTab extends StatelessWidget {
                         borderSide: const BorderSide(color: Colors.black26))),
               ),
             ),
-            SizedBox(height: 20,),
-            Column(children: [
-              IconButton(
-                  onPressed: ()  {
-
-                    Navigator.pushReplacementNamed(context, SingIn.routeName);
-                  },
-                  icon: const Icon(Icons.logout)),
-              Text("Logout",style: TextStyle(fontWeight: FontWeight.w300,fontSize: 20),)
-
-
-            ],)
+            SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [
+                IconButton(
+                    onPressed: () async {
+                      SharedPreferences preferences =
+                          await SharedPreferences.getInstance();
+                      await preferences.remove(
+                          'token'); // Remove the token from SharedPreferences
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SingIn())); // Navigate back to login screen
+                    },
+                    icon: const Icon(Icons.logout)),
+                Text(
+                  "Logout",
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+                )
+              ],
+            )
           ],
         ),
       ),

@@ -1,15 +1,15 @@
 
-
-
 import 'package:ept_mate/screens/plan_type_screen/plan_type.dart';
 import 'package:ept_mate/screens/tabs/home_tab.dart';
-import 'package:ept_mate/screens/tabs/location_tab.dart';
+import 'package:ept_mate/screens/tabs/tripPlans_tab.dart';
 import 'package:ept_mate/screens/tabs/profile_tab.dart';
 import 'package:ept_mate/screens/tabs/search_tab.dart';
+import 'package:ept_mate/weather/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constant/constant.dart';
+import '../model/UserModel.dart';
 import '../widgets/custom_nav_bar.dart';
 import 'favourte_screen/favourite_Screen.dart';
 
@@ -24,23 +24,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int index = 0;
-  List<Widget> tabs = const [
+  List<Widget> tabs =  [
     HomeTab(),
     SearchTab(),
-    LocationTab(),
+    TripPlansTab(),
     ProfileTab()
   ];
 
   @override
   Widget build(BuildContext context) {
+    UserModel userModel=UserModel();
+    print(userModel.token);
     return Scaffold(
       drawer: Drawer(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           backgroundColor: Colors.white,
           child: ListView(
 
-              // Important: Remove any padding from the ListView.
+            // Important: Remove any padding from the ListView.
               padding: EdgeInsets.zero,
               children: [
                 DrawerHeader(
@@ -49,30 +51,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: null,
                 ),
+
                 ListTile(
                   title: Row(
                     children: [
-                      Icon(Icons.airplanemode_active_sharp),
-                        SizedBox(width: 10,),
-                        Text('Trip Plans',style:GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),),
+                      Icon(Icons.sunny,color: Colors.yellow,),
+                      SizedBox(width: 10,),
+                      Text('weather',style:GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),),
                     ],
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, PlanType.routeName);
+                    Navigator.pushNamed(context, weatherView.routeName);
                   },
                 ),
                 ListTile(
                   title: Row(
                     children: [
                       Icon(Icons.favorite),
-                        SizedBox(width: 10,),
-                        Text('Favorite',style:GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),),
+                      SizedBox(width: 10,),
+                      Text('Favorite',style:GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),),
                     ],
                   ),
                   onTap: () {
@@ -83,15 +86,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Row(
                     children: [
                       Icon(Icons.settings),
-                        SizedBox(width: 10,),
-                        Text('Settings',style:GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black),),
+                      SizedBox(width: 10,),
+                      Text('Settings',style:GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black),),
                     ],
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, PlanType.routeName);
+                    //Navigator.pushNamed(context, PlanType.routeName);
                   },
                 ),
               ])),

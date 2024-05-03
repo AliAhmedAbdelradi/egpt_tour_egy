@@ -51,8 +51,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             text: 'Search',
           ),
           GButton(
-            icon: Icons.directions_car_rounded,
-            text: 'Ride',
+            icon: Icons.airplanemode_active_sharp,
+            text: 'Trip Plans',
           ),
           GButton(
             icon: Icons.person,

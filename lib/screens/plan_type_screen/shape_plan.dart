@@ -19,9 +19,9 @@ class ShapePlan extends StatelessWidget {
             margin: EdgeInsets.only(top: 15,left: 20),
             child: Text(txt, style: GoogleFonts.poppins(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),)),
         Container(
-          width: 250,
-          height: 40,
-          margin: EdgeInsets.only(top: 100,left: 30),
+          width: 245.w,
+          height: 35.h,
+          margin: EdgeInsets.only(top: 90.h,left: 30.w),
           child: ElevatedButton(
               style: ButtonStyle(
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(

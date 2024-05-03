@@ -1,11 +1,9 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../cubits/login/login__cubit.dart';
 import '../cubits/login/login__state.dart';
 import '../helper/show_dailog.dart';
@@ -150,7 +148,9 @@ class _SingInFormState extends State<SingInForm> {
                                 formKey.currentState!.save();
                                 LoginCubit.get(context).UserLogin(
                                     emailController.text,
-                                    passwordController.text);
+                                    passwordController.text,
+
+                                );
                               } else {
                                 autoValidateMode = AutovalidateMode.always;
                                 setState(() {});
@@ -165,6 +165,7 @@ class _SingInFormState extends State<SingInForm> {
       ),
     );
   }
+
 
   void visiblePassword() {
     setState(() {

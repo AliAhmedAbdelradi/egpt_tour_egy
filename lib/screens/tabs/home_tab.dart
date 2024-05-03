@@ -1,11 +1,7 @@
-
-
+import 'package:ept_mate/api_manager/api_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../categories/cultural/Religious_categ.dart';
-import '../categories/cultural/cultural_categ.dart';
-import '../categories/cultural/leisure_categ.dart';
-import '../categories/cultural/medical_categ.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../city_res_cat.dart';
 
 class HomeTab extends StatelessWidget {
@@ -13,105 +9,142 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(30),
-        child:
-        Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const Text("Find Your category",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 22,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.bold)),
-          const SizedBox(
-            height: 10,
-          ),
-          InkWell(
-              onTap: () {
-                 Navigator.pushNamed(context, CityResCat.routeName);
-              },
-              child: const Image(
-                  image: AssetImage("assets/images/pyramids.png"))),
-          SizedBox(
-            height: 7.h,
-          ),
-          const Text("Cultural",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.bold)),
-          SizedBox(
-            height: 7.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Expanded(
-                child: InkWell(
+    return FutureBuilder(
+      future: ApiManager .getCategory(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
+
+        final cate = snapshot.data?.data ?? [];
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Text("Discover",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold)),
+              SizedBox(
+                height: 10.h,
+              ),
+              InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, LeisureCateg.routeName);
+                   Navigator.push(context, MaterialPageRoute(builder: (_)=> CityResCat(categoryId:cate[0].id.toString())));
                   },
-                  child: const Image(
-                      image: AssetImage("assets/images/Leisure.png")),
-                ),
+                  child: Container(
+                      width: 500.w,
+                      height: 200.h,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                            image: NetworkImage(cate[0].imageLink ?? ""),
+                            fit: BoxFit.cover,
+                          )))),
+              SizedBox(
+                height: 7.h,
+              ),
+              Text(
+                cate[0].name ?? "",
+                style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.bold, fontSize: 18),
               ),
               SizedBox(
-                width: 10.w,
+                height: 10.h,
               ),
-              Expanded(
-                child: InkWell(
-                  onTap: () {
-                      Navigator.pushNamed(context, ReligiousCateg.routeName);
-                  },
-                  child: const Image(
-                      image: AssetImage("assets/images/Religion.png")),
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 7.h,
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                "Leisure",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> CityResCat(categoryId:cate[1].id.toString())));
+                      },
+                      child:  Container(
+                          width: 40.w,
+                          height: 90.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                image: NetworkImage(cate[1].imageLink ?? ""),
+                                fit: BoxFit.cover,
+                              ))),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Expanded(
+                    child:  InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> CityResCat(categoryId:cate[2].id.toString())));
+                      },
+                      child:  Container(
+                          width: 40.w,
+                          height: 90.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                image: NetworkImage(cate[2].imageLink ?? ""),
+                                fit: BoxFit.cover,
+                              ))),
+                    ),
+                  )
+                ],
               ),
-              Text(
-                "Religion",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+              SizedBox(
+                height: 10.h,
               ),
-            ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    cate[1].name ?? "",
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                  Text(
+                    cate[2].name ?? "",
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+
+                ],
+
+              ),
+                  SizedBox(height: 10.h,),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> CityResCat(categoryId:cate[3].id.toString())));
+                      },
+                      child:  Container(
+                          width: 500.w,
+                          height: 200.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              image: DecorationImage(
+                                image: NetworkImage(cate[3].imageLink ?? ""),
+                                fit: BoxFit.cover,
+                              )))),
+                  SizedBox(
+                    height: 7.h,
+                  ),
+                  Text(
+                    cate[3].name ?? "",
+                    style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+
+            ]),
           ),
-          SizedBox(
-            height: 7.h,
-          ),
-          Center(
-              child: InkWell(
-                  onTap: () {
-                     Navigator.pushNamed(context, MedicalCateg.routeName);
-                  },
-                  child: const Image(
-                      image: AssetImage("assets/images/Medical.png")))),
-          SizedBox(
-            height: 7.h,
-          ),
-          const Text(
-            "Medical",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          )
-        ]),
-      ),
+        );
+      },
     );
   }
 }

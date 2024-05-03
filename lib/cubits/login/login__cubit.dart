@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/authentication_helper.dart';
 import '../../model/UserModel.dart';
@@ -19,13 +19,29 @@ class LoginCubit extends Cubit<LoginState> {
     DioHelper.postData(url: '/api/Adminstration/Login', data: {
       'password': password,
       'userName': userName,
-    }).then((value) {
+    }).then((value) async {
       userModel = UserModel.fromJson(value.data);
-      Navigator(initialRoute: HomeScreen.routeName,);
+
+      /// save token here
+
+     await saveToken(userModel.token ?? "");
+      Navigator(
+        initialRoute: HomeScreen.routeName,
+      );
       emit(LoginSuccessState(userModel));
     }).catchError((error) {
       emit(LoginErrorState(error.toString()));
       print(error.toString());
     });
   }
+
+  Future<void> saveToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("token", token);
+  }
+
+  // Future<String?> getToken() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   return prefs.getString(token);
+  // }
 }

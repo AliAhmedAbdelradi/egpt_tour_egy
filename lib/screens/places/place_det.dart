@@ -45,7 +45,7 @@ class _PlaceDetState extends State<PlaceDet> {
           children: [
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, Add_places.routeName,);
+                Navigator.pushNamed(context, planDetails.routeName,);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

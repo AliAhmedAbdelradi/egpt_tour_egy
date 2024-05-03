@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 class DioHelper {
   static Dio dio = Dio(BaseOptions(
-      baseUrl: 'https://mazenhussein-001-site1.jtempurl.com',
+      baseUrl: 'https://egypttourmate-001-site1.etempurl.com',
       receiveDataWhenStatusError: true,
       headers: {'Content-Type': 'application/json'}));
 
