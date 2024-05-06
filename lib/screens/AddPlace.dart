@@ -108,7 +108,6 @@ class _Places_By_cat_And_CityState extends State<AddPlace> {
                 return GestureDetector(
                   onTap: () {
                     _passBackSelectedData(category[index].name ?? "");
-
                   },
                   child: Column(
                     children: [

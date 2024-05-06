@@ -25,7 +25,7 @@ class _DateScreenState extends State<DateScreen>
 {
   DateTimeRange? _dateTimeRange;
   DateTime time = DateTime.now();
-  DateFormat dateFormat = DateFormat("yyyy-MM-dd THH:mm:ss");
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
 
 

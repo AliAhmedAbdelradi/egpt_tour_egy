@@ -4,7 +4,6 @@ import 'package:ept_mate/screens/tabs/tripPlans_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../model/trip.dart';
-import '../plan_type_screen/plan_type.dart';
 import '../select_city/btn1.dart';
 
 class planDetails extends StatefulWidget {
@@ -15,15 +14,14 @@ class planDetails extends StatefulWidget {
 
   planDetails({required this.trip});
 
-
   Trip trip;
-
 
   @override
   State<planDetails> createState() => _planDetailsState();
 }
 
 class _planDetailsState extends State<planDetails> {
+  List S = ["cairo t"];
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +41,6 @@ class _planDetailsState extends State<planDetails> {
     var place3 = widget.trip.placesID?[2];
     print(start);
 
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -51,7 +48,7 @@ class _planDetailsState extends State<planDetails> {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 HomeScreen.routeName,
-                    (route) => false,
+                (route) => false,
               );
             },
             icon: Icon(
@@ -125,7 +122,7 @@ class _planDetailsState extends State<planDetails> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20),
                             border:
-                            Border.all(width: 1.5.w, color: Colors.black))),
+                                Border.all(width: 1.5.w, color: Colors.black))),
                   ),
                   SizedBox(
                     width: 30.w,
@@ -166,7 +163,7 @@ class _planDetailsState extends State<planDetails> {
                       child: Text("$name1",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
-                   Spacer(),
+                    Spacer(),
                     Text("$first days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
@@ -177,11 +174,11 @@ class _planDetailsState extends State<planDetails> {
                     image: DecorationImage(
                         image: AssetImage("assets/images/Aswan_place.png"),
                         fit: BoxFit.fill,
-                      opacity: .9
-                    ),
+                        opacity: .9),
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(width: 1.5.w, color: Colors.transparent)),
+                    border:
+                        Border.all(width: 1.5.w, color: Colors.transparent)),
               ),
             ),
             Padding(
@@ -200,8 +197,40 @@ class _planDetailsState extends State<planDetails> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
+              child: Column(
                 children: [
+                  ...List.generate(
+                    S.length,
+                    (index) {
+                      return Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 13.w),
+                            child: Center(
+                                child: Text(
+                              "${S[index]}",
+                              style:
+                                  TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
+                            )),
+                            height: 33.h,
+                            width: 159.w,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 1.5.w, color: Color(0xff89C9FF))),
+                          ),
+                          IconButton(onPressed: () {
+                            setState(() {
+                              S.removeAt(index);
+
+                            });
+
+                          }, icon: Icon(Icons.delete))
+                        ],
+                      );
+                    },
+                  ).toList(),
                   InkWell(
                     onTap: () async {
                       var selectedData = await Navigator.push(
@@ -214,7 +243,8 @@ class _planDetailsState extends State<planDetails> {
                         // Assuming selectedData is of type String
                         if (selectedData != null) {
                           setState(() {
-                            widget.plus = selectedData.toString() ;
+                            S.add(selectedData);
+                            S=S.toSet().toList();
                             print(widget.plus);
                           });
                         }
@@ -224,10 +254,10 @@ class _planDetailsState extends State<planDetails> {
                       margin: EdgeInsets.only(left: 13.w),
                       child: Center(
                           child: Text(
-                            "${widget.plus}",
-                            style:
-                            TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                          )),
+                        "+Add place",
+                        style: TextStyle(
+                            fontSize: 15, color: Color(0xff89C9FF)),
+                      )),
                       height: 33.h,
                       width: 159.w,
                       decoration: BoxDecoration(
@@ -236,7 +266,7 @@ class _planDetailsState extends State<planDetails> {
                           border: Border.all(
                               width: 1.5.w, color: Color(0xff89C9FF))),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -262,10 +292,11 @@ class _planDetailsState extends State<planDetails> {
                     image: DecorationImage(
                         image: AssetImage("assets/images/Luxor_place.png"),
                         fit: BoxFit.fill,
-                    opacity: .9),
+                        opacity: .9),
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(width: 1.5.w, color: Colors.transparent)),
+                    border:
+                        Border.all(width: 1.5.w, color: Colors.transparent)),
               ),
               //luxor 2days
             ),
@@ -299,7 +330,7 @@ class _planDetailsState extends State<planDetails> {
                         // Assuming selectedData is of type String
                         if (selectedData != null) {
                           setState(() {
-                            widget.plus1 = selectedData.toString() ;
+                            widget.plus1 = selectedData.toString();
                             print(widget.plus1);
                           });
                         }
@@ -309,19 +340,19 @@ class _planDetailsState extends State<planDetails> {
                       margin: EdgeInsets.only(left: 13.w),
                       child: Center(
                           child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddPlace(placeID: '$place2')));
-                            },
-                            child: Text(
-                              "${widget.plus1}",
-                              style:
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddPlace(placeID: '$place2')));
+                        },
+                        child: Text(
+                          "${widget.plus1}",
+                          style:
                               TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                            ),
-                          )),
+                        ),
+                      )),
                       height: 33.h,
                       width: 159.w,
                       decoration: BoxDecoration(
@@ -345,7 +376,7 @@ class _planDetailsState extends State<planDetails> {
                       child: Text("$name3",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
-                   Spacer(),
+                    Spacer(),
                     Text("$third days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
@@ -355,9 +386,8 @@ class _planDetailsState extends State<planDetails> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/images/Aswan_place1.png"),
-                        fit: BoxFit.fill
-                        ,opacity: .9
-                    ),
+                        fit: BoxFit.fill,
+                        opacity: .9),
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(width: 1.5, color: Colors.transparent)),
@@ -388,37 +418,36 @@ class _planDetailsState extends State<planDetails> {
                       margin: EdgeInsets.only(left: 13.w),
                       child: Center(
                           child: InkWell(
-
-                            onTap: () async {
-                              var selectedData = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddPlace(placeID: '$place3')));
+                        onTap: () async {
+                          var selectedData = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddPlace(placeID: '$place3')));
+                          setState(() {
+                            // Update the state with the selected data received from AddPlace screen
+                            // Assuming selectedData is of type String
+                            if (selectedData != null) {
                               setState(() {
-                                // Update the state with the selected data received from AddPlace screen
-                                // Assuming selectedData is of type String
-                                if (selectedData != null) {
-                                  setState(() {
-                                    widget.plus2 = selectedData.toString() ;
-                                    print(widget.plus2);
-                                  });
-                                }
+                                widget.plus2 = selectedData.toString();
+                                print(widget.plus2);
                               });
-                            },
-                            child: Text(
-                              "${widget.plus2}",
-                              style:
+                            }
+                          });
+                        },
+                        child: Text(
+                          "${widget.plus2}",
+                          style:
                               TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                            ),
-                          )),
+                        ),
+                      )),
                       height: 33.h,
                       width: 159.w,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           border:
-                          Border.all(width: 1.5, color: Color(0xff89C9FF))),
+                              Border.all(width: 1.5, color: Color(0xff89C9FF))),
                     ),
                   )
                 ],
