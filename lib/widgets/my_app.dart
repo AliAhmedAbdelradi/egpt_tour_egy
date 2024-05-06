@@ -25,6 +25,7 @@ import '../screens/forget_password.dart';
 import '../screens/home.dart';
 import '../screens/onboarding_screen.dart';
 import '../screens/plan_type_screen/plan_type.dart';
+import '../screens/readyTrips/number of places.dart';
 import '../screens/request_ride/ride_request.dart';
 import '../screens/select_city/Select_City_Screen.dart';
 import '../screens/sing_in.dart';
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
                 ),
             Readymade.routeName: (context) => Readymade(),
             InteractiveMap.routeName: (context) => InteractiveMap( ),
+            NumOfPlaceReadyTrip.routeName: (context) => NumOfPlaceReadyTrip(),
             //DaysCounter.routeName: (context) => const DaysCounter(),
             //Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
           },

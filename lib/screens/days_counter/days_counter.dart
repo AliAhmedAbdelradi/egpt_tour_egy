@@ -1,3 +1,4 @@
+import 'package:ept_mate/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,7 +42,7 @@ class _DaysCounterState extends State<DaysCounter> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.popAndPushNamed(context, PlanType.routeName);
+              Navigator.popAndPushNamed(context, HomeScreen.routeName);
             },
             icon: Icon(
               Icons.cancel_outlined,

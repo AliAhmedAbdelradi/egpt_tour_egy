@@ -54,9 +54,9 @@ class FavCateg extends StatelessWidget {
               ),
             ]),
           ),
-          SizedBox(height: 16,),
+          SizedBox(height: 16.h,),
           Container(
-            margin: EdgeInsets.only(top: 16),
+            margin: EdgeInsets.only(top: 16.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -75,7 +75,7 @@ class FavCateg extends StatelessWidget {
                 Icon(
                   Icons.favorite,
                   color: Colors.red,
-                  weight: 33,
+                  weight: 33.w,
                 )
               ],
             ),

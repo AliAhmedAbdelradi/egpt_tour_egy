@@ -1,4 +1,6 @@
 import 'package:ept_mate/screens/AddPlace.dart';
+import 'package:ept_mate/screens/home.dart';
+import 'package:ept_mate/screens/tabs/tripPlans_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../model/trip.dart';
@@ -48,7 +50,7 @@ class _planDetailsState extends State<planDetails> {
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                PlanType.routeName,
+                HomeScreen.routeName,
                     (route) => false,
               );
             },
@@ -94,7 +96,7 @@ class _planDetailsState extends State<planDetails> {
                       width: 84.w,
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(20),
                           border: Border.all(width: 1.5, color: Colors.black))),
                   SizedBox(
                     width: 40.w,
@@ -121,9 +123,9 @@ class _planDetailsState extends State<planDetails> {
                         width: 84.w,
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                             border:
-                            Border.all(width: 1.5, color: Colors.black))),
+                            Border.all(width: 1.5.w, color: Colors.black))),
                   ),
                   SizedBox(
                     width: 30.w,
@@ -135,7 +137,7 @@ class _planDetailsState extends State<planDetails> {
                           Text("$third",
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff89C9FF))),
-                          Text("day",
+                          Text("days",
                               style: TextStyle(
                                   fontSize: 20, color: Color(0xff89C9FF))),
                           Text("$name3",
@@ -148,7 +150,7 @@ class _planDetailsState extends State<planDetails> {
                       width: 84.w,
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(20),
                           border: Border.all(width: 1.5, color: Colors.black)))
                 ],
               ),
@@ -164,9 +166,7 @@ class _planDetailsState extends State<planDetails> {
                       child: Text("$name1",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
-                    SizedBox(
-                      width: 90.w,
-                    ),
+                   Spacer(),
                     Text("$first days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
@@ -176,10 +176,12 @@ class _planDetailsState extends State<planDetails> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/images/Aswan_place.png"),
-                        fit: BoxFit.fill),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(width: 1.5.w, color: Colors.black)),
+                        fit: BoxFit.fill,
+                      opacity: .9
+                    ),
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(width: 1.5.w, color: Colors.transparent)),
               ),
             ),
             Padding(
@@ -219,7 +221,7 @@ class _planDetailsState extends State<planDetails> {
                       });
                     },
                     child: Container(
-                      margin: EdgeInsets.only(left: 13),
+                      margin: EdgeInsets.only(left: 13.w),
                       child: Center(
                           child: Text(
                             "${widget.plus}",
@@ -249,9 +251,7 @@ class _planDetailsState extends State<planDetails> {
                       child: Text("$name2",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
-                    SizedBox(
-                      width: 110.w,
-                    ),
+                    Spacer(),
                     Text("$second days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
@@ -261,10 +261,11 @@ class _planDetailsState extends State<planDetails> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/images/Luxor_place.png"),
-                        fit: BoxFit.fill),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(width: 1.5.w, color: Colors.black)),
+                        fit: BoxFit.fill,
+                    opacity: .9),
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(width: 1.5.w, color: Colors.transparent)),
               ),
               //luxor 2days
             ),
@@ -305,7 +306,7 @@ class _planDetailsState extends State<planDetails> {
                       });
                     },
                     child: Container(
-                      margin: EdgeInsets.only(left: 13),
+                      margin: EdgeInsets.only(left: 13.w),
                       child: Center(
                           child: InkWell(
                             onTap: () {
@@ -344,9 +345,7 @@ class _planDetailsState extends State<planDetails> {
                       child: Text("$name3",
                           style: TextStyle(fontSize: 25, color: Colors.white)),
                     ),
-                    SizedBox(
-                      width: 90.w,
-                    ),
+                   Spacer(),
                     Text("$third days",
                         style: TextStyle(fontSize: 25, color: Colors.white)),
                   ],
@@ -356,10 +355,12 @@ class _planDetailsState extends State<planDetails> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage("assets/images/Aswan_place1.png"),
-                        fit: BoxFit.fill),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(width: 1.5, color: Colors.black)),
+                        fit: BoxFit.fill
+                        ,opacity: .9
+                    ),
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(width: 1.5, color: Colors.transparent)),
               ),
               //luxor 2days
             ),
@@ -384,7 +385,7 @@ class _planDetailsState extends State<planDetails> {
                   InkWell(
                     onTap: () {},
                     child: Container(
-                      margin: EdgeInsets.only(left: 13),
+                      margin: EdgeInsets.only(left: 13.w),
                       child: Center(
                           child: InkWell(
 
@@ -433,7 +434,7 @@ class _planDetailsState extends State<planDetails> {
                 }),
                 Spacer(),
                 Btn1(Color(0xFF89C9FF), Colors.white, "Save", () {
-                  Navigator.pushNamed(context, PlanType.routeName);
+                  Navigator.pushNamed(context, TripPlansTab.routeName);
                 }),
               ],
             )

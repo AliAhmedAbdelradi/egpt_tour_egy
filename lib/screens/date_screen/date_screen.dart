@@ -1,5 +1,6 @@
 
 
+import 'package:ept_mate/screens/home.dart';
 import 'package:intl/intl.dart';
 import 'package:ept_mate/api_manager/api_manager.dart';
 import 'package:ept_mate/model/trip.dart';
@@ -35,7 +36,7 @@ class _DateScreenState extends State<DateScreen>
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.popAndPushNamed(context, PlanType.routeName);
+              Navigator.popAndPushNamed(context, HomeScreen.routeName);
             },
             icon: Icon(
               Icons.cancel_outlined,
