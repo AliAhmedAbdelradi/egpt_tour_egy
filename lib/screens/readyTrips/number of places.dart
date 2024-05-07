@@ -51,7 +51,7 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
           future: ApiManager.getReadyMateById(id: id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
               return Center(child: Text(snapshot.error.toString()));
@@ -59,9 +59,10 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
 
             return ListView.separated(
               separatorBuilder: (context, index) {
-                return SizedBox(height: 30.h,);
+                return SizedBox(
+                  height: 30.h,
+                );
               },
-
               scrollDirection: Axis.vertical,
               padding: const EdgeInsets.all(16),
               itemBuilder: (context, index) {
@@ -75,16 +76,16 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
                       for (var detail in details ?? [])
                         SingleChildScrollView(
                           child: Column(
-
                             children: [
-                              Text("${detail.cityName}",style:GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.black,)),
-
+                              Text("${detail.cityName}",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  )),
                               Container(
-                                width: 180.w,
-                                height: 120.h,
+                                width: double.infinity.w,
+                                height: 150.h,
                                 padding: EdgeInsets.all(20),
                                 decoration: BoxDecoration(
                                   color: Colors.black,
@@ -98,12 +99,13 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Container(
-                                      alignment: Alignment.topRight,
-                                      child:  Text("Day ${detail.dayNum}",style:GoogleFonts.poppins(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: Colors.white,)
-                                    )),
+                                        alignment: Alignment.topRight,
+                                        child: Text("Day ${detail.dayNum}",
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                            ))),
                                     Spacer(),
                                     Container(
                                       alignment: Alignment.bottomLeft,
@@ -111,7 +113,7 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
                                         detail.name,
                                         style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 15,
+                                          fontSize: 20,
                                           color: Colors.white,
                                         ),
                                       ),
@@ -119,10 +121,9 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 30.h,)
-
-
-
+                              SizedBox(
+                                height: 30.h,
+                              )
                             ],
                           ),
                         ),

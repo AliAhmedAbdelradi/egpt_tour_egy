@@ -83,7 +83,8 @@ class _ReadymadeState extends State<Readymade> {
                             width: double.infinity.w,
                             height: 50.h,
                             decoration: BoxDecoration(
-                                color: primaryColor,
+                              image: DecorationImage(image: AssetImage("assets/images/create_trip.png"),opacity: .9,fit: BoxFit.cover),
+                                color: Colors.black,
                                 borderRadius: BorderRadius.circular(10)),
                             child: Center(
                               child: Row(
