@@ -1,5 +1,3 @@
-
-
 import 'package:ept_mate/screens/customize_screen/create_trip/shape_plan_create.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,41 +49,70 @@ class CreateTrip extends StatelessWidget {
                     fontSize: 15,
                     fontWeight: FontWeight.w600)),
             SizedBox(
-              height: 30.h,
+              height: 15.h,
             ),
-            ShapePlanCreate(
-                "assets/images/create_trip.png",
-                "Create  A  Trip",
+            Text("Step 2",
+                style: GoogleFonts.poppins(
+                    color: Colors.black38,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600)),
+            SizedBox(
+              height: 20.h,
+            ),
+            ShapePlanCreate("assets/images/create_trip.png", "Create  A  Trip",
                 "Create a fully customized day-by-day itherary \n and discover the hidden gems of egypt",
                 () {
-                  Navigator.pushNamed(context, SelectCategory.routeName);
-
-                }),
+              Navigator.pushNamed(context, SelectCategory.routeName);
+            }),
             SizedBox(
-              height: 50.h,
+              height: 35.h,
             ),
             Row(
               children: [
-                Icon(Icons.add,size:21,),
-                SizedBox(width: 5.w,),
-                Text("Create Trip",style: TextStyle(color: Color(0xFF89C9FF),fontSize: 18),),
-                SizedBox(width: 40.w,),
-                Text("|",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w100,fontSize: 20),),
-                SizedBox(width: 25.w,),
-                Icon(Icons.watch_later_outlined,size: 21,),
-                SizedBox(width: 5.w,),
-                Text("View History",style: TextStyle(color: Color(0xFF89C9FF), fontSize: 18),),
-
-
-
-
-                
+                Icon(
+                  Icons.add,
+                  size: 21,
+                ),
+                SizedBox(
+                  width: 5.w,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, SelectCategory.routeName);
+                  },
+                  child: Text(
+                    "Create Trip",
+                    style: TextStyle(color: Color(0xFF89C9FF), fontSize: 18),
+                  ),
+                ),
+                SizedBox(
+                  width: 40.w,
+                ),
+                Text(
+                  "|",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20),
+                ),
+                SizedBox(
+                  width: 25.w,
+                ),
+                Icon(
+                  Icons.watch_later_outlined,
+                  size: 21,
+                ),
+                SizedBox(
+                  width: 5.w,
+                ),
+                Text(
+                  "View History",
+                  style: TextStyle(color: Color(0xFF89C9FF), fontSize: 18),
+                ),
               ],
             ),
-
           ],
         ),
-
       ),
     );
   }

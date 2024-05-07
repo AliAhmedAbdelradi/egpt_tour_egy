@@ -3,6 +3,7 @@ import 'package:ept_mate/screens/home.dart';
 import 'package:ept_mate/screens/tabs/tripPlans_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../model/trip.dart';
 import '../select_city/btn1.dart';
 
@@ -22,6 +23,8 @@ class planDetails extends StatefulWidget {
 
 class _planDetailsState extends State<planDetails> {
   List S = [];
+  List m = [];
+  List n = [];
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class _planDetailsState extends State<planDetails> {
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 HomeScreen.routeName,
-                    (route) => false,
+                (route) => false,
               );
             },
             icon: Icon(
@@ -76,14 +79,14 @@ class _planDetailsState extends State<planDetails> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text("$first",
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   fontSize: 20, color: Color(0xff89C9FF))),
                           Text("days",
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   fontSize: 20, color: Color(0xff89C9FF))),
                           Center(
                             child: Text("$name1",
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 15,
                                 )),
                           ),
@@ -105,13 +108,13 @@ class _planDetailsState extends State<planDetails> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text("$second",
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                     fontSize: 20, color: Color(0xff89C9FF))),
                             Text("days",
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                     fontSize: 20, color: Color(0xff89C9FF))),
                             Text("$name2",
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 15,
                                 )),
                           ],
@@ -122,7 +125,7 @@ class _planDetailsState extends State<planDetails> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(20),
                             border:
-                            Border.all(width: 1.5.w, color: Colors.black))),
+                                Border.all(width: 1.5.w, color: Colors.black))),
                   ),
                   SizedBox(
                     width: 30.w,
@@ -132,13 +135,13 @@ class _planDetailsState extends State<planDetails> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text("$third",
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   fontSize: 20, color: Color(0xff89C9FF))),
                           Text("days",
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   fontSize: 20, color: Color(0xff89C9FF))),
                           Text("$name3",
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 15,
                               )),
                         ],
@@ -161,11 +164,17 @@ class _planDetailsState extends State<planDetails> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text("$name1",
-                          style: TextStyle(fontSize: 25, color: Colors.white)),
+                          style: GoogleFonts.poppins(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal)),
                     ),
                     Spacer(),
                     Text("$first days",
-                        style: TextStyle(fontSize: 25, color: Colors.white)),
+                        style: GoogleFonts.poppins(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal)),
                   ],
                 ),
                 height: 77.h,
@@ -178,7 +187,7 @@ class _planDetailsState extends State<planDetails> {
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(30),
                     border:
-                    Border.all(width: 1.5.w, color: Colors.transparent)),
+                        Border.all(width: 1.5.w, color: Colors.transparent)),
               ),
             ),
             Padding(
@@ -190,7 +199,7 @@ class _planDetailsState extends State<planDetails> {
                   SizedBox(width: 10.w),
                   Text(
                     "from ($date1) to ($date2) ",
-                    style: TextStyle(color: Colors.black87, fontSize: 25),
+                    style: GoogleFonts.poppins(color: Colors.black87, fontSize: 25),
                   )
                 ],
               ),
@@ -201,17 +210,19 @@ class _planDetailsState extends State<planDetails> {
                 children: [
                   ...List.generate(
                     S.length,
-                        (index) {
+                    (index) {
                       return Row(
                         children: [
                           Container(
                             margin: EdgeInsets.only(left: 13.w),
                             child: Center(
                                 child: Text(
-                                  "${S[index]}",
-                                  style:
-                                  TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                                )),
+                              "${S[index]}",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500)
+                            )),
                             height: 33.h,
                             width: 159.w,
                             decoration: BoxDecoration(
@@ -220,13 +231,13 @@ class _planDetailsState extends State<planDetails> {
                                 border: Border.all(
                                     width: 1.5.w, color: Color(0xff89C9FF))),
                           ),
-                          IconButton(onPressed: () {
-                            setState(() {
-                              S.removeAt(index);
-
-                            });
-
-                          }, icon: Icon(Icons.delete))
+                          IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  S.removeAt(index);
+                                });
+                              },
+                              icon: Icon(Icons.delete),color: Colors.red,)
                         ],
                       );
                     },
@@ -244,7 +255,7 @@ class _planDetailsState extends State<planDetails> {
                         if (selectedData != null) {
                           setState(() {
                             S.add(selectedData);
-                            S=S.toSet().toList();
+                            S = S.toSet().toList();
                             print(widget.plus);
                           });
                         }
@@ -254,10 +265,13 @@ class _planDetailsState extends State<planDetails> {
                       margin: EdgeInsets.only(left: 13.w),
                       child: Center(
                           child: Text(
-                            "+Add place",
-                            style: TextStyle(
-                                fontSize: 15, color: Color(0xff89C9FF)),
-                          )),
+                        "+Add place",
+                        style:
+                        GoogleFonts.poppins(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500),
+                      )),
                       height: 33.h,
                       width: 159.w,
                       decoration: BoxDecoration(
@@ -279,11 +293,17 @@ class _planDetailsState extends State<planDetails> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text("$name2",
-                          style: TextStyle(fontSize: 25, color: Colors.white)),
+                          style: GoogleFonts.poppins(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal)),
                     ),
                     Spacer(),
                     Text("$second days",
-                        style: TextStyle(fontSize: 25, color: Colors.white)),
+                        style: GoogleFonts.poppins(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal)),
                   ],
                 ),
                 height: 77.h,
@@ -296,7 +316,7 @@ class _planDetailsState extends State<planDetails> {
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(30),
                     border:
-                    Border.all(width: 1.5.w, color: Colors.transparent)),
+                        Border.all(width: 1.5.w, color: Colors.transparent)),
               ),
               //luxor 2days
             ),
@@ -309,15 +329,51 @@ class _planDetailsState extends State<planDetails> {
                   SizedBox(width: 10.w),
                   Text(
                     "from ($date2) to ($date3) ",
-                    style: TextStyle(color: Colors.black87, fontSize: 25),
+                    style: GoogleFonts.poppins(color: Colors.black87, fontSize: 25),
                   )
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
+              child: Column(
                 children: [
+                  ...List.generate(
+                    n.length,
+                    (index) {
+                      return Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 13.w),
+                            child: Center(
+                                child: Text(
+                              "${n[index]}",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500),
+                            )),
+                            height: 33.h,
+                            width: 159.w,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 1.5.w, color: Color(0xff89C9FF))),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                n.removeAt(index);
+                              });
+                            },
+                            icon: Icon(Icons.delete),
+                            color: Colors.red,
+                          )
+                        ],
+                      );
+                    },
+                  ).toList(),
                   InkWell(
                     onTap: () async {
                       var selectedData = await Navigator.push(
@@ -330,8 +386,9 @@ class _planDetailsState extends State<planDetails> {
                         // Assuming selectedData is of type String
                         if (selectedData != null) {
                           setState(() {
-                            widget.plus1 = selectedData.toString();
-                            print(widget.plus1);
+                            n.add(selectedData);
+                            n = n.toSet().toList();
+                            print(widget.plus);
                           });
                         }
                       });
@@ -339,20 +396,13 @@ class _planDetailsState extends State<planDetails> {
                     child: Container(
                       margin: EdgeInsets.only(left: 13.w),
                       child: Center(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddPlace(placeID: '$place2')));
-                            },
-                            child: Text(
-                              "${widget.plus1}",
-                              style:
-                              TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                            ),
-                          )),
+                          child: Text(
+                        "+Add place",
+                        style: GoogleFonts.poppins(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500),
+                      )),
                       height: 33.h,
                       width: 159.w,
                       decoration: BoxDecoration(
@@ -361,7 +411,7 @@ class _planDetailsState extends State<planDetails> {
                           border: Border.all(
                               width: 1.5.w, color: Color(0xff89C9FF))),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -374,11 +424,17 @@ class _planDetailsState extends State<planDetails> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text("$name3",
-                          style: TextStyle(fontSize: 25, color: Colors.white)),
+                          style: GoogleFonts.poppins(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal)),
                     ),
                     Spacer(),
                     Text("$third days",
-                        style: TextStyle(fontSize: 25, color: Colors.white)),
+                        style: GoogleFonts.poppins(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal)),
                   ],
                 ),
                 height: 77.h,
@@ -403,53 +459,88 @@ class _planDetailsState extends State<planDetails> {
                   SizedBox(width: 10.w),
                   Text(
                     "from ($date3) to ($date4) ",
-                    style: TextStyle(color: Colors.black87, fontSize: 25),
+                    style: GoogleFonts.poppins(color: Colors.black87, fontSize: 25),
                   )
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
+              child: Column(
                 children: [
+                  ...List.generate(
+                    m.length,
+                    (index) {
+                      return Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 13.w),
+                            child: Center(
+                              child: Text("${m[index]}",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500)),
+                            ),
+                            height: 33.h,
+                            width: 159.w,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 1.5.w, color: Color(0xff89C9FF))),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                m.removeAt(index);
+                              });
+                            },
+                            icon: Icon(Icons.delete),
+                            color: Colors.red,
+                          )
+                        ],
+                      );
+                    },
+                  ).toList(),
                   InkWell(
-                    onTap: () {},
+                    onTap: () async {
+                      var selectedData = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  AddPlace(placeID: '$place3')));
+                      setState(() {
+                        // Update the state with the selected data received from AddPlace screen
+                        // Assuming selectedData is of type String
+                        if (selectedData != null) {
+                          setState(() {
+                            m.add(selectedData);
+                            m = m.toSet().toList();
+                            print(widget.plus);
+                          });
+                        }
+                      });
+                    },
                     child: Container(
                       margin: EdgeInsets.only(left: 13.w),
                       child: Center(
-                          child: InkWell(
-                            onTap: () async {
-                              var selectedData = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddPlace(placeID: '$place3')));
-                              setState(() {
-                                // Update the state with the selected data received from AddPlace screen
-                                // Assuming selectedData is of type String
-                                if (selectedData != null) {
-                                  setState(() {
-                                    widget.plus2 = selectedData.toString();
-                                    print(widget.plus2);
-                                  });
-                                }
-                              });
-                            },
-                            child: Text(
-                              "${widget.plus2}",
-                              style:
-                              TextStyle(fontSize: 15, color: Color(0xff89C9FF)),
-                            ),
-                          )),
+                          child: Text(
+                        "+Add place",
+                        style: GoogleFonts.poppins(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500),
+                      )),
                       height: 33.h,
                       width: 159.w,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          border:
-                          Border.all(width: 1.5, color: Color(0xff89C9FF))),
+                          border: Border.all(
+                              width: 1.5.w, color: Color(0xff89C9FF))),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

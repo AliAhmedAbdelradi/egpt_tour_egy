@@ -13,7 +13,7 @@ class FavCateg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 356.w,
-      height: 127.h,
+      height: 130.h,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               bottomLeft:  Radius.circular(20),
