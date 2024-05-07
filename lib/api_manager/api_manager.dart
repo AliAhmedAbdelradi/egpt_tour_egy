@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/CityAfterEdit.dart';
 import '../model/GetReadyMateById.dart';
 import '../model/PlaceDetailsByPlaceId.dart';
+import '../model/PlaceFloorRoomStatuesByIdRoom.dart';
 import '../model/PlaceFloorRoomStatuesModel.dart';
+import '../model/PlaceFloorRoomsById.dart';
 import '../model/PlaceFloorRoomsStatusAfter.dart';
 import '../model/PlaceModel.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -102,29 +104,35 @@ class ApiManager {
     return place;
   }
 
-  static Future<PlaceFloorRoomStatuesModel?> getFloorDetails() async {
+  static Future<PlaceFloorRoomsById?> getFloorDetails({
+    required int floorId,
+
+  }) async {
+
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/PlaceFloorRooms/GetAll';
+        'https://egypttourmate-001-site1.etempurl.com/api/PlaceFloorRooms/GetById?Id=$floorId';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
     var response = await dio.get(url);
-    var Floor = PlaceFloorRoomStatuesModel.fromJson(response.data);
+    var Floor = PlaceFloorRoomsById.fromJson(response.data);
     return Floor;
   }
 
-  static Future<PlaceFloorRoomsStatusAfter?> getPlaceFloorRoomStatues() async {
+  static Future<PlaceFloorRoomStatuesByIdRoom?> getPlaceFloorRoomStatues({
+    required int roomId
+}) async {
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/PlaceFloorRoomStatues/GetAll';
+        'https://egypttourmate-001-site1.etempurl.com/api/PlaceFloorRoomStatues/GetByRoomId?roomId=$roomId';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
     var response = await dio.get(url);
-    var statues = PlaceFloorRoomsStatusAfter.fromJson(response.data);
+    var statues = PlaceFloorRoomStatuesByIdRoom.fromJson(response.data);
     return statues;
   }
 

@@ -41,6 +41,15 @@ class _PlaceDicripState extends State<PlaceDicrip> {
     }
   }
 
+  void _launchURL() async {
+    const url = 'https://www.easwaaq.com/nmec/tickets';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,11 +136,10 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                                     fontSize: 18,
                                     color: primaryColor,
                                     fontWeight: FontWeight.w500),
-                              )
+                              ),
                             ],
                           ),
                         ),
-
                         Divider(
                           height: 20.h,
                           indent: 10.w,
@@ -139,47 +147,92 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                           color: Colors.black,
                           thickness: 1,
                         ),
-                        Row(
+                        Column(
                           children: [
-                            Column(
+                            Row(
                               children: [
-                                Text("Open Time",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 17,
-                                        color: primaryColor,
-                                        fontWeight: FontWeight.w500)),
-                                Row(
+                                Column(
                                   children: [
-                                    Icon(Icons.watch_later_outlined,
-                                        color: Colors.black54,size: 17,),
-                                    Text(
-                                      "${category[index].openTime?.substring(0, 5)} AM",
-                                      style: GoogleFonts.poppins(fontSize: 14),
-                                    )
+                                    Text("Open Time",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 17,
+                                            color: primaryColor,
+                                            fontWeight: FontWeight.w500)),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.watch_later_outlined,
+                                          color: Colors.black54,
+                                          size: 17,
+                                        ),
+                                        Text(
+                                          "${category[index].openTime?.substring(0, 5)} AM",
+                                          style: GoogleFonts.poppins(fontSize: 14),
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 ),
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    Text("Close Time",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 17,
+                                            color: primaryColor,
+                                            fontWeight: FontWeight.w500)),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.watch_later_outlined,
+                                          color: Colors.black54,
+                                          size: 17,
+                                        ),
+                                        Text(
+                                          "${category[index].closeTime?.substring(0, 5)} PM",
+                                          style: GoogleFonts.poppins(fontSize: 14),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
-                            Spacer(),
-                            Column(
+                            SizedBox(height: 20.h,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Close Time",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 17,
-                                        color: primaryColor,
-                                        fontWeight: FontWeight.w500)),
-                                Row(
-                                  children: [
-                                    Icon(Icons.watch_later_outlined,
-                                        color: Colors.black54,size: 17,),
-                                    Text(
-                                      "${category[index].closeTime?.substring(0, 5)} PM",
-                                      style: GoogleFonts.poppins(fontSize: 14),
-                                    )
-                                  ],
+                                Icon(
+                                  Icons.book_online,
+                                  weight: 20.w,
+                                  color: Colors.orange,
                                 ),
+                                Text(
+                                  "Book Your Tickets Now!",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500),
+                                ),
+
+
+
+
                               ],
-                            )
+
+                            ),
+                            InkWell(
+                              onTap: () {
+                                _launchURL();
+                              },
+                              child: Text(
+                                "Click here",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    color:  primaryColor,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
                           ],
                         ),
                         Divider(
@@ -199,12 +252,17 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                         ),
                         ElevatedButton(
                           style: ButtonStyle(
-                              fixedSize: MaterialStatePropertyAll(Size(210, 10)),
-                              backgroundColor: MaterialStatePropertyAll(primaryColor),
-                              shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)))),
+                              fixedSize:
+                                  MaterialStatePropertyAll(Size(210, 10)),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(primaryColor),
+                              shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(20)))),
                           onPressed: () {
-                            Navigator.pushNamed(context, InteractiveMap.routeName);
+                            Navigator.pushNamed(
+                                context, InteractiveMap.routeName);
                           },
                           child: Text(
                             'Go To Interactive Map >>',
@@ -216,7 +274,6 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                         ),
                       ],
                     ),
-
                   ],
                 ),
               );

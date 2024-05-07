@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../api_manager/api_manager.dart';
-import 'PlaceFloorRoomStatues.dart';
+import '../../../api_manager/api_manager.dart';
 
-class DetailsFloor extends StatefulWidget {
-  DetailsFloor({super.key});
+import 'PlaceFloorRoomStatues2.dart';
+
+class DetailsFloor2 extends StatefulWidget {
+  const DetailsFloor2({super.key});
 
   @override
-  State<DetailsFloor> createState() => _DetailsFloorState();
+  State<DetailsFloor2> createState() => _DetailsFloorState();
 }
 
-class _DetailsFloorState extends State<DetailsFloor> {
+class _DetailsFloorState extends State<DetailsFloor2> {
   final future = ApiManager();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: ApiManager.getFloorDetails(),
+      future: ApiManager.getFloorDetails(floorId: 9),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
@@ -41,7 +42,7 @@ class _DetailsFloorState extends State<DetailsFloor> {
                         height: 20.h,
                       ),
                       Text(
-                        cate[0].name ?? "",
+                        cate[index].name ?? "",
                         style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -52,9 +53,12 @@ class _DetailsFloorState extends State<DetailsFloor> {
                       ),
                       Stack(
                         children: [
-                          Image.network(cate[0].imageLink ?? ""),
+                          Image.network(cate[index].imageLink ?? ""),
                           InkWell(
                             onTap: () {
+                              setState(() {
+
+                              });
                               showStatues();
                             },
                             child: Center(
@@ -72,6 +76,16 @@ class _DetailsFloorState extends State<DetailsFloor> {
                           )
                         ],
                       ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Text(
+                        "Room ${cate[index].number}",
+                        style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 24,
+                            color: Colors.black),
+                      ),
                     ],
                   ),
                 ),
@@ -83,13 +97,14 @@ class _DetailsFloorState extends State<DetailsFloor> {
       },
     );
   }
-
   void showStatues() {
     showDialog(
       context: context,
       builder: (context) {
-        return PlaceFloorRoomStatues();
+        return PlaceFloorRoomStatues2();
       },
     );
   }
+
+
 }

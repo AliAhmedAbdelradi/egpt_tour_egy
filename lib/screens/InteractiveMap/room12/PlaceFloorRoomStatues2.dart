@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../api_manager/api_manager.dart';
+import '../../../api_manager/api_manager.dart';
 
-class PlaceFloorRoomStatues extends StatefulWidget {
+class PlaceFloorRoomStatues2 extends StatefulWidget {
   @override
-  State<PlaceFloorRoomStatues> createState() => _DetailsFloorState();
+  State<PlaceFloorRoomStatues2> createState() => _DetailsFloorState();
 }
 
-class _DetailsFloorState extends State<PlaceFloorRoomStatues> {
+class _DetailsFloorState extends State<PlaceFloorRoomStatues2> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: ApiManager.getPlaceFloorRoomStatues(),
+      future: ApiManager.getPlaceFloorRoomStatues(roomId: 9),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
@@ -22,12 +22,13 @@ class _DetailsFloorState extends State<PlaceFloorRoomStatues> {
         }
 
         final data = snapshot.data?.data ?? [];
+        print(data);
 
         return ListView.builder(
           scrollDirection: Axis.vertical,
           itemCount: data.length,
           itemBuilder: (context, index) {
-            final item = data[index];
+
 
             return Dialog(
               child: SizedBox(
@@ -37,7 +38,7 @@ class _DetailsFloorState extends State<PlaceFloorRoomStatues> {
                     children: [
                       SizedBox(height: 20.h),
                       Text(
-                        item.name ?? "",
+                        data[index].name ?? "",
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.bold,
                           fontSize: 20.sp,
@@ -45,9 +46,9 @@ class _DetailsFloorState extends State<PlaceFloorRoomStatues> {
                         ),
                       ),
                       SizedBox(height: 10.h),
-                      Image.network(item.imageLink ?? ""),
+                      Image.network(data[index].imageLink ?? ""),
                       Text(
-                        "Period: ${item.period}",
+                        "Period: ${data[index].period}",
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400,
                           fontSize: 20.sp,
@@ -55,7 +56,7 @@ class _DetailsFloorState extends State<PlaceFloorRoomStatues> {
                         ),
                       ),
                       Text(
-                        "Dynasty: ${item.dynasty}",
+                        "Dynasty: ${data[index].dynasty}",
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400,
                           fontSize: 20.sp,
@@ -63,7 +64,7 @@ class _DetailsFloorState extends State<PlaceFloorRoomStatues> {
                         ),
                       ),
                       Text(
-                        "Height: ${item.height}",
+                        "Height: ${data[index].height}",
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400,
                           fontSize: 20.sp,
@@ -71,7 +72,7 @@ class _DetailsFloorState extends State<PlaceFloorRoomStatues> {
                         ),
                       ),
                       Text(
-                        "Place of Discovery: ${item.placeOfDiscovery}",
+                        "Place of Discovery: ${data[index].placeOfDiscovery}",
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400,
                           fontSize: 20.sp,
@@ -79,7 +80,7 @@ class _DetailsFloorState extends State<PlaceFloorRoomStatues> {
                         ),
                       ),
                       Text(
-                        "Material: ${item.material}",
+                        "Material: ${data[index].material}",
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400,
                           fontSize: 20.sp,
