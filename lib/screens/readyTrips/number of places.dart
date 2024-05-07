@@ -54,7 +54,7 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
+              return Center(child: Text("No Data"));
             }
 
             return ListView.separated(

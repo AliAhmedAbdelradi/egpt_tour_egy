@@ -79,34 +79,47 @@ class _ReadymadeState extends State<Readymade> {
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (_)=> NumOfPlaceReadyTrip( id: cate[index].id??0)));
                         },
-                        child: Container(
-                            width: double.infinity.w,
-                            height: 50.h,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(image: AssetImage("assets/images/create_trip.png"),opacity: .9,fit: BoxFit.cover),
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Center(
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "${cate[index].name}",
-                                    style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
-                                        fontSize: 22),
+                        child:Container(
+                          width: 250.w,
+                          height: 160.h,
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              image:  AssetImage("assets/images/Rectangle 5.png"),
+                              fit: BoxFit.cover,
+                              opacity: 0.9,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.topRight,
+                                child:Text(
+                                  "${cate[index].duration} Days",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.white,
                                   ),
-                                  Spacer(),
-                                  Text(
-                                    "${cate[index].duration} Days",
-                                    style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
-                                        fontSize: 22),
-                                  ),
-                                ],
+                                ),
                               ),
-                            )),
+                              Spacer(),
+                              Container(
+                                alignment: Alignment.bottomLeft,
+                                child: Text(
+                                  cate[index].name ?? "",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   );
