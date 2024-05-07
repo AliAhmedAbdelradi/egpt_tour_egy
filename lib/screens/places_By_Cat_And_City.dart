@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/constant.dart';
 import 'days_counter/btn2.dart';
+import 'details_place/place_detail.dart';
+import 'details_place/place_disc.dart';
 
 class Places_By_cat_And_City extends StatefulWidget {
   static String routeName = 'Places_By_cat_And_City';
@@ -84,9 +86,6 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
           if (snapshot.hasError) {
             return Center(child: Text("no data entered"));
           }
-          if (snapshot == null) {
-            return Center(child: Text("No Data Entry"));
-          }
 
           final category = snapshot.data?.data ?? [];
 
@@ -148,52 +147,33 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                           fontSize: 20,
                         ),
                       ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "rate : ${category[index].rate}",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black,
-                              fontSize: 20,
-                            ),
-                          ),
-                          Text(
-                            "rateCount : ${category[index].rateCount}",
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  if (category[index].id ==
-                      2) // Show button only if category ID is 2
-                    ElevatedButton(
-                      style: ButtonStyle(
-                          fixedSize: MaterialStatePropertyAll(Size(210, 10)),
-                          backgroundColor: MaterialStatePropertyAll( primaryColor) ,
-                          shape: MaterialStatePropertyAll(
-                            
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)))),
-                      onPressed: () {
-                        Navigator.pushNamed(context, InteractiveMap.routeName);
-                      },
-                      child: Text('Go To Interactive Map >>',style: GoogleFonts.poppins(fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 15),),
-                    ),
+                   
+                     InkWell(
+                       onTap: () {
+                         Navigator.push(context, MaterialPageRoute(builder: (_)=> PlaceDicrip( PlaceId: category[index].id.toString(),)));
+                       },
+                       child: Column(
+                         children: [
+                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                             children: [
+                               Text("See More",style:GoogleFonts.poppins(
+                                   fontWeight: FontWeight.normal,
+                                   color:primaryColor  ,
+                                   fontSize: 22),),
+                               Icon(Icons.navigate_next,color: primaryColor,size: 22,)
+                             ],
+                           ),
+
+                         ],
+                       ),
+                     ),
+
                 ],
               );
             },

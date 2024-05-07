@@ -7,7 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PlaceDic extends StatelessWidget {
   static const String routeName = "dic";
-  const PlaceDic({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {

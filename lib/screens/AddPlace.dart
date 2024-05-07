@@ -1,6 +1,4 @@
 import 'package:ept_mate/api_manager/api_manager.dart';
-import 'package:ept_mate/model/trip.dart';
-import 'package:ept_mate/screens/InteractiveMap/interactive_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -108,7 +106,6 @@ class _Places_By_cat_And_CityState extends State<AddPlace> {
                 return GestureDetector(
                   onTap: () {
                     _passBackSelectedData(category[index].name ?? "");
-
                   },
                   child: Column(
                     children: [

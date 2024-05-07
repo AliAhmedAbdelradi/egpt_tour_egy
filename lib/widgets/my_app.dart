@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
             PlaceDic.routeName: (context) => PlaceDic(),
             TripPlansTab.routeName: (context) => TripPlansTab(),
             //SelectCity.routeName: (context) =>    SelectCity(),
-            PlaceDicrip.routeName: (context) => PlaceDicrip(),
+            PlaceDicrip.routeName: (context) => PlaceDicrip(PlaceId: '',),
             RideRiquest.routeName: (context) => RideRiquest(),
             weatherView.routeName: (context) => weatherView(),
             SelectCategory.routeName: (context) => SelectCategory(
@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
                 ),
             Readymade.routeName: (context) => Readymade(),
             InteractiveMap.routeName: (context) => InteractiveMap( ),
-            NumOfPlaceReadyTrip.routeName: (context) => NumOfPlaceReadyTrip(),
+            NumOfPlaceReadyTrip.routeName: (context) => NumOfPlaceReadyTrip(id: 0,),
             //DaysCounter.routeName: (context) => const DaysCounter(),
             //Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
           },

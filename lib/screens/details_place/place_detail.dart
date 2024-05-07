@@ -1,14 +1,45 @@
-
-
+import 'package:ept_mate/constant/constant.dart';
+import 'package:ept_mate/model/PlaceDetailsByPlaceId.dart';
+import 'package:ept_mate/screens/details_place/placeImages.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../api_manager/api_manager.dart';
+import '../InteractiveMap/interactive_map.dart';
 import '../plan_type_screen/plan_type.dart';
 import '../select_city/btn1.dart';
 import 'detail_shape.dart';
 
-class PlaceDicrip extends StatelessWidget {
+class PlaceDicrip extends StatefulWidget {
   static const String routeName = "Dicrip";
+  String PlaceId;
+
+  PlaceDicrip({required this.PlaceId});
+
+  @override
+  State<PlaceDicrip> createState() => _PlaceDicripState();
+}
+
+class _PlaceDicripState extends State<PlaceDicrip> {
+  PlaceDetailsByPlaceId list = PlaceDetailsByPlaceId();
+
+  _launchMaps(double latitude, double longitude) async {
+    // Construct the URL with the latitude and longitude
+    final url =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+
+    // Check if the URL can be launched
+    if (await canLaunch(url)) {
+      // Launch the URL
+      await launch(url);
+    } else {
+      // Handle the case where the URL cannot be launched
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +47,10 @@ class PlaceDicrip extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.popAndPushNamed(context, PlanType.routeName);
+              Navigator.pop(context);
             },
             icon: Icon(
-              Icons.cancel_outlined,
+              Icons.arrow_back,
               color: Colors.black,
               size: 30,
             )),
@@ -31,205 +62,168 @@ class PlaceDicrip extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              detail_shape("assets/images/pyramids_details.png"),
-              SizedBox(
-                height: 10,
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 42),
-                          child: Text(
-                            "pyramids",
-                            style: TextStyle(fontSize: 18, color: Colors.black87),
-                          )),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 38),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          color: Colors.redAccent,
-                        ),
-                        Text(
-                          "Cairo",
-                          style: TextStyle(fontSize: 14),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Divider(
-                    height: 2,
-                    indent: 40,
-                    endIndent: 40,
-                    color: Colors.black,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 42),
-                          child: Text(
-                            "Start",
-                            style: TextStyle(fontSize: 18, color: Colors.black87),
-                          )),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 38),
-                    child: Row(
-                      children: [
-                        Icon(Icons.watch_later_outlined, color: Colors.black54),
-                        Text(
-                          "10.00 AM",
-                          style: TextStyle(fontSize: 14),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Divider(
-                    height: 2,
-                    indent: 40,
-                    endIndent: 40,
-                    color: Colors.black,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 42),
-                          child: Text(
-                            "End",
-                            style: TextStyle(fontSize: 18, color: Colors.black87),
-                          )),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 38),
-                    child: Row(
-                      children: [
-                        Icon(Icons.watch_later_outlined, color: Colors.black54),
-                        Text(
-                          "7.00 PM",
-                          style: TextStyle(fontSize: 14),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Divider(
-                    height: 2,
-                    indent: 40,
-                    endIndent: 40,
-                    color: Colors.black,
-                    thickness: 1,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          weight: 20,
-                        ),
-                        Text(
-                          "Location",
-                          style: TextStyle(fontSize: 14, color: Colors.black),
-                        )
-                      ],
-                    ),
-                    height: 33.h,
-                    width: 140.w,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 1.5, color: Colors.black),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Divider(
-                    height: 2,
-                    indent: 40,
-                    endIndent: 40,
-                    color: Colors.black,
-                    thickness: 1,
-                  ),
-                  SizedBox(
-                    height: 13,
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "place Activity",
-                          style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.black),
-                        )
-                      ],
-                    ),
-                    height: 90.h,
-                    width: 281.w,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(width: 1.5, color: Colors.black),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 13,
-                  ),
-                  Divider(
-                    height: 2,
-                    indent: 40,
-                    endIndent: 40,
-                    color: Colors.black,
-                    thickness: 1,
-                  ),
-                  Text("The Egyptian pyramids",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  Text("are ancient masonry",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  Text("structures located in",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  Text("Egypt",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                ],
-          
-              ),
-              SizedBox(height: 15.h,),
-
-              Btn1(Color(0xFF89C9FF), Colors.white, "Back", () {
-                Navigator.pop(context);
-              })
-            ],
-          ),
+      body: FutureBuilder(
+        future: ApiManager.getPlaceDetailsPlaceId(
+          placeId: widget.PlaceId,
         ),
+        builder: (context, snapshot) {
+          print(snapshot.data?.data);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text("no data entered"));
+          }
+
+          final category = snapshot.data?.data ?? [];
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemBuilder: (context, index) {
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    PlaceImagesCarousel(
+                        placeImages: category[index].placeImages ?? []),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                child: Text(
+                              category[index].placeName ?? "",
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {});
+                            _launchMaps(category[index].latitude ?? 0,
+                                category[index].longitude ?? 0);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                weight: 20.w,
+                                color: Colors.red,
+                              ),
+                              Text(
+                                "Location",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    color: primaryColor,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                        ),
+
+                        Divider(
+                          height: 20.h,
+                          indent: 10.w,
+                          endIndent: 10.w,
+                          color: Colors.black,
+                          thickness: 1,
+                        ),
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                Text("Open Time",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 17,
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.w500)),
+                                Row(
+                                  children: [
+                                    Icon(Icons.watch_later_outlined,
+                                        color: Colors.black54,size: 17,),
+                                    Text(
+                                      "${category[index].openTime?.substring(0, 5)} AM",
+                                      style: GoogleFonts.poppins(fontSize: 14),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Spacer(),
+                            Column(
+                              children: [
+                                Text("Close Time",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 17,
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.w500)),
+                                Row(
+                                  children: [
+                                    Icon(Icons.watch_later_outlined,
+                                        color: Colors.black54,size: 17,),
+                                    Text(
+                                      "${category[index].closeTime?.substring(0, 5)} PM",
+                                      style: GoogleFonts.poppins(fontSize: 14),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        Divider(
+                          height: 30.h,
+                          indent: 10.w,
+                          endIndent: 10.w,
+                          color: Colors.black,
+                          thickness: 1,
+                        ),
+                        Text(
+                          category[index].detailedDescription ?? "",
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                              fixedSize: MaterialStatePropertyAll(Size(210, 10)),
+                              backgroundColor: MaterialStatePropertyAll(primaryColor),
+                              shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)))),
+                          onPressed: () {
+                            Navigator.pushNamed(context, InteractiveMap.routeName);
+                          },
+                          child: Text(
+                            'Go To Interactive Map >>',
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 15),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                  ],
+                ),
+              );
+            },
+            itemCount: category.length,
+          );
+        },
       ),
     );
   }

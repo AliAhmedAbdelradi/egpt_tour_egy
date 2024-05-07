@@ -1,5 +1,7 @@
 
 
+
+
 import 'package:ept_mate/screens/home.dart';
 import 'package:intl/intl.dart';
 import 'package:ept_mate/api_manager/api_manager.dart';
@@ -7,10 +9,9 @@ import 'package:ept_mate/model/trip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../Add_places/find_places.dart';
 import '../customize_screen/Select_Category/btn.dart';
-import '../plan_type_screen/plan_type.dart';
+
 
 class DateScreen extends StatefulWidget {
   DateScreen({required this.trip});
@@ -25,7 +26,7 @@ class _DateScreenState extends State<DateScreen>
 {
   DateTimeRange? _dateTimeRange;
   DateTime time = DateTime.now();
-  DateFormat dateFormat = DateFormat("yyyy-MM-dd THH:mm:ss");
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
 
 

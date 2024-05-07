@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../constant/constant.dart';
 import '../select_city/btn1.dart';
 
 class Readymade extends StatefulWidget {
@@ -29,7 +30,6 @@ class _ReadymadeState extends State<Readymade> {
                     fontSize: 22,
                     color: Colors.black)),
             margin: EdgeInsets.only(top: 10.h),
-
             padding: EdgeInsets.all(10),
           ),
           leading: IconButton(
@@ -64,69 +64,49 @@ class _ReadymadeState extends State<Readymade> {
 
               final cate = snapshot.data?.data ?? [];
 
-              return ListView.builder(
+              return ListView.separated(
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    height: 20.h,
+                  );
+                },
                 scrollDirection: Axis.vertical,
-
                 padding: const EdgeInsets.all(16),
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Text("${cate[index].name}",style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.black),),
-                      SizedBox(height: 10,),
                       InkWell(
                         onTap: () {
-
-                          Navigator.pushNamed(context, NumOfPlaceReadyTrip.routeName);
+                          Navigator.push(context, MaterialPageRoute(builder: (_)=> NumOfPlaceReadyTrip( id: cate[index].id??0)));
                         },
                         child: Container(
-                          width: 250.w,
-                          height: 160.h,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                              image: NetworkImage(cate[index].cityImage ?? ""),
-                              fit: BoxFit.cover,
-                              opacity: 0.7,
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  "${cate[index].dayNumber!*cate[index].duration!.toInt()} Days",
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.white,
+                            width: double.infinity.w,
+                            height: 50.h,
+                            decoration: BoxDecoration(
+                                color: primaryColor,
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "${cate[index].name}",
+                                    style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
+                                        fontSize: 22),
                                   ),
-                                ),
-                              ),
-                              Spacer(),
-                              Container(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(
-                                  cate[index].cityName ?? "",
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.white,
+                                  Spacer(),
+                                  Text(
+                                    "${cate[index].duration} Days",
+                                    style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
+                                        fontSize: 22),
                                   ),
-                                ),
+                                ],
                               ),
-
-                            ],
-                          ),
-                        ),
+                            )),
                       ),
-                      SizedBox(height: 10.h,)
-
-
                     ],
                   );
                 },
