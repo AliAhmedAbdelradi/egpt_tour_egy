@@ -6,10 +6,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'model/UserModel.dart';
 
-void main() async{
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var token = preferences.getString('token');
-  runApp(MyApp(isLoggedIn: token != null));
+
+  // Determine if the user is logged in based on the token
+  bool isLoggedIn = token != null;
+
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
+
