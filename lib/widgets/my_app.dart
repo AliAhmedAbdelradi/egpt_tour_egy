@@ -1,6 +1,8 @@
 
 
 import 'package:ept_mate/api_manager/api_manager.dart';
+import 'package:ept_mate/model/FastTripPlan.dart';
+
 import 'package:ept_mate/screens/readyTrips/readytrip.dart';
 import 'package:ept_mate/weather/view.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,8 @@ import '../screens/date_screen/date_screen.dart';
 import '../screens/days_counter/days_counter.dart';
 import '../screens/details_place/place_detail.dart';
 import '../screens/details_place/place_disc.dart';
+import '../screens/fastTrip/FastTrip.dart';
+import '../screens/fastTrip/number of placesFastTrip.dart';
 import '../screens/favourte_screen/favourite_Screen.dart';
 import '../screens/forget_password.dart';
 import '../screens/home.dart';
@@ -80,8 +84,10 @@ class MyApp extends StatelessWidget {
             Readymade.routeName: (context) => Readymade(),
             InteractiveMap.routeName: (context) => InteractiveMap( ),
             NumOfPlaceReadyTrip.routeName: (context) => NumOfPlaceReadyTrip(id: 0,),
+            NumOfPlaceFastTrip.routeName: (context) => NumOfPlaceFastTrip(id: 0,),
             //DaysCounter.routeName: (context) => const DaysCounter(),
             //Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
+            FastTrip.routeName:(context)=>FastTrip()
           },
         );
       },

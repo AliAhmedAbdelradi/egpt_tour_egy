@@ -1,3 +1,4 @@
+import 'package:ept_mate/constant/constant.dart';
 import 'package:ept_mate/screens/plan_type_screen/shape_plan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,6 +68,8 @@ class PlanType extends StatelessWidget {
             ShapePlan("assets/images/Rectangle 5.png", "Ready made", () {
               Navigator.pushNamed(context, Readymade.routeName);
             }),
+
+
           ],
         ),
       ),

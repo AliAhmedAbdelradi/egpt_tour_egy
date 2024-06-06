@@ -1,18 +1,16 @@
 import 'package:ept_mate/constant/constant.dart';
 import 'package:ept_mate/model/PlaceDetailsByPlaceId.dart';
 import 'package:ept_mate/screens/details_place/placeImages.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_tts/flutter_tts.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../api_manager/api_manager.dart';
 import '../InteractiveMap/interactive_map.dart';
-import '../plan_type_screen/plan_type.dart';
-import '../select_city/btn1.dart';
-import 'detail_shape.dart';
+
 
 class PlaceDicrip extends StatefulWidget {
   static const String routeName = "Dicrip";

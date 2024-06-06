@@ -3,6 +3,7 @@ import 'package:ept_mate/model/CategoryModel.dart';
 import 'package:ept_mate/model/trip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/CityAfterEdit.dart';
+import '../model/FastTripPlan.dart';
 import '../model/GetReadyMateById.dart';
 import '../model/PlaceDetailsByPlaceId.dart';
 import '../model/PlaceFloorRoomStatuesByIdRoom.dart';
@@ -198,5 +199,21 @@ class ApiManager {
         "$url/api/ReadyTrips/GetTripsById?Id= $id");
     var  readyMateById = GetReadyMateById.fromJson(response.data);
     return readyMateById;
+  }
+
+
+
+  static Future<FastTripPlan?> getFastTrip() async {
+    Dio dio = Dio();
+    String url =
+        'https://egypttourmate-001-site1.etempurl.com/api/ReadyTrips/GetFastTrips';
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+
+    var response = await dio.get(url);
+    var category = FastTripPlan.fromJson(response.data);
+    return category;
   }
 }

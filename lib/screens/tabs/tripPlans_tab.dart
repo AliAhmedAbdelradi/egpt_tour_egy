@@ -1,7 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../constant/constant.dart';
 import '../customize_screen/create_trip/create_trip_screen.dart';
+import '../fastTrip/FastTrip.dart';
 import '../plan_type_screen/shape_plan.dart';
 import '../readyTrips/readytrip.dart';
 import '../request_ride/categ_ride.dart';
@@ -47,6 +50,15 @@ class TripPlansTab extends StatelessWidget {
               ShapePlan("assets/images/Rectangle 5.png", "Ready made", () {
                 Navigator.pushNamed(context, Readymade.routeName);
               }),
+              SizedBox(
+                height: 20.h,
+              ),
+              TextButton(onPressed: (
+
+
+                  ){
+                Navigator.pushNamed(context, FastTrip.routeName);
+              }, child: Text("are you need fast trip?",style: TextStyle(color: primaryColor,fontWeight: FontWeight.bold,fontSize: 19),))
             ],
           ),
         ),
