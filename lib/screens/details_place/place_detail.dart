@@ -4,6 +4,7 @@ import 'package:ept_mate/screens/details_place/placeImages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -49,6 +50,7 @@ class _PlaceDicripState extends State<PlaceDicrip> {
       throw 'Could not launch $url';
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -140,6 +142,7 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                             ],
                           ),
                         ),
+
                         Divider(
                           height: 20.h,
                           indent: 10.w,
@@ -198,42 +201,49 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                                 )
                               ],
                             ),
-                            SizedBox(height: 20.h,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.book_online,
-                                  weight: 20.w,
-                                  color: Colors.orange,
+
+                            SizedBox(height: 10   .h,),
+                            if(category[index].placeId==2)
+
+                                Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .center,
+                                      children: [
+                                        Icon(
+                                          Icons.book_online,
+                                          weight: 20.w,
+                                          color: Colors.orange,
+                                        ),
+                                        Text(
+                                          "Book Your Tickets Now!",
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+
+                                      ],
+
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        _launchURL();
+                                      },
+                                      child: Text(
+                                        "Click here",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 18,
+                                            color: primaryColor,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  "Book Your Tickets Now!",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 18,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                ),
 
-
-
-
-                              ],
-
-                            ),
-                            InkWell(
-                              onTap: () {
-                                _launchURL();
-                              },
-                              child: Text(
-                                "Click here",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 18,
-                                    color:  primaryColor,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
                           ],
+
                         ),
                         Divider(
                           height: 30.h,
@@ -250,6 +260,7 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                         SizedBox(
                           height: 20,
                         ),
+                        if(category[index].placeId==2)
                         ElevatedButton(
                           style: ButtonStyle(
                               fixedSize:
