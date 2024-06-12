@@ -2,6 +2,7 @@
 
 import 'package:ept_mate/api_manager/api_manager.dart';
 import 'package:ept_mate/model/FastTripPlan.dart';
+import 'package:ept_mate/screens/Meusem_of_IslamicArt_IteractiveMap/iteractiveMap_meusem_of_islamicArt.dart';
 
 import 'package:ept_mate/screens/readyTrips/readytrip.dart';
 import 'package:ept_mate/weather/view.dart';
@@ -10,7 +11,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../model/UserModel.dart';
 import '../screens/Add_places/find_places.dart';
+import '../screens/Amanda_tempel_interactiveMap/interactiveMap_AmandaTemple.dart';
+import '../screens/Coptic_Meusem_InteractiveMap/interactiveMap_copticMeusem.dart';
 import '../screens/InteractiveMap/interactive_map.dart';
+import '../screens/abo_sample_interactiveMap/interactiveMap_aboSample.dart';
 import '../screens/categories/cultural/Religious_categ.dart';
 import '../screens/categories/cultural/cultural_categ.dart';
 import '../screens/categories/cultural/leisure_categ.dart';
@@ -27,6 +31,7 @@ import '../screens/fastTrip/number of placesFastTrip.dart';
 import '../screens/favourte_screen/favourite_Screen.dart';
 import '../screens/forget_password.dart';
 import '../screens/home.dart';
+import '../screens/mohamed_ali_interactiveMap/interactiveMap_mohamedAli.dart';
 import '../screens/onboarding_screen.dart';
 import '../screens/plan_type_screen/plan_type.dart';
 import '../screens/readyTrips/number of places.dart';
@@ -82,7 +87,12 @@ class MyApp extends StatelessWidget {
                   categoryId: '',
                 ),
             Readymade.routeName: (context) => Readymade(),
-            InteractiveMap.routeName: (context) => InteractiveMap( ),
+            InteractiveMap.routeName: (context) => InteractiveMap(),
+            InteractiveMapAboSample.routeName: (context) => InteractiveMapAboSample(),
+            InteractiveMapMohamedAli.routeName: (context) => InteractiveMapMohamedAli(),
+            InteractiveMapCopticMeusem.routeName: (context) => InteractiveMapCopticMeusem(),
+            InteractiveMapAmanda.routeName: (context) => InteractiveMapAmanda(),
+            InteractiveMapMeusemOfIslamicArt.routeName: (context) => InteractiveMapMeusemOfIslamicArt(),
             NumOfPlaceReadyTrip.routeName: (context) => NumOfPlaceReadyTrip(id: 0,),
             NumOfPlaceFastTrip.routeName: (context) => NumOfPlaceFastTrip(id: 0,),
             //DaysCounter.routeName: (context) => const DaysCounter(),

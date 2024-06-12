@@ -60,12 +60,11 @@ class _DetailsFloorState extends State<DetailsFloor> {
                               child: Center(
                                 child: Container(
                                   margin: EdgeInsets.only(top: 50.h),
-                                  width: 10.w,
-                                  height: 10.h,
+                                  width: 14.w,
+                                  height: 14.h,
                                   decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.white, width: 1),
-                                      color: Colors.redAccent,
+                                      border: Border.all(color: Colors.redAccent,width: 4.5.w),
+                                      color: Colors.white,
                                       borderRadius: BorderRadius.circular(60)),
                                 ),
                               ),

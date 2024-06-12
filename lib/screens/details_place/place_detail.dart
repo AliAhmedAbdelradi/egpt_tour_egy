@@ -9,8 +9,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../api_manager/api_manager.dart';
+import '../Amanda_tempel_interactiveMap/interactiveMap_AmandaTemple.dart';
+import '../Coptic_Meusem_InteractiveMap/interactiveMap_copticMeusem.dart';
 import '../InteractiveMap/interactive_map.dart';
-
+import '../Meusem_of_IslamicArt_IteractiveMap/iteractiveMap_meusem_of_islamicArt.dart';
+import '../abo_sample_interactiveMap/interactiveMap_aboSample.dart';
+import '../mohamed_ali_interactiveMap/interactiveMap_mohamedAli.dart';
 
 class PlaceDicrip extends StatefulWidget {
   static const String routeName = "Dicrip";
@@ -41,14 +45,13 @@ class _PlaceDicripState extends State<PlaceDicrip> {
   }
 
   void _launchURL() async {
-    const url = 'https://www.easwaaq.com/nmec/tickets';
+    const url = 'https://egyptianmuseumcairo.eg/ticket-opening-hours/';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +143,6 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                             ],
                           ),
                         ),
-
                         Divider(
                           height: 20.h,
                           indent: 10.w,
@@ -168,7 +170,8 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                                         ),
                                         Text(
                                           "${category[index].openTime?.substring(0, 5)} AM",
-                                          style: GoogleFonts.poppins(fontSize: 14),
+                                          style:
+                                              GoogleFonts.poppins(fontSize: 14),
                                         )
                                       ],
                                     ),
@@ -191,7 +194,8 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                                         ),
                                         Text(
                                           "${category[index].closeTime?.substring(0, 5)} PM",
-                                          style: GoogleFonts.poppins(fontSize: 14),
+                                          style:
+                                              GoogleFonts.poppins(fontSize: 14),
                                         )
                                       ],
                                     ),
@@ -199,49 +203,44 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                                 )
                               ],
                             ),
-
-                            SizedBox(height: 10   .h,),
-                            if(category[index].placeId==2)
-
-                                Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .center,
-                                      children: [
-                                        Icon(
-                                          Icons.book_online,
-                                          weight: 20.w,
-                                          color: Colors.orange,
-                                        ),
-                                        Text(
-                                          "Book Your Tickets Now!",
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 18,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-
-                                      ],
-
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        _launchURL();
-                                      },
-                                      child: Text(
-                                        "Click here",
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            if (category[index].placeId == 2)
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.book_online,
+                                        weight: 20.w,
+                                        color: Colors.orange,
+                                      ),
+                                      Text(
+                                        "Book Your Tickets Now!",
                                         style: GoogleFonts.poppins(
                                             fontSize: 18,
-                                            color: primaryColor,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.w500),
                                       ),
+                                    ],
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      _launchURL();
+                                    },
+                                    child: Text(
+                                      "Click here",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 18,
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.w500),
                                     ),
-                                  ],
-                                ),
-
+                                  ),
+                                ],
+                              ),
                           ],
-
                         ),
                         Divider(
                           height: 30.h,
@@ -258,29 +257,120 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                         SizedBox(
                           height: 20,
                         ),
-                        if(category[index].placeId==2)
-                        ElevatedButton(
-                          style: ButtonStyle(
-                              fixedSize:
-                                  MaterialStatePropertyAll(Size(210, 10)),
-                              backgroundColor:
-                                  MaterialStatePropertyAll(primaryColor),
-                              shape: MaterialStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(20)))),
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, InteractiveMap.routeName);
-                          },
-                          child: Text(
-                            'Go To Interactive Map >>',
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 15),
+                        if (category[index].placeId == 2)
+                          ElevatedButton(
+                            style: ButtonStyle(
+                                fixedSize:
+                                MaterialStatePropertyAll(Size(100, 30)),
+                                backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                shape: MaterialStatePropertyAll(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(20)))),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, InteractiveMap.routeName);
+                            },
+                            child: Image(
+                              image: AssetImage(
+                                  "assets/images/icon_Interactive_Map.png"),fit: BoxFit.fill,height: 100,width: 150,
+                            ),
                           ),
-                        ),
+                        if (category[index].placeId == 76)
+                          ElevatedButton(
+                            style: ButtonStyle(
+                                fixedSize:
+                                    MaterialStatePropertyAll(Size(100, 30)),
+                                backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                shape: MaterialStatePropertyAll(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)))),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, InteractiveMapAboSample.routeName);
+                            },
+                            child: Image(
+                              image: AssetImage(
+                                  "assets/images/icon_Interactive_Map.png"),fit: BoxFit.fill,height: 100,width: 150,
+                            ),
+                          ),
+                        if (category[index].placeId == 16)
+                          ElevatedButton(
+                            style: ButtonStyle(
+                                fixedSize:
+                                MaterialStatePropertyAll(Size(100, 30)),
+                                backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                shape: MaterialStatePropertyAll(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(20)))),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, InteractiveMapMohamedAli.routeName);
+                            },
+                            child: Image(
+                              image: AssetImage(
+                                  "assets/images/icon_Interactive_Map.png"),fit: BoxFit.fill,height: 100,width: 150,
+                            ),
+                          ),
+                        if (category[index].placeId == 48)
+                          ElevatedButton(
+                            style: ButtonStyle(
+                                fixedSize:
+                                MaterialStatePropertyAll(Size(100, 30)),
+                                backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                shape: MaterialStatePropertyAll(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(20)))),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, InteractiveMapAmanda.routeName);
+                            },
+                            child: Image(
+                              image: AssetImage(
+                                  "assets/images/icon_Interactive_Map.png"),fit: BoxFit.fill,height: 100,width: 150,
+                            ),
+                          ),
+                        if (category[index].placeId == 78)
+                          ElevatedButton(
+                            style: ButtonStyle(
+                                fixedSize:
+                                MaterialStatePropertyAll(Size(100, 30)),
+                                backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                shape: MaterialStatePropertyAll(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(20)))),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, InteractiveMapCopticMeusem.routeName);
+                            },
+                            child: Image(
+                              image: AssetImage(
+                                  "assets/images/icon_Interactive_Map.png"),fit: BoxFit.fill,height: 100,width: 150,
+                            ),
+                          ),
+                        if (category[index].placeId == 77)
+                          ElevatedButton(
+                            style: ButtonStyle(
+                                fixedSize:
+                                MaterialStatePropertyAll(Size(100, 30)),
+                                backgroundColor: MaterialStatePropertyAll(Colors.white),
+                                shape: MaterialStatePropertyAll(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(20)))),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, InteractiveMapMeusemOfIslamicArt.routeName);
+                            },
+                            child: Image(
+                              image: AssetImage(
+                                  "assets/images/icon_Interactive_Map.png"),fit: BoxFit.fill,height: 100,width: 150,
+                            ),
+                          ),
                       ],
                     ),
                   ],

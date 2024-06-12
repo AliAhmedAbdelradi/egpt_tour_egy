@@ -46,11 +46,11 @@ class _InteractiveMapState extends State<InteractiveMap> {
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 35.h, left: 205.w),
-                      width: 12.w,
-                      height: 12.h,
+                      width: 13.w,
+                      height: 13.h,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white,width: 1.w),
-                          color: Colors.red, borderRadius: BorderRadius.circular(60)),
+                          border: Border.all(color: Colors.red, width: 4.5.w),
+                          color: Colors.white, borderRadius: BorderRadius.circular(60)),
                     ),
                   ),
                   SizedBox(height: 55.h,),
@@ -61,11 +61,11 @@ class _InteractiveMapState extends State<InteractiveMap> {
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 35.h, left: 110.w),
-                      width: 12.w,
-                      height: 12.h,
+                      width: 13.w,
+                      height: 13.h,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white,width: 1.w),
-                          color: Colors.red, borderRadius: BorderRadius.circular(60)),
+                          border: Border.all(color: Colors.red, width: 4.5.w),
+                          color: Colors.white, borderRadius: BorderRadius.circular(60)),
                     ),
                   ),
                 ],
@@ -74,14 +74,7 @@ class _InteractiveMapState extends State<InteractiveMap> {
             ],
           ),
 
-          Btn1(
-            Color(0xFF89C9FF),
-            Colors.white,
-            "Back",
-                () {
-              Navigator.pop(context);
-            },
-          ),
+
         ],
       ),
     );

@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/CityAfterEdit.dart';
 import '../model/FastTripPlan.dart';
 import '../model/GetReadyMateById.dart';
+import '../model/InteractiveMapByPlaceId.dart';
 import '../model/PlaceDetailsByPlaceId.dart';
 import '../model/PlaceFloorRoomStatuesByIdRoom.dart';
 import '../model/PlaceFloorRoomStatuesModel.dart';
@@ -137,6 +138,19 @@ class ApiManager {
     return statues;
   }
 
+  static Future<PlaceFloorRoomsStatusAfter?> getFloorRoomStatues() async {
+    Dio dio = Dio();
+    String url =
+        'https://egypttourmate-001-site1.etempurl.com/api/PlaceFloorRoomStatues/GetAll';
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+    var response = await dio.get(url);
+    var statues = PlaceFloorRoomsStatusAfter.fromJson(response.data);
+    return statues;
+  }
+
   static Future<void> addTrip(Trip trip) async {
     trip.nameOfTrip="TEST";
     print(trip.toJson());
@@ -216,4 +230,20 @@ class ApiManager {
     var category = FastTripPlan.fromJson(response.data);
     return category;
   }
+
+  static Future<InteractiveMapByPlaceId?> getInteractiveMapByPlaceId({
+    required int placeId,
+  }) async {
+    Dio dio = Dio();
+    String url = 'https://egypttourmate-001-site1.etempurl.com';
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+    var response = await dio.get(
+        "$url/api/PlaceDetails/GetInteractiveMapByPlaceId?placeId=$placeId");
+    var  interactiveMap = InteractiveMapByPlaceId.fromJson(response.data);
+    return interactiveMap;
+  }
+
 }
