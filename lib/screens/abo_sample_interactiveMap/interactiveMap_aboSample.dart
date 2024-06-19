@@ -57,7 +57,7 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapAboSample> {
                 });
               },
               child: Container(
-                margin: EdgeInsets.only(right: 135.w, top: 25.h),
+                margin: EdgeInsets.only(right: 135.w, top: 25.w),
                 width: 14.w,
                 height: 14.h,
                 decoration: BoxDecoration(

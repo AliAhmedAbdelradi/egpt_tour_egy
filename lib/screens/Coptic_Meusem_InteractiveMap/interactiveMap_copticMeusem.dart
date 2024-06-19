@@ -48,7 +48,7 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapCopticMeusem> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 90.h,left: 80.h),
+                    margin: EdgeInsets.only(bottom: 90.h,left: 80.w),
                     width: 18.w,
                     height: 18.h,
                     decoration: BoxDecoration(
@@ -64,7 +64,7 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapCopticMeusem> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 255.h,left: 20.h),
+                    margin: EdgeInsets.only(bottom: 255.h,left: 20.w),
                     width: 18.w,
                     height: 18.h,
                     decoration: BoxDecoration(
@@ -81,7 +81,7 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapCopticMeusem> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 5.h,left: 115.h),
+                    margin: EdgeInsets.only(bottom: 5.h,left: 115.w),
                     width: 18.w,
                     height: 18.h,
                     decoration: BoxDecoration(
