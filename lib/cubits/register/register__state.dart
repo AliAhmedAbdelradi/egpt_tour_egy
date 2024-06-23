@@ -1,16 +1,17 @@
 
 
-import '../../model/UserModel.dart';
-import '../../model/UserModel1.dart';
+import 'package:ept_mate/model/UserModel2.dart';
+
+
 
 abstract class RegisterState {}
 
 class RegisterInitialState extends RegisterState {}
 
 class RegisterSuccessState extends RegisterState {
-  UserModel1 userModel1;
+  UserModel2 userModel2;
 
-  RegisterSuccessState(this.userModel1);
+  RegisterSuccessState(this.userModel2);
 }
 class RegisterLoadingState extends RegisterState {}
 

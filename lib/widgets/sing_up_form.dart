@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../constant/constant.dart';
 import '../cubits/register/register__cubit.dart';
 import '../cubits/register/register__state.dart';
 import '../helper/show_dailog.dart';
@@ -41,14 +42,14 @@ class _SingUpFormState extends State<SingUpForm> {
       child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
           if (state is RegisterSuccessState) {
-            if (state.userModel1.status != null) {
-              Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+            if (state.userModel2.status != null) {
+              showDetalis3();
               Fluttertoast.showToast(
-                  msg: "Successfully Logged In",
+                  msg: "Send Confirmation code Successfully",
                   toastLength: Toast.LENGTH_LONG,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.green,
+                  backgroundColor: primaryColor,
                   textColor: Colors.white,
                   fontSize: 16.0);
             }
@@ -93,8 +94,7 @@ class _SingUpFormState extends State<SingUpForm> {
                     keyboardType: TextInputType.emailAddress,
                     controller: emailController,
                     suffixIcon: IconButton(onPressed: () {
-                      Navigator.pushNamed(context, EmailConfirmationScreen
-                          .routeName);
+                      showDetalis3();
                     }, icon: Icon(Icons.verified_outlined)),
                   ),
                   SizedBox(height: 10.h),
@@ -211,7 +211,14 @@ class _SingUpFormState extends State<SingUpForm> {
     });
   }
 
-
+  void showDetalis3() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return EmailConfirmationScreen();
+      },
+    );
+  }
 
 
 }

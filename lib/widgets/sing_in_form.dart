@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../constant/constant.dart';
 import '../cubits/login/login__cubit.dart';
 import '../cubits/login/login__state.dart';
 import '../helper/show_dailog.dart';
@@ -41,7 +42,7 @@ class _SingInFormState extends State<SingInForm> {
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 5,
-                backgroundColor: Colors.green,
+                backgroundColor: primaryColor,
                 textColor: Colors.white,
                 fontSize: 16.0);
           } else if(state is LoginErrorState){

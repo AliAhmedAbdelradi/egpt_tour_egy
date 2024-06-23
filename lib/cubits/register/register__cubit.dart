@@ -1,4 +1,5 @@
 import 'package:ept_mate/cubits/register/register__state.dart';
+import 'package:ept_mate/model/UserModel2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +11,7 @@ import '../../screens/sing_in.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitialState());
   static RegisterCubit get(context) => BlocProvider.of(context);
-  UserModel1 userModel1 = UserModel1();
+  UserModel2 userModel2 = UserModel2();
 
   void UserRegister(
       {required String email,
@@ -25,14 +26,14 @@ class RegisterCubit extends Cubit<RegisterState> {
       "username": username,
       "roleName": "user"
     }).then((value) async {
-      userModel1 = UserModel1.fromJson(value.data);
+      userModel2 = UserModel2.fromJson(value.data);
       //await saveToken(userModel1.token ?? "");
 
       Navigator(
         initialRoute: SingIn.routeName,
       );
 
-      emit(RegisterSuccessState(userModel1));
+      emit(RegisterSuccessState(userModel2));
     }).catchError((error) {
       emit(RegisterErrorState(error.toString()));
       print(error.toString());
