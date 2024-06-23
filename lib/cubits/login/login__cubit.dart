@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/authentication_helper.dart';
 import '../../model/UserModel.dart';
+import '../../model/UserModel1.dart';
 import '../../screens/home.dart';
 import 'login__state.dart';
 
@@ -12,7 +13,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
 
-  UserModel userModel = UserModel();
+  UserModel1 userModel1 = UserModel1();
 
   void UserLogin(String userName, String password) {
     emit(LoginLoadingState());
@@ -20,15 +21,15 @@ class LoginCubit extends Cubit<LoginState> {
       'password': password,
       'userName': userName,
     }).then((value) async {
-      userModel = UserModel.fromJson(value.data);
+      userModel1 = UserModel1.fromJson(value.data);
 
       /// save token here
 
-     await saveToken(userModel.token ?? "");
+     await saveToken(userModel1.token ?? "");
       Navigator(
         initialRoute: HomeScreen.routeName,
       );
-      emit(LoginSuccessState(userModel));
+      emit(LoginSuccessState(userModel1));
     }).catchError((error) {
       emit(LoginErrorState(error.toString()));
       print(error.toString());

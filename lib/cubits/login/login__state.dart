@@ -1,15 +1,16 @@
 
 
 import '../../model/UserModel.dart';
+import '../../model/UserModel1.dart';
 
 abstract class LoginState {}
 
 class LoginInitialState extends LoginState {}
 
 class LoginSuccessState extends LoginState {
-  UserModel userModel;
+  UserModel1 userModel1;
 
-  LoginSuccessState(this.userModel);
+  LoginSuccessState(this.userModel1);
 }
 
 class LoginLoadingState extends LoginState {}

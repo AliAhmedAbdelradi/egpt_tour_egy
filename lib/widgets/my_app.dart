@@ -20,6 +20,7 @@ import '../screens/categories/cultural/cultural_categ.dart';
 import '../screens/categories/cultural/leisure_categ.dart';
 import '../screens/categories/cultural/medical_categ.dart';
 import '../screens/city_res_cat.dart';
+import '../screens/confirm_email/Confirm_Email.dart';
 import '../screens/customize_screen/Select_Category/Select_Category_Screen.dart';
 import '../screens/customize_screen/create_trip/create_trip_screen.dart';
 import '../screens/date_screen/date_screen.dart';
@@ -97,7 +98,8 @@ class MyApp extends StatelessWidget {
             NumOfPlaceFastTrip.routeName: (context) => NumOfPlaceFastTrip(id: 0,),
             //DaysCounter.routeName: (context) => const DaysCounter(),
             //Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
-            FastTrip.routeName:(context)=>FastTrip()
+            FastTrip.routeName:(context)=>FastTrip(),
+            EmailConfirmationScreen.routeName:(context)=>EmailConfirmationScreen()
           },
         );
       },

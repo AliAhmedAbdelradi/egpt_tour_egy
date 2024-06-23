@@ -48,7 +48,7 @@ class NumOfPlaceFastTrip extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(top: 40.h),
         child: FutureBuilder(
-          future: ApiManager.getFastTrip(),
+          future: ApiManager.getFastTripsById(fastTripsId: id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -77,15 +77,10 @@ class NumOfPlaceFastTrip extends StatelessWidget {
                         SingleChildScrollView(
                           child: Column(
                             children: [
-                              Text("${detail.cityName}",
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                  )),
+
                               Container(
-                                width: double.infinity.w,
-                                height: 150.h,
+                                width: 220.w,
+                                height: 130.h,
                                 padding: EdgeInsets.all(20),
                                 decoration: BoxDecoration(
                                   color: Colors.black,
@@ -98,15 +93,7 @@ class NumOfPlaceFastTrip extends StatelessWidget {
                                 ),
                                 child: Column(
                                   children: [
-                                    Container(
-                                        alignment: Alignment.topRight,
-                                        child: Text("Day ${detail.dayNum}",
-                                            style: GoogleFonts.poppins(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20,
-                                              color: Colors.white,
-                                            ))),
-                                    Spacer(),
+
                                     Container(
                                       alignment: Alignment.bottomLeft,
                                       child: Text(

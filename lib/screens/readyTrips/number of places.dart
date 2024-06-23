@@ -84,8 +84,8 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
                                     color: Colors.black,
                                   )),
                               Container(
-                                width: double.infinity.w,
-                                height: 150.h,
+                                width: 230.w,
+                                height: 120.h,
                                 padding: EdgeInsets.all(20),
                                 decoration: BoxDecoration(
                                   color: Colors.black,
@@ -99,16 +99,7 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Container(
-                                        alignment: Alignment.topRight,
-                                        child: Text("Day ${detail.dayNum}",
-                                            style: GoogleFonts.poppins(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20,
-                                              color: Colors.white,
-                                            ))),
-                                    Spacer(),
-                                    Container(
-                                      alignment: Alignment.bottomLeft,
+                                      alignment: Alignment.topLeft,
                                       child: Text(
                                         detail.name,
                                         style: GoogleFonts.poppins(
@@ -118,6 +109,15 @@ class NumOfPlaceReadyTrip extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                    Spacer(),
+                                    Container(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Text("Day ${detail.dayNum}",
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                            ))),
                                   ],
                                 ),
                               ),

@@ -7,7 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 class CityResCat extends StatefulWidget {
   static const String routeName = "cityres";
   String categoryId;
-  CityResCat ({ required this.categoryId});
+
+  CityResCat({required this.categoryId});
 
   @override
   State<CityResCat> createState() => _CityResCatState();
@@ -92,46 +93,44 @@ class _CityResCatState extends State<CityResCat> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_)=> Places_By_cat_And_City(cityID: cate[index].id.toString(),CategoryID: widget.categoryId,)));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => Places_By_cat_And_City(
+                                          cityID: cate[index].id.toString(),
+                                          CategoryID: widget.categoryId,
+                                        )));
                           },
                           child: Container(
                             width: 250.w,
                             height: 160.h,
                             padding: EdgeInsets.all(20),
-
                             decoration: BoxDecoration(
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(15),
                                 image: DecorationImage(
-                                    image:
-                                    NetworkImage(cate[index].imageLink ?? ""),
+                                    image: NetworkImage(
+                                        cate[index].imageLink ?? ""),
                                     fit: BoxFit.cover,
                                     opacity: 0.7)),
                             child: Column(
                               children: [
-                                Container(
-                                    alignment: Alignment.topRight,
-                                    child: Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.white,
-                                    )
-
-                                ),
-                                Spacer(),
                                 Container(
                                     alignment: Alignment.bottomLeft,
                                     child: Text(
                                       cate[index].name ?? "",
                                       style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 15,
+                                          fontSize: 16,
                                           color: Colors.white),
                                     )),
                               ],
                             ),
                           ),
                         ),
-                        SizedBox(height: 20,)
+                        SizedBox(
+                          height: 20,
+                        )
                       ],
                     ),
                   );

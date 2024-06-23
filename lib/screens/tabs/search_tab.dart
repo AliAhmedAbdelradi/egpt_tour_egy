@@ -1,136 +1,130 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SearchTab extends StatelessWidget {
+import '../../api_manager/api_manager.dart';
+import '../../model/AllPlaces.dart';
+
+import '../search.dart';
+
+class SearchTab extends StatefulWidget {
   const SearchTab({super.key});
+
+  @override
+  State<SearchTab> createState() => _SearchTabState();
+}
+
+class _SearchTabState extends State<SearchTab> {
+
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Column(
+      appBar: AppBar(
+        title: Row(
           children: [
-            SizedBox(height: 10,),
-            Container(
-              width: 250.w,
-              height: 35.h,
-              child: TextFormField(
-                obscureText: false,
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        borderSide:
-                            BorderSide(color: Colors.black26, width: 1)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                        borderSide:
-                            BorderSide(color: Colors.black26, width: 1)),
-                    focusColor: Colors.black26,
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 18,
-                    ),
-                    errorMaxLines: 10,
-                    suffixIconColor: Colors.black26,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
-                    hintStyle: TextStyle(
-                        height: 0.h, fontSize: 16, color: Colors.black26),
-                    hintText: "Search"),
-              ),
-            ),
-            Card(
-              color: Colors.white,
-              shape: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.transparent),
-                  borderRadius: BorderRadius.circular(20)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Stack(
-                    children: [
-                      Image(
-                        image: AssetImage("assets/images/tower.png"),
-                        width: 328.w,
-                        height: 370.h,
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(top: 50.h, left: 295.w),
-                          child: Icon(
-                            Icons.favorite,
-                            size: 30,
-                            color: Colors.white,
-                          ))
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 30.w),
-                        child: Text("Cairo Tower",
-                            style: GoogleFonts.radioCanada(
-                                fontSize: 25,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(left: 125.w),
-                          child: Text("4,33")),
-                      Icon(
-                        Icons.star,
-                        color: Colors.black87,
-                        size: 12,
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 15.h),
-                  Row(
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 30.w),
-                          child: Text(
-                              "The Cairo Toweris a free-standing concrete tower  ",
-                              style: GoogleFonts.radioCanada(
-                                  fontSize: 15,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold))),
-                    ],
-                  ),
-                  SizedBox(height: 5.h),
-                  Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 30.w),
-                        child: Text(
-                          "in Cairo Egypt At 187 m (614 ft), it was the tallest  ",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5.h),
-                  Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 30.w),
-                        child: Text(
-                          "the tallest structure in Egypt for 37 years until 1998",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+            Text(' Search'),
+            Spacer(),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: PlaceSearch());
+              },
             ),
           ],
         ),
+
+      ),
+      body:FutureBuilder (
+        future:   ApiManager.getAllPlacess(),
+        builder: (context, snapshot) {
+          print(snapshot.data?.data??[]);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text("no data entered"));
+          }
+
+          final category = snapshot.data?.data??[];
+
+          return ListView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(16),
+            itemBuilder: (context, index) {
+              return Card(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                color: Colors.white70,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 150.w,
+                          height: 100.h,
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              image: NetworkImage(category?[index].imageLink ?? ""),
+                              fit: BoxFit.cover,
+                              opacity: 0.7,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+
+                              Container(
+                                alignment: Alignment.bottomLeft,
+                                child: Text(
+                                    category[index].name ?? "",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12, // Adjusted font size
+                                      color: Colors.white, // Adjusted text color for better readability
+                                    )),
+                              )],
+                          ),
+                        ),
+                        SizedBox(width: 8.w), // Add some spacing between the image and text
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                category[index].description ?? "",
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13, // Adjusted font size
+                                  color: Colors.black, // Adjusted text color for better readability
+                                ),
+                                overflow: TextOverflow.clip, // Handle overflow
+                                maxLines: 7, // Maximum number of lines to display
+                              ),
+
+
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+            itemCount: category.length,
+          );
+        },
       ),
     );
   }
 }
+
+

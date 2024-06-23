@@ -2,19 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:ept_mate/model/CategoryModel.dart';
 import 'package:ept_mate/model/trip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../model/AllPlaces.dart';
 import '../model/CityAfterEdit.dart';
 import '../model/FastTripPlan.dart';
+import '../model/FavouriteModel.dart';
+import '../model/GetFastTripsById.dart';
 import '../model/GetReadyMateById.dart';
 import '../model/InteractiveMapByPlaceId.dart';
 import '../model/PlaceDetailsByPlaceId.dart';
 import '../model/PlaceFloorRoomStatuesByIdRoom.dart';
-import '../model/PlaceFloorRoomStatuesModel.dart';
 import '../model/PlaceFloorRoomsById.dart';
 import '../model/PlaceFloorRoomsStatusAfter.dart';
 import '../model/PlaceModel.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-import '../model/ReadyMadeModel3.dart';
 import '../model/ReadyMateModel4.dart'; // Import PrettyDioLogger
 
 class ApiManager {
@@ -27,7 +27,7 @@ class ApiManager {
   static Future<CityAfterEdit?> getData() async {
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/CityCategory/GetAll';
+        'https://egyptttourmate-001-site1.gtempurl.com/api/CityCategory/GetAll';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
@@ -48,7 +48,7 @@ class ApiManager {
   static Future<CategoryModel?> getCategory() async {
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/TourismCategories/GetAll';
+        'https://egyptttourmate-001-site1.gtempurl.com/api/TourismCategories/GetAll';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
@@ -62,7 +62,7 @@ class ApiManager {
   static Future<CityAfterEdit?> getCity() async {
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/CityCategory/GetAll';
+        'https://egyptttourmate-001-site1.gtempurl.com/api/CityCategory/GetAll';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
@@ -76,7 +76,7 @@ class ApiManager {
   static Future<ReadyMateModel4?> getReady() async {
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/ReadyTrips/GetTrips';
+        'https://egyptttourmate-001-site1.gtempurl.com/api/ReadyTrips/GetTrips';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
@@ -87,14 +87,14 @@ class ApiManager {
     return ready;
   }
 
-  static String url = 'https://egypttourmate-001-site1.etempurl.com/';
+  static String url = 'https://egyptttourmate-001-site1.gtempurl.com/';
 
   static Future<PlaceModel?> getPlaceById({
     required String categoryId,
     required String cityId,
   }) async {
     Dio dio = Dio();
-    String url = 'https://egypttourmate-001-site1.etempurl.com';
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
@@ -108,27 +108,24 @@ class ApiManager {
 
   static Future<PlaceFloorRoomsById?> getFloorDetails({
     required int floorId,
-
   }) async {
-
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/PlaceFloorRooms/GetById?Id=$floorId';
+        'https://egyptttourmate-001-site1.gtempurl.com/api/PlaceFloorRooms/GetById?Id=$floorId';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
     var response = await dio.get(url);
-    var Floor = PlaceFloorRoomsById.fromJson(response.data);
-    return Floor;
+    var floor = PlaceFloorRoomsById.fromJson(response.data);
+    return floor;
   }
 
-  static Future<PlaceFloorRoomStatuesByIdRoom?> getPlaceFloorRoomStatues({
-    required int roomId
-}) async {
+  static Future<PlaceFloorRoomStatuesByIdRoom?> getPlaceFloorRoomStatues(
+      {required int roomId}) async {
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/PlaceFloorRoomStatues/GetByRoomId?roomId=$roomId';
+        'https://egyptttourmate-001-site1.gtempurl.com/api/PlaceFloorRoomStatues/GetByRoomId?roomId=$roomId';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
@@ -141,7 +138,7 @@ class ApiManager {
   static Future<PlaceFloorRoomsStatusAfter?> getFloorRoomStatues() async {
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/PlaceFloorRoomStatues/GetAll';
+        'https://egyptttourmate-001-site1.gtempurl.com/api/PlaceFloorRoomStatues/GetAll';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
@@ -152,35 +149,33 @@ class ApiManager {
   }
 
   static Future<void> addTrip(Trip trip) async {
-    trip.nameOfTrip="TEST";
+    trip.nameOfTrip = "TEST";
     print(trip.toJson());
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/UserTrips/Add';
+        'https://egyptttourmate-001-site1.gtempurl.com/api/UserTrips/Add';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
-    try{
-      var response = await dio.post(url,data:FormData.fromMap(trip.toJson()));
+    try {
+      var response = await dio.post(url, data: FormData.fromMap(trip.toJson()));
       print(response.data);
-    }
-    catch(e){
+    } catch (e) {
       print(e);
-
     }
   }
+
   static Future<PlaceModel?> getplaceByCityId({
     required String cityId,
   }) async {
     Dio dio = Dio();
-    String url = 'https://egypttourmate-001-site1.etempurl.com';
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
-    var response = await dio.get(
-        "$url/api/Places/GetByCity?cityId=$cityId");
+    var response = await dio.get("$url/api/Places/GetByCity?cityId=$cityId");
     var place = PlaceModel.fromJson(response.data);
     return place;
   }
@@ -189,13 +184,13 @@ class ApiManager {
     required String placeId,
   }) async {
     Dio dio = Dio();
-    String url = 'https://egypttourmate-001-site1.etempurl.com';
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
-    var response = await dio.get(
-        "$url/api/PlaceDetails/GetByPlaceId?placeId=$placeId");
+    var response =
+        await dio.get("$url/api/PlaceDetails/GetByPlaceId?placeId=$placeId");
     var placeDetails = PlaceDetailsByPlaceId.fromJson(response.data);
     return placeDetails;
   }
@@ -204,23 +199,20 @@ class ApiManager {
     required int id,
   }) async {
     Dio dio = Dio();
-    String url = 'https://egypttourmate-001-site1.etempurl.com';
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
-    var response = await dio.get(
-        "$url/api/ReadyTrips/GetTripsById?Id= $id");
-    var  readyMateById = GetReadyMateById.fromJson(response.data);
+    var response = await dio.get("$url/api/ReadyTrips/GetTripsById?Id= $id");
+    var readyMateById = GetReadyMateById.fromJson(response.data);
     return readyMateById;
   }
-
-
 
   static Future<FastTripPlan?> getFastTrip() async {
     Dio dio = Dio();
     String url =
-        'https://egypttourmate-001-site1.etempurl.com/api/ReadyTrips/GetFastTrips';
+        'https://egyptttourmate-001-site1.gtempurl.com/api/ReadyTrips/GetFastTrips';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
@@ -235,15 +227,66 @@ class ApiManager {
     required int placeId,
   }) async {
     Dio dio = Dio();
-    String url = 'https://egypttourmate-001-site1.etempurl.com';
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
     var response = await dio.get(
         "$url/api/PlaceDetails/GetInteractiveMapByPlaceId?placeId=$placeId");
-    var  interactiveMap = InteractiveMapByPlaceId.fromJson(response.data);
+    var interactiveMap = InteractiveMapByPlaceId.fromJson(response.data);
     return interactiveMap;
   }
 
+  static Future<FavouriteModel?> getFavourite() async {
+    Dio dio = Dio();
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+    var response = await dio.get("$url/api/UserFavorits/GetAll");
+    var fav = FavouriteModel.fromJson(response.data);
+    return fav;
+  }
+
+  static Future<AllPlaces?> getAllPlacess({String? query}) async {
+    Dio dio = Dio();
+    String url =
+        'https://egyptttourmate-001-site1.gtempurl.com/api/Places/GetAll';
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+    List<AllPlaces> result = [];
+
+    var response = await dio.get(url);
+    var placess = AllPlaces.fromJson(response.data);
+
+    /*
+   if (query != null && query.isNotEmpty) {
+      placess = placess.where((element) {
+        final name = element['name'];
+        return name != null && name.toString().toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    }
+    */
+
+    return placess;
+  }
+
+  static Future<GetFastTripsById?> getFastTripsById({
+    required int fastTripsId,
+  }) async {
+    Dio dio = Dio();
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+    var response = await dio.get(
+        "$url/api/ReadyTrips/GetFastTripsById?Id=$fastTripsId");
+    var fstrip = GetFastTripsById.fromJson(response.data);
+    return fstrip;
+  }
 }

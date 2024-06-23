@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../cubits/register/register__cubit.dart';
 import '../cubits/register/register__state.dart';
 import '../helper/show_dailog.dart';
+import '../screens/confirm_email/Confirm_Email.dart';
 import '../screens/home.dart';
 import 'custom_button.dart';
 import 'custom_text_feild.dart';
@@ -40,7 +41,7 @@ class _SingUpFormState extends State<SingUpForm> {
       child: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
           if (state is RegisterSuccessState) {
-            if (state.userModel.status != null) {
+            if (state.userModel1.status != null) {
               Navigator.pushReplacementNamed(context, HomeScreen.routeName);
               Fluttertoast.showToast(
                   msg: "Successfully Logged In",
@@ -80,7 +81,7 @@ class _SingUpFormState extends State<SingUpForm> {
                         return "please enter your Email   ";
                       }
                       final bool emailValid = RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[com]+")
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[com]+")
                           .hasMatch(value);
                       if (!emailValid) {
                         return "enter valid email(.gmail,.yahoo)";
@@ -91,16 +92,21 @@ class _SingUpFormState extends State<SingUpForm> {
                     hint: 'Enter Your Email',
                     keyboardType: TextInputType.emailAddress,
                     controller: emailController,
+                    suffixIcon: IconButton(onPressed: () {
+                      Navigator.pushNamed(context, EmailConfirmationScreen
+                          .routeName);
+                    }, icon: Icon(Icons.verified_outlined)),
                   ),
                   SizedBox(height: 10.h),
                   CustomTextField(
                     validator: (value) {
-                      if(value!.length<11) {
+                      if (value!.length < 11) {
                         return "phone number must be 11 number";
                       }
-                      if(value.isEmpty){
-                        return"please enter your phone";
+                      if (value.isEmpty) {
+                        return "please enter your phone";
                       }
+                      return null;
                     },
                     hint: 'Enter Your Phone Number',
                     keyboardType: TextInputType.phone,
@@ -109,18 +115,19 @@ class _SingUpFormState extends State<SingUpForm> {
                   SizedBox(height: 10.h),
                   CustomTextField(
                       validator: (value) {
-                        if(value!.length<8){
+                        if (value!.length < 8) {
                           return "password can not less 8 characters";
                         }
-                        RegExp regex=RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-                        var passNonNullValue=value??"";
-                        if(passNonNullValue.isEmpty){
+                        RegExp regex = RegExp(
+                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+                        var passNonNullValue = value ;
+                        if (passNonNullValue.isEmpty) {
                           return ("Password is required");
                         }
-                        else if(passNonNullValue.length<8){
+                        else if (passNonNullValue.length < 8) {
                           return ("Password Must be more than 7 characters");
                         }
-                        else if(!regex.hasMatch(passNonNullValue)){
+                        else if (!regex.hasMatch(passNonNullValue)) {
                           return ("Password should contain upper,lower,digit and Special character ");
                         }
 
@@ -137,12 +144,13 @@ class _SingUpFormState extends State<SingUpForm> {
                   SizedBox(height: 10.h),
                   CustomTextField(
                     validator: (value) {
-                      if(value!.isEmpty){
-                        return"confirm password is required";
+                      if (value!.isEmpty) {
+                        return "confirm password is required";
                       }
-                       else if(value!=passwordController.text){
+                      else if (value != passwordController.text) {
                         return "confirm password not matching";
                       }
+                      return null;
                     },
                     errorMessage: 'please enter your password',
                     controller: confirmPasswordController,
@@ -202,4 +210,8 @@ class _SingUpFormState extends State<SingUpForm> {
       }
     });
   }
+
+
+
+
 }

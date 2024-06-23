@@ -11,11 +11,11 @@ List<OnboardingModel> content = [
           'Egypt\'s wonderful coasts on the Red Sea and the Mediterranean attract '
           '  beach and water sports lovers. Cities like Sharm El Sheikh '
           'and Hurghada arepopular destinations for beach and diving lovers'),
-  OnboardingModel(
-      image: 'assets/images/city_driver.gif',
-      title: 'Landmarks Taxi Tour',
-      desc:
-          'You Can Request a Driver To Take You From His Plane To Your Tourist Destination to Discover the Land Marks of Egypt'),
+ // OnboardingModel(
+   //   image: 'assets/images/city_driver.gif',
+   //   title: 'Landmarks Taxi Tour',
+     // desc:
+    //      'You Can Request a Driver To Take You From His Plane To Your Tourist Destination to Discover the Land Marks of Egypt'),
   OnboardingModel(
       image: 'assets/images/exploring.gif',
       title: 'Discover Egypt',

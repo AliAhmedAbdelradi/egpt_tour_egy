@@ -2,50 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../api_manager/api_manager.dart';
-import '../../constant/constant.dart';
-import '../fav_categ/fav_categ.dart';
+import '../api_manager/api_manager.dart';
 
-class FavouriteScreen extends StatefulWidget {
-  static const String routeName = "favourite";
+class PlaceSearch extends SearchDelegate<String> {
 
-  const FavouriteScreen({super.key});
+
+
 
   @override
-  State<FavouriteScreen> createState() => _favouriteScreenState();
-}
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(Icons.close),
+        onPressed: () {
+          query = '';
+        },
+      )
+    ];
+  }
 
-class _favouriteScreenState extends State<FavouriteScreen> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("My Favourites",style:  GoogleFonts.poppins(
-          fontWeight: FontWeight.bold,
-          fontSize: 20, // Adjusted font size
-          color: Colors.black, // Adjusted text color for better readability
-        ),),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            size: 30,
-          ),
-          color: Colors.black,
-        ),
-        actions: [
-          Image(
-            image: const AssetImage("assets/images/logo.png"),
-            width: 60.w,
-            height: 55.h,
-          )
-        ],
-      ),
-      body: FutureBuilder(
-        future: ApiManager.getFavourite(),
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, '');
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // Implement search results UI if needed
+    return Container(
+      child: FutureBuilder(
+        future: ApiManager.getAllPlacess(),
         builder: (context, snapshot) {
           print(snapshot.data?.data);
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -85,24 +76,17 @@ class _favouriteScreenState extends State<FavouriteScreen> {
                           ),
                           child: Column(
                             children: [
+
                               Container(
-                                alignment: Alignment.topRight,
-                                child: Icon(
-                                  Icons.favorite,
-                                  color: Colors.redAccent,
-                                ),
-                              ),
-                              Spacer(),
-                          Container(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              category[index].name ?? "",
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12, // Adjusted font size
-                                color: Colors.white, // Adjusted text color for better readability
-                              )),
-                          )],
+                                alignment: Alignment.bottomLeft,
+                                child: Text(
+                                    category[index].name ?? "",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12, // Adjusted font size
+                                      color: Colors.white, // Adjusted text color for better readability
+                                    )),
+                              )],
                           ),
                         ),
                         SizedBox(width: 8.w), // Add some spacing between the image and text
@@ -136,6 +120,15 @@ class _favouriteScreenState extends State<FavouriteScreen> {
           );
         },
       ),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+
+
+    return Center(
+      child: Text('No results found for "$query"'),
     );
   }
 }

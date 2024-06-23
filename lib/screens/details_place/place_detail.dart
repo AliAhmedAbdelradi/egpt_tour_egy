@@ -249,6 +249,17 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                           color: Colors.black,
                           thickness: 1,
                         ),
+                        Container(
+
+                          decoration: BoxDecoration(color: primaryColor,borderRadius: BorderRadius.circular(30)),
+                          child: Icon(
+                            Icons.keyboard_voice_outlined,
+                            weight: 30.w,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 10.h,),
+
                         Text(
                           category[index].detailedDescription ?? "",
                           style: GoogleFonts.poppins(
