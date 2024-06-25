@@ -97,12 +97,7 @@ class _DetailsFloorState extends State<DetailsFloor2> {
     );
   }
   void showStatues() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return PlaceFloorRoomStatues2();
-      },
-    );
+    Navigator.pushNamed(context, PlaceFloorRoomStatues2.routeName);
   }
 
 

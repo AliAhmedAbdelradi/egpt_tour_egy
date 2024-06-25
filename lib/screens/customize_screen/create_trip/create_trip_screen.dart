@@ -21,13 +21,13 @@ class CreateTrip extends StatelessWidget {
             icon: Icon(
               Icons.arrow_back,
               color: Colors.black,
-              size: 30,
+              size: 30.w,
             )),
         actions: [
           ImageIcon(
             AssetImage("assets/images/logo.png"),
             color: Colors.black,
-            size: 50,
+            size: 50.w,
           )
         ],
       ),
@@ -41,20 +41,20 @@ class CreateTrip extends StatelessWidget {
             Text("My Trips ",
                 style: GoogleFonts.poppins(
                     color: Colors.black,
-                    fontSize: 35,
+                    fontSize: 35.sp,
                     fontWeight: FontWeight.w600)),
             Text("Your trip to egypt starts here",
                 style: GoogleFonts.poppins(
                     color: Colors.black38,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w600)),
             SizedBox(
               height: 15.h,
             ),
-            Text("Step 2",
+            Text("Step 1",
                 style: GoogleFonts.poppins(
                     color: Colors.black38,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w600)),
             SizedBox(
               height: 20.h,
@@ -69,22 +69,28 @@ class CreateTrip extends StatelessWidget {
             ),
             Row(
               children: [
-                Icon(
-                  Icons.add,
-                  size: 21,
-                ),
-                SizedBox(
-                  width: 5.w,
-                ),
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, SelectCategory.routeName);
+
                   },
-                  child: Text(
-                    "Create Trip",
-                    style: TextStyle(color: Color(0xFF89C9FF), fontSize: 18),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.add,
+                        size: 21.w,
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Text(
+                        "Create Trip",
+                        style: TextStyle(color: Color(0xFF89C9FF), fontSize: 18.sp),
+                      ),
+                    ],
                   ),
                 ),
+
                 SizedBox(
                   width: 40.w,
                 ),
@@ -93,21 +99,21 @@ class CreateTrip extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w100,
-                      fontSize: 20),
+                      fontSize: 20.sp),
                 ),
                 SizedBox(
                   width: 25.w,
                 ),
                 Icon(
                   Icons.watch_later_outlined,
-                  size: 21,
+                  size: 21.w,
                 ),
                 SizedBox(
                   width: 5.w,
                 ),
                 Text(
                   "View History",
-                  style: TextStyle(color: Color(0xFF89C9FF), fontSize: 18),
+                  style: TextStyle(color: Color(0xFF89C9FF), fontSize: 18.sp),
                 ),
               ],
             ),

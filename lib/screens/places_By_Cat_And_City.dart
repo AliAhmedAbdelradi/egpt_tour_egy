@@ -131,26 +131,19 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
+
                   Column(
                     children: [
                       Text(
-                        "description : ${category[index].description}",
+                        textAlign: TextAlign.center,
+                        "${category[index].description}",
                         style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.bold,
                           color: Colors.black,
-                          fontSize: 20,
+                          fontSize: 17,
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
                   ),
                    
                      InkWell(

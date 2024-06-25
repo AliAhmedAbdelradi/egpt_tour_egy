@@ -40,9 +40,9 @@ class HomeTab extends StatelessWidget {
                   },
                   child: Container(
                       width: 500.w,
-                      height: 200.h,
+                      height: 170.h,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
                             image: NetworkImage(cate[0].imageLink ?? ""),
                             fit: BoxFit.cover,
@@ -70,7 +70,7 @@ class HomeTab extends StatelessWidget {
                           width: 40.w,
                           height: 90.h,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
                                 image: NetworkImage(cate[1].imageLink ?? ""),
                                 fit: BoxFit.cover,
@@ -89,7 +89,7 @@ class HomeTab extends StatelessWidget {
                           width: 40.w,
                           height: 90.h,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
                                 image: NetworkImage(cate[2].imageLink ?? ""),
                                 fit: BoxFit.cover,
@@ -125,9 +125,9 @@ class HomeTab extends StatelessWidget {
                       },
                       child:  Container(
                           width: 500.w,
-                          height: 200.h,
+                          height: 170.h,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
                                 image: NetworkImage(cate[3].imageLink ?? ""),
                                 fit: BoxFit.cover,

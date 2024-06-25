@@ -100,29 +100,14 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapMeusemOfIslamicA
   }
 
   void showDetalis() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusMeusemOfIslamicArt();
-      },
-    );
+     Navigator.pushNamed(context, DetailsFloorStatusMeusemOfIslamicArt.routeName);
   }
 
   void showDetalis1() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusMeusemOfIslamicArt1();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatusMeusemOfIslamicArt1.routeName);
   }
 
   void showDetalis2() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusMeusemOfIslamicArt2();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatusMeusemOfIslamicArt2.routeName);
   }
 }

@@ -32,9 +32,15 @@ class DaysCounter extends StatefulWidget {
 }
 
 class _DaysCounterState extends State<DaysCounter> {
-  int valueG = 0;
-  int valueC = 0;
-  int valueA = 0;
+  // Create a list to hold the values for each country
+  List<int> daysValues = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the daysValues list with zeros
+    daysValues = List<int>.filled(widget.countrySelected.length, 0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,54 +86,36 @@ class _DaysCounterState extends State<DaysCounter> {
             SizedBox(
               height: 10.h,
             ),
-
-
             Expanded(
-              child: Column(
-                children: [
-                  contain("${widget.countrySelected[0]??""}", "$valueG", () {
-                    setState(() {});
-                    valueG++;
-                  }, () {
-                    setState(() {
-                      if (valueG > 0) {
-                        valueG--;
-                      } else {
-                        valueG = 0;
-                      }
-                    });
-                  }),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  contain("${widget.countrySelected[1]??""}", "$valueC", () {
-                    setState(() {});
-                    valueC++;
-                  }, () {
-                    setState(() {
-                      if (valueC > 0) {
-                        valueC--;
-                      } else {
-                        valueC = 0;
-                      }
-                    });
-                  }),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  contain("${widget.countrySelected[2]??""}", "$valueA", () {
-                    setState(() {});
-                    valueA++;
-                  }, () {
-                    setState(() {
-                      if (valueA > 0) {
-                        valueA--;
-                      } else {
-                        valueA = 0;
-                      }
-                    });
-                  }),
-                ],
+              child: ListView.builder(
+                itemCount: widget.countrySelected.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      contain(
+                        "${widget.countrySelected[index] ?? ""}",
+                        "${daysValues[index]}",
+                            () {
+                          setState(() {
+                            daysValues[index]++;
+                          });
+                        },
+                            () {
+                          setState(() {
+                            if (daysValues[index] > 0) {
+                              daysValues[index]--;
+                            } else {
+                              daysValues[index] = 0;
+                            }
+                          });
+                        },
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
             Row(
@@ -137,8 +125,13 @@ class _DaysCounterState extends State<DaysCounter> {
                 }),
                 Spacer(),
                 Btn2(Colors.white, Color(0xFF89C9FF), "Continue", () {
-                  widget.trip.dayNums=[valueG,valueC,valueA];
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DateScreen(trip: widget.trip,)));
+                  widget.trip.dayNums = daysValues;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DateScreen(trip: widget.trip),
+                    ),
+                  );
                 }),
               ],
             )

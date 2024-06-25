@@ -22,6 +22,7 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:false ,
       appBar: AppBar(
         leading: Image.asset(
           'assets/images/logo.png',

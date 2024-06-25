@@ -57,9 +57,9 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapAboSample> {
                 });
               },
               child: Container(
-                margin: EdgeInsets.only(right: 135.w, top: 25.w),
-                width: 14.w,
-                height: 14.h,
+                margin: EdgeInsets.only(right: 135.w, top: 25.7.w),
+                width: 15.w,
+                height: 15.h,
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.red, width: 4.5.w),
                     color: Colors.white,
@@ -73,9 +73,9 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapAboSample> {
                 });
               },
               child: Container(
-                margin: EdgeInsets.only(top: 113.h, right: 76.w),
-                width: 14.w,
-                height: 14.h,
+                margin: EdgeInsets.only(top: 114.5.h, right: 76.w),
+                width: 15.w,
+                height: 15.h,
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.red, width: 4.5.w),
                     color: Colors.white,
@@ -89,29 +89,14 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapAboSample> {
   }
 
   void showDetalis() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatus();
-      },
-    );
+     Navigator.pushNamed(context, DetailsFloorStatus.routeName);
   }
 
   void showDetalis1() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatus1();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatus1.routeName);
   }
 
   void showDetalis2() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatus2();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatus2.routeName);
   }
 }

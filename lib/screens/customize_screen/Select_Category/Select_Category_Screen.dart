@@ -101,7 +101,10 @@ class _SelectCategoryState extends State<SelectCategory> {
                             Text(
                               cate[0].name ?? "",
                               style:
-                              TextStyle(fontSize: 18, color: Colors.black),
+                              GoogleFonts.poppins(
+                                  fontSize: 20,
+                                  color:Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Spacer(),
                           ],
@@ -145,8 +148,10 @@ class _SelectCategoryState extends State<SelectCategory> {
                           ),
                           Text(
                             cate[1].name ?? "",
-                            style:
-                            TextStyle(fontSize: 18, color: Colors.black),
+                            style: GoogleFonts.poppins(
+                                fontSize: 20,
+                                color:Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                           Spacer(),
                         ],
@@ -191,8 +196,10 @@ class _SelectCategoryState extends State<SelectCategory> {
                             ),
                             Text(
                               cate[2].name ?? "",
-                              style: const TextStyle(
-                                  fontSize: 20, color: Colors.black),
+                              style:  GoogleFonts.poppins(
+                                fontSize: 20,
+                                color:Colors.black,
+                                fontWeight: FontWeight.bold),
                             ),
                             const Spacer(),
                           ],
@@ -237,8 +244,10 @@ class _SelectCategoryState extends State<SelectCategory> {
                             ),
                             Text(
                               cate[3].name ?? "",
-                              style:
-                              TextStyle(fontSize: 20, color: Colors.black),
+                              style: GoogleFonts.poppins(
+                                  fontSize: 20,
+                                  color:Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Spacer(),
                           ],

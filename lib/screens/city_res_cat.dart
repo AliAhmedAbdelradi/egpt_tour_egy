@@ -107,7 +107,7 @@ class _CityResCatState extends State<CityResCat> {
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
                                 color: Colors.black,
-                                borderRadius: BorderRadius.circular(15),
+                                borderRadius: BorderRadius.circular(20),
                                 image: DecorationImage(
                                     image: NetworkImage(
                                         cate[index].imageLink ?? ""),

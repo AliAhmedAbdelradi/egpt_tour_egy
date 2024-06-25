@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:roundcheckbox/roundcheckbox.dart';
 import '../../api_manager/api_manager.dart';
 import '../plan_type_screen/plan_type.dart';
 import 'btn1.dart';
@@ -88,63 +89,63 @@ class _SelectCityState extends State<SelectCity> {
                   // Displaying categories
                   SingleChildScrollView(
                     child: Column(
-                      children: List.generate(categories.length, (index)
-                      {
-                        final  city = categories[index];
-                        return InkWell(
-                          onTap: () {
-
-                            setState(() {
-                              if (selectedCountries.contains(city.name)) {
-                                selectedCountries.remove(city.name);
-                                selectedIDS.remove(city.id);
-                              } else {
-                                selectedCountries.add(city.name??"");
-                                selectedIDS.add(city.id??0);
-                                widget.trip.cityName=selectedCountries;
-
-
-                              }
-                            });
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 71.h,
-                                width: 260.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(width: 0, color: Colors.black),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Image.network(city.imageLink ?? ""),
-                                    ),
-                                    SizedBox(width: 20.w),
-                                    Text(
-                                      city.name ?? "",
-                                      style: TextStyle(fontSize: 20, color: Colors.black),
-                                    ),
-                                  ],
-
-                                ),
-
+                      children: List.generate(categories.length, (index) {
+                        final city = categories[index];
+                        return Row(
+                          children: [
+                            Container(
+                              height: 71.h,
+                              width: 300.w,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border:
+                                    Border.all(width: 0, color: Colors.black),
                               ),
-                              SizedBox(width: 30.w),
-                              Visibility(
-                                visible: selectedCountries.contains(city.name),
-                                child: Icon(
-                                  Icons.done_all,
-                                  size: 20,
-                                  color: Colors.green,
-                                ),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Image.network(city.imageLink ?? "",width: 100.w,height: 90.w,fit: BoxFit.cover,),
+                                  ),
+                                  SizedBox(width: 20.w),
+                                  Text(
+                                    city.name ?? "",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 20,
+                                        color:Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(width: 5.w),
+                            InkWell(
+                              child: RoundCheckBox(
+                                size: 25,
+                                onTap: (selected) {
+                                  if (selectedCountries.contains(city.name)) {
+                                    selectedCountries.remove(city.name);
+                                    selectedIDS.remove(city.id);
+                                  } else {
+                                    selectedCountries.add(city.name ?? "");
+                                    selectedIDS.add(city.id ?? 0);
+                                    widget.trip.cityName = selectedCountries;
+                                  }
+
+                                },
+                                border: Border.all(
+                                  width: 1,
+                                ),
+                                uncheckedWidget:
+                                    Icon(Icons.close, color: Colors.white),
+                              ),
+                            ),
+                             // Space between each row
+                          ],
+
                         );
+
                       }),
                     ),
                   ),
@@ -155,7 +156,7 @@ class _SelectCityState extends State<SelectCity> {
                         Color(0xFF89C9FF),
                         Colors.white,
                         "Back",
-                            () {
+                        () {
                           Navigator.pop(context);
                         },
                       ),
@@ -164,15 +165,14 @@ class _SelectCityState extends State<SelectCity> {
                         Colors.white,
                         Color(0xFF89C9FF),
                         "Continue",
-                            () {
-                          widget.trip.placesID=selectedIDS;
+                        () {
+                          widget.trip.placesID = selectedIDS;
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (_) => DaysCounter(
                                 countrySelected: selectedCountries,
                                 trip: widget.trip,
-
 
                                 // Pass selected countries
                               ),

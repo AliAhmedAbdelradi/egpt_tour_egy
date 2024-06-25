@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class contain extends StatefulWidget {
   String txt;
@@ -23,19 +25,25 @@ class _containState extends State<contain> {
     return Container(
       child: Row(
         children: [
-          SizedBox(width: 20,),
-          Text(widget.txt,style: TextStyle(fontSize: 18),),
+          SizedBox(width: 20.w,),
+          Text(widget.txt,style: GoogleFonts.poppins(
+              fontSize: 18.sp,
+              color:Colors.black,
+              fontWeight: FontWeight.bold)),
           Spacer(),
           InkWell(
             onTap: (){
               widget.sub();
             },
               child: Container(
-                  margin: EdgeInsets.only(bottom: 15),
+                  margin: EdgeInsets.only(bottom: 15.h),
                   child: Icon(Icons.minimize))),
-          SizedBox(width: 13,),
-          Text("${widget.x}",),
-          SizedBox(width: 13,),
+          SizedBox(width: 13.w,),
+          Text("${widget.x}",style: GoogleFonts.poppins(
+              fontSize: 18.sp,
+              color:Colors.black,
+              fontWeight: FontWeight.bold),),
+          SizedBox(width: 13.w,),
           InkWell(
               onTap: (){
                 widget.add();
@@ -46,12 +54,12 @@ class _containState extends State<contain> {
 
         ],
       ),
-        height: 71,
-        width: 348,
+        height: 71.h,
+        width: 348.w,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(width: 0, color: Colors.black)));
+            border: Border.all(width: 0.w, color: Colors.black)));
   }
 
 }

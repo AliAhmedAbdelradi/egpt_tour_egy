@@ -48,7 +48,7 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapCopticMeusem> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 90.h,left: 80.w),
+                    margin: EdgeInsets.only(bottom: 90.h,left: 85.w),
                     width: 18.w,
                     height: 18.h,
                     decoration: BoxDecoration(
@@ -64,7 +64,7 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapCopticMeusem> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 255.h,left: 20.w),
+                    margin: EdgeInsets.only(bottom: 255.h,left: 35.w),
                     width: 18.w,
                     height: 18.h,
                     decoration: BoxDecoration(
@@ -81,7 +81,7 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapCopticMeusem> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 5.h,left: 115.w),
+                    margin: EdgeInsets.only(bottom: 5.h,left: 120.w),
                     width: 18.w,
                     height: 18.h,
                     decoration: BoxDecoration(
@@ -100,29 +100,14 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapCopticMeusem> {
   }
 
   void showDetalis() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusCopticMeusem();
-      },
-    );
+   Navigator.pushNamed(context, DetailsFloorStatusCopticMeusem.routeName);
   }
 
   void showDetalis1() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusCopticMeusem1();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatusCopticMeusem1.routeName);
   }
 
   void showDetalis2() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusCopticMeusem2();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatusCopticMeusem2.routeName);
   }
 }

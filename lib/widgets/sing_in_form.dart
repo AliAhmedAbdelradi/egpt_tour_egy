@@ -36,7 +36,12 @@ class _SingInFormState extends State<SingInForm> {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(username: emailController.text),
+              ),
+            );
             Fluttertoast.showToast(
                 msg: "Successfully Logged In",
                 toastLength: Toast.LENGTH_LONG,

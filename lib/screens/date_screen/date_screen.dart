@@ -42,13 +42,13 @@ class _DateScreenState extends State<DateScreen>
             icon: Icon(
               Icons.cancel_outlined,
               color: Colors.black,
-              size: 30,
+              size: 30.w,
             )),
         actions: [
           ImageIcon(
             AssetImage("assets/images/logo.png"),
             color: Colors.black,
-            size: 50,
+            size: 50.w,
           )
         ],
       ),
@@ -62,7 +62,7 @@ class _DateScreenState extends State<DateScreen>
             Text("Select your trips start date ",
                 style: GoogleFonts.poppins(
                     color: Colors.black,
-                    fontSize: 35,
+                    fontSize: 35.sp,
                     fontWeight: FontWeight.w600)),
             SizedBox(
               height: 10.h,
@@ -70,53 +70,53 @@ class _DateScreenState extends State<DateScreen>
             Text("Step 5",
                 style: GoogleFonts.poppins(
                     color: Colors.black38,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w600)),
             SizedBox(
-              height: 30,
+              height: 30.h,
             ),
             Row(
               children: [
-                SizedBox(width: 10,),
+                SizedBox(width: 10.w,),
                 Text("Start date",
                     style: GoogleFonts.poppins(
                         color: Colors.black38,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600)),
                 SizedBox(
-                  width: 100,
+                  width: 100.w,
                 ),
                 Text("End date",
                     style: GoogleFonts.poppins(
                         color: Colors.black38,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600)),
               ],
             ),
 
             Container(
-              width: 343,
-              height: 43,
+              width: 343.w,
+              height: 43.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(width: 0, color: Colors.black)),
+                  border: Border.all(width: 0.w, color: Colors.black)),
               child: Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "${_dateTimeRange?.start.toString().substring(0,10)}",
+                      _dateTimeRange?.start.toString().substring(0,10)??"",
                       style: GoogleFonts.poppins(
-                          fontSize: 15, fontWeight: FontWeight.w400),
+                          fontSize: 15.sp, fontWeight: FontWeight.w400),
                     ),
 
 
                   ),
                   SizedBox(width: 50.w,),
                   Text(
-                    "${_dateTimeRange?.end.toString().substring(0,10)}",
+                    _dateTimeRange?.end.toString().substring(0,10)??"",
                     style: GoogleFonts.poppins(
-                        fontSize: 15, fontWeight: FontWeight.w400),
+                        fontSize: 15.sp, fontWeight: FontWeight.w400),
                   ),
                   Spacer(),
                   InkWell(
@@ -125,7 +125,7 @@ class _DateScreenState extends State<DateScreen>
                     },
                     child: Icon(
                       Icons.calendar_month,
-                      size: 22,
+                      size: 22.w,
                       color: Color(0xFF89C9FF),
                     ),
                   )

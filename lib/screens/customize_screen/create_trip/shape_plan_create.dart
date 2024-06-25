@@ -33,29 +33,24 @@ class ShapePlanCreate extends StatelessWidget {
 
                   backgroundColor:
                   MaterialStatePropertyAll(Colors.white)),
-              onPressed: () {},
-              child: InkWell(
-                onTap: () {
-                  tab();
-                },
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 30.w,
-                    ),
-                    Icon(
-                      Icons.add,
-                      color: Colors.black,
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    Text(
-                        txt,
-                        style: GoogleFonts.poppins(color: Colors.black,fontSize: 15,fontWeight: FontWeight.w600)
-                    ),
-                  ],
-                ),
+              onPressed: () {tab();},
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 30.w,
+                  ),
+                  Icon(
+                    Icons.add,
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  Text(
+                      txt,
+                      style: GoogleFonts.poppins(color: Colors.black,fontSize: 15.sp,fontWeight: FontWeight.w600)
+                  ),
+                ],
               )),
         )
       ],

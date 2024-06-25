@@ -11,7 +11,8 @@ class PlaceImagesCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity.w,
-      height: 200.h,
+      height: 180.h,
+      color: Colors.black,
       child: PageView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: placeImages.length,
@@ -19,6 +20,7 @@ class PlaceImagesCarousel extends StatelessWidget {
           return Image.network(
             placeImages[index],
             fit: BoxFit.cover,
+
           );
         },
       ),

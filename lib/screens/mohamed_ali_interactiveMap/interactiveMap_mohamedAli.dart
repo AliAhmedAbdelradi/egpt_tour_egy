@@ -112,36 +112,16 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapMohamedAli> {
     );
   }
   void showDetalis() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusMohamedAli();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatusMohamedAli.routeName);
   }
   void showDetalis1() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusMohamedAli1();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatusMohamedAli1.routeName);
   }
   void showDetalis2() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusMohamedAli2();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatusMohamedAli2.routeName);
   }
   void showDetalis3() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusMohamedAli3();
-      },
-    );
+    Navigator.pushNamed(context, DetailsFloorStatusMohamedAli3.routeName);
   }
 
 

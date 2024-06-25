@@ -25,13 +25,13 @@ class PlanType extends StatelessWidget {
             icon: Icon(
               Icons.arrow_back,
               color: Colors.black,
-              size: 30,
+              size: 30.w,
             )),
         actions: [
           ImageIcon(
             AssetImage("assets/images/logo.png"),
             color: Colors.black,
-            size: 50,
+            size: 50.w,
           )
         ],
       ),
@@ -45,12 +45,12 @@ class PlanType extends StatelessWidget {
             Text("Trip Plans ",
                 style: GoogleFonts.poppins(
                     color: Colors.black,
-                    fontSize: 35,
+                    fontSize: 35.sp,
                     fontWeight: FontWeight.w600)),
             Text("Choose Type",
                 style: GoogleFonts.poppins(
                     color: Colors.black38,
-                    fontSize: 15,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w600)),
             SizedBox(
               height: 30.h,

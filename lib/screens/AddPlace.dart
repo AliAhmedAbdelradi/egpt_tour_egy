@@ -19,7 +19,7 @@ class AddPlace extends StatefulWidget {
 class _Places_By_cat_And_CityState extends State<AddPlace> {
 
 
-  void _passBackSelectedData(String data) {
+  void _passBackSelectedData(String data,) {
     Navigator.pop(context, data);
 
     print(data);// Pass back data to previous screen
@@ -90,9 +90,6 @@ class _Places_By_cat_And_CityState extends State<AddPlace> {
             if (snapshot.hasError) {
               return Center(child: Text("no data entered"));
             }
-            if (snapshot == null) {
-              return Center(child: Text("No Data Entry"));
-            }
 
             final category = snapshot.data?.data ?? [];
 
@@ -100,23 +97,24 @@ class _Places_By_cat_And_CityState extends State<AddPlace> {
 
 
 
-            return ListView.separated(
+            return ListView.builder(
               padding: const EdgeInsets.all(16),
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    _passBackSelectedData(category[index].name ?? "");
+                    _passBackSelectedData(category[index].imageLink ?? "");
+
                   },
                   child: Column(
                     children: [
                       Container(
-                        width: 250.w,
-                        height: 160.h,
+                        width: 240.w,
+                        height: 140.h,
                         padding: EdgeInsets.all(20),
 
                         decoration: BoxDecoration(
                             color: Colors.black,
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
                                 image:
                                 NetworkImage(category[index].imageLink ?? ""),
@@ -124,15 +122,8 @@ class _Places_By_cat_And_CityState extends State<AddPlace> {
                                 opacity: 0.7)),
                         child: Column(
                           children: [
-                            Container(
-                                alignment: Alignment.topRight,
-                                child: Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.white,
-                                )
 
-                            ),
-                            Spacer(),
+
                             Container(
                                 alignment: Alignment.bottomLeft,
                                 child: Text(
@@ -147,19 +138,14 @@ class _Places_By_cat_And_CityState extends State<AddPlace> {
                           ],
                         ),
                       ),
-                      SizedBox(width: 12,),
+                      SizedBox(height: 12.w,),
 
 
                     ],
                   ),
                 );
               },
-              separatorBuilder: (context, index) {
-                return Divider(
-                  thickness: 2,
-                  color: Colors.black,
-                );
-              },
+
               itemCount: category.length,
 
             );

@@ -48,11 +48,6 @@ class _InteractiveMapAboSampleState extends State<InteractiveMapAmanda> {
   }
 
   void showDetalis() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsFloorStatusAmanda();
-      },
-    );
+     Navigator.pushNamed(context, DetailsFloorStatusAmanda.routeName);
   }
 }

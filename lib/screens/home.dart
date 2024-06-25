@@ -16,8 +16,10 @@ import 'favourte_screen/favourite_Screen.dart';
 class HomeScreen extends StatefulWidget {
   static String routeName = 'home';
 
-  const HomeScreen({super.key});
 
+  final String username;
+
+  HomeScreen({required this.username});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -56,9 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Row(
                     children: [
                       Icon(Icons.sunny,color: Colors.yellow,),
-                      SizedBox(width: 10,),
+                      SizedBox(width: 10.w,),
                       Text('weather',style:GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.normal,
                           color: Colors.black),),
                     ],
@@ -71,9 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Row(
                     children: [
                       Icon(Icons.favorite),
-                      SizedBox(width: 10,),
+                      SizedBox(width: 10.w,),
                       Text('Favorite',style:GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.normal,
                           color: Colors.black),),
                     ],
@@ -86,9 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Row(
                     children: [
                       Icon(Icons.settings),
-                      SizedBox(width: 10,),
+                      SizedBox(width: 10.w,),
                       Text('Settings',style:GoogleFonts.poppins(
-                          fontSize: 20,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.normal,
                           color: Colors.black),),
                     ],
@@ -110,8 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Image(
             image: AssetImage("assets/images/logo.png"),
-            height: 50,
-            width: 50,
+            height: 50.h,
+            width: 50.w,
             color: Colors.black,
           ),
         ],
@@ -121,8 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 bottomLeft: Radius.circular(30.w))),
         centerTitle: true,
         title: Text(
-          "Hi, Friend",
-          style: TextStyle(fontSize: 24),
+          "Hi, ${widget.username}",
+          style: TextStyle(fontSize: 24.sp),
         ),
         backgroundColor: primaryColor,
       ),
