@@ -6,9 +6,6 @@ import '../api_manager/api_manager.dart';
 
 class PlaceSearch extends SearchDelegate<String> {
 
-
-
-
   @override
   List<Widget> buildActions(BuildContext context) {
     return [

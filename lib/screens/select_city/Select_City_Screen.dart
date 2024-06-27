@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../api_manager/api_manager.dart';
-import '../plan_type_screen/plan_type.dart';
 import 'btn1.dart';
 import 'package:ept_mate/screens/days_counter/days_counter.dart';
 
@@ -88,22 +87,18 @@ class _SelectCityState extends State<SelectCity> {
                   // Displaying categories
                   SingleChildScrollView(
                     child: Column(
-                      children: List.generate(categories.length, (index)
-                      {
-                        final  city = categories[index];
+                      children: List.generate(categories.length, (index) {
+                        final city = categories[index];
                         return InkWell(
                           onTap: () {
-
                             setState(() {
                               if (selectedCountries.contains(city.name)) {
                                 selectedCountries.remove(city.name);
                                 selectedIDS.remove(city.id);
                               } else {
-                                selectedCountries.add(city.name??"");
-                                selectedIDS.add(city.id??0);
-                                widget.trip.cityName=selectedCountries;
-
-
+                                selectedCountries.add(city.name ?? "");
+                                selectedIDS.add(city.id ?? 0);
+                                widget.trip.cityName = selectedCountries;
                               }
                             });
                           },
@@ -115,23 +110,24 @@ class _SelectCityState extends State<SelectCity> {
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(width: 0, color: Colors.black),
+                                  border:
+                                      Border.all(width: 0, color: Colors.black),
                                 ),
                                 child: Row(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(10),
-                                      child: Image.network(city.imageLink ?? ""),
+                                      child:
+                                          Image.network(city.imageLink ?? ""),
                                     ),
                                     SizedBox(width: 20.w),
                                     Text(
                                       city.name ?? "",
-                                      style: TextStyle(fontSize: 20, color: Colors.black),
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.black),
                                     ),
                                   ],
-
                                 ),
-
                               ),
                               SizedBox(width: 30.w),
                               Visibility(
@@ -155,7 +151,7 @@ class _SelectCityState extends State<SelectCity> {
                         Color(0xFF89C9FF),
                         Colors.white,
                         "Back",
-                            () {
+                        () {
                           Navigator.pop(context);
                         },
                       ),
@@ -164,15 +160,14 @@ class _SelectCityState extends State<SelectCity> {
                         Colors.white,
                         Color(0xFF89C9FF),
                         "Continue",
-                            () {
-                          widget.trip.placesID=selectedIDS;
+                        () {
+                          widget.trip.placesID = selectedIDS;
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (_) => DaysCounter(
                                 countrySelected: selectedCountries,
                                 trip: widget.trip,
-
 
                                 // Pass selected countries
                               ),

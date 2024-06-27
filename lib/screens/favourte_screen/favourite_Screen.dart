@@ -105,7 +105,7 @@ class _favouriteScreenState extends State<FavouriteScreen> {
                           )],
                           ),
                         ),
-                        SizedBox(width: 8.w), // Add some spacing between the image and text
+                        SizedBox(width: 10.w), // Add some spacing between the image and text
                         Expanded(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,

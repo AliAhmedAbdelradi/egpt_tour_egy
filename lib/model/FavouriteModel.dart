@@ -3,7 +3,7 @@ class FavouriteModel {
       this.success, 
       this.message, 
       this.data, 
-      this.status,});
+      this.status, required String placeId,});
 
   FavouriteModel.fromJson(dynamic json) {
     success = json['success'];

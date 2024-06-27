@@ -18,7 +18,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       required String phoneNumber,
       required String username}) {
     emit(RegisterLoadingState());
-    DioHelper.postData(url: '/api/Adminstration/register', data: {
+    DioHelper.postData(url: '/api/Adminstration/registerUser', data: {
       "email": email,
       "password": pass,
       "phoneNumber": phoneNumber,

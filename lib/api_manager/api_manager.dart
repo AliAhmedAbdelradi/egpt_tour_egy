@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:ept_mate/model/CategoryModel.dart';
 import 'package:ept_mate/model/trip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../model/AddOrRemoveFavourites.dart';
 import '../model/AllPlaces.dart';
 import '../model/CityAfterEdit.dart';
 import '../model/FastTripPlan.dart';
@@ -190,7 +193,7 @@ class ApiManager {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
     var response =
-        await dio.get("$url/api/PlaceDetails/GetByPlaceId?placeId=$placeId");
+    await dio.get("$url/api/PlaceDetails/GetByPlaceId?placeId=$placeId");
     var placeDetails = PlaceDetailsByPlaceId.fromJson(response.data);
     return placeDetails;
   }
@@ -238,7 +241,12 @@ class ApiManager {
     return interactiveMap;
   }
 
+  static List<FavouriteModel>favouritse = [];
+  static Set<String>favouriteId = {};
+
   static Future<FavouriteModel?> getFavourite() async {
+    favouritse.clear();
+    favouriteId.clear();
     Dio dio = Dio();
     String url = 'https://egyptttourmate-001-site1.gtempurl.com';
     String? token = await getToken(); // Get token asynchronously
@@ -249,6 +257,42 @@ class ApiManager {
     var fav = FavouriteModel.fromJson(response.data);
     return fav;
   }
+
+  static Future<void> addAndRemoveFromFavourite(
+      {required String placeId}) async {
+    Dio dio = Dio();
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
+    String? token = await getToken(); // Get token asynchronously
+
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+
+      var response = await dio.post(
+          "$url/api/UserFavorits/Add",
+          data: {
+            "id": 0,
+            "userId": "string",
+            "placeId": placeId
+          }
+      );
+
+      if (response.data is Map<String, dynamic>) {
+        var responsy = response.data as Map<String, dynamic>;
+        if (responsy['success'] == true) {
+          if (favouriteId.contains(placeId)) {
+
+            favouriteId.remove(placeId);
+            favouritse.remove(placeId);
+          } else {
+            favouriteId.add(placeId);
+            favouritse.add(placeId as FavouriteModel);
+          }
+        }
+      }
+
+  }
+
 
   static Future<AllPlaces?> getAllPlacess({String? query}) async {
     Dio dio = Dio();
@@ -263,14 +307,14 @@ class ApiManager {
     var response = await dio.get(url);
     var placess = AllPlaces.fromJson(response.data);
 
-    /*
+
    if (query != null && query.isNotEmpty) {
-      placess = placess.where((element) {
-        final name = element['name'];
+      result = result.where((element) {
+        final name = element;
         return name != null && name.toString().toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
-    */
+
 
     return placess;
   }

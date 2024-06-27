@@ -2,8 +2,6 @@
 import 'package:ept_mate/screens/sing_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-
 import '../widgets/connected_with_row.dart';
 import '../widgets/have_acc_or_not.dart';
 import '../widgets/sing_up_form.dart';
@@ -30,8 +28,6 @@ class SingUp extends StatelessWidget {
               SizedBox(height: 10.h),
               const SingUpForm(),
               //const ConnectedWithRow(),
-
-
              // SizedBox(height: 5.h),
               HaveAccountOrNot(
                 questionText: 'Already  have an account ? ',

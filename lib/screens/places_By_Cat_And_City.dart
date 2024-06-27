@@ -5,9 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/constant.dart';
-import 'days_counter/btn2.dart';
 import 'details_place/place_detail.dart';
-import 'details_place/place_disc.dart';
+
 
 class Places_By_cat_And_City extends StatefulWidget {
   static String routeName = 'Places_By_cat_And_City';
@@ -21,6 +20,14 @@ class Places_By_cat_And_City extends StatefulWidget {
 }
 
 class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
+  bool _isFavorited = false;
+  void _toggleFavorite() {
+      setState(() {
+
+      });
+      _isFavorited = !_isFavorited;
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,9 +118,14 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                       children: [
                         Container(
                           alignment: Alignment.topRight,
-                          child: Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
+                          child: InkWell(
+                            onTap: () {
+                              ApiManager.addAndRemoveFromFavourite(placeId: category[index].id.toString());
+                            },
+                            child: IconButton(onPressed: _toggleFavorite,icon: Icon(
+                              Icons.favorite_border,
+                              color: _isFavorited ? Colors.red : Colors.grey,
+                            ),)
                           ),
                         ),
                         Spacer(),
@@ -152,7 +164,7 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                   SizedBox(
                     height: 10.h,
                   ),
-                   
+
                      InkWell(
                        onTap: () {
                          Navigator.push(context, MaterialPageRoute(builder: (_)=> PlaceDicrip( PlaceId: category[index].id.toString(),)));

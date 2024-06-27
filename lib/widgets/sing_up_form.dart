@@ -9,6 +9,7 @@ import '../cubits/register/register__state.dart';
 import '../helper/show_dailog.dart';
 import '../screens/confirm_email/Confirm_Email.dart';
 import '../screens/home.dart';
+import '../screens/sing_in.dart';
 import 'custom_button.dart';
 import 'custom_text_feild.dart';
 
@@ -42,7 +43,7 @@ class _SingUpFormState extends State<SingUpForm> {
         listener: (context, state) {
           if (state is RegisterSuccessState) {
             if (state.userModel1.status != null) {
-              Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+              Navigator.pushReplacementNamed(context, SingIn.routeName);
               Fluttertoast.showToast(
                   msg: "Successfully Logged In",
                   toastLength: Toast.LENGTH_LONG,
