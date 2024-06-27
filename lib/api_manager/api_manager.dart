@@ -18,7 +18,8 @@ import '../model/PlaceFloorRoomsById.dart';
 import '../model/PlaceFloorRoomsStatusAfter.dart';
 import '../model/PlaceModel.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import '../model/ReadyMateModel4.dart'; // Import PrettyDioLogger
+import '../model/ReadyMateModel4.dart';
+import '../model/delete.dart'; // Import PrettyDioLogger
 
 class ApiManager {
   static Future<String?> getToken() async {
@@ -290,8 +291,26 @@ class ApiManager {
           }
         }
       }
+  }
+  static Future<Delete> DelFavourite(
+      {required String favId}) async {
+    Dio dio = Dio();
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
+    String? token = await getToken(); // Get token asynchronously
+
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+
+    var response = await dio.post(
+        "$url/api/UserFavorits/Delete?ID=$favId");
+        var delete = Delete.fromJson(response.data);
+        return delete;
+
+    ;
 
   }
+
 
 
   static Future<AllPlaces?> getAllPlacess({String? query}) async {
@@ -302,7 +321,7 @@ class ApiManager {
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
-    List<AllPlaces> result = [];
+    List<String> result = [];
 
     var response = await dio.get(url);
     var placess = AllPlaces.fromJson(response.data);
@@ -311,7 +330,7 @@ class ApiManager {
    if (query != null && query.isNotEmpty) {
       result = result.where((element) {
         final name = element;
-        return name != null && name.toString().toLowerCase().contains(query.toLowerCase());
+        return name.toString().toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
 

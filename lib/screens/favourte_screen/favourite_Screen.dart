@@ -1,3 +1,4 @@
+import 'package:ept_mate/model/AddOrRemoveFavourites.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -121,6 +122,21 @@ class _favouriteScreenState extends State<FavouriteScreen> {
                                 overflow: TextOverflow.clip, // Handle overflow
                                 maxLines: 7, // Maximum number of lines to display
                               ),
+                              MaterialButton(
+                                onPressed: ()
+                                {
+                                setState(() {
+                                  ApiManager.DelFavourite(favId: category[index].id.toString() );
+                                });  // add | remove
+
+                                },
+                                child: Text("Remove"),
+                                textColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25)
+                                ),
+                                color: Colors.deepOrange,
+                              )
 
 
                             ],

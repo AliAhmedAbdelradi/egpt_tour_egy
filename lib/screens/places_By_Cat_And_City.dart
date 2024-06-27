@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../constant/constant.dart';
 import 'details_place/place_detail.dart';
 
-
 class Places_By_cat_And_City extends StatefulWidget {
   static String routeName = 'Places_By_cat_And_City';
   String cityID;
@@ -20,14 +19,16 @@ class Places_By_cat_And_City extends StatefulWidget {
 }
 
 class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
-  bool _isFavorited = false;
-  void _toggleFavorite() {
-      setState(() {
+  // Store favorite status for each place
+  Map<String, bool> favoriteStatus = {};
 
-      });
-      _isFavorited = !_isFavorited;
-
+  void _toggleFavorite(String placeId) {
+    setState(() {
+      favoriteStatus[placeId] = !(favoriteStatus[placeId] ?? false);
+    });
+    ApiManager.addAndRemoveFromFavourite(placeId: placeId);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +49,7 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
               hintText: "Search",
               hintStyle: const TextStyle(color: Colors.grey, fontSize: 15),
               border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(50.w)),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(50.w)),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.blue),
                 borderRadius: BorderRadius.circular(50.w),
@@ -99,6 +100,9 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
           return ListView.separated(
             padding: const EdgeInsets.all(16),
             itemBuilder: (context, index) {
+              final place = category[index];
+              final isFavorited = favoriteStatus[place.id.toString()] ?? false;
+
               return Column(
                 children: [
                   Container(
@@ -109,32 +113,30 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(15),
                       image: DecorationImage(
-                        image: NetworkImage(category[index].imageLink ?? ""),
+                        image: NetworkImage(place.imageLink ?? ""),
                         fit: BoxFit.cover,
                         opacity: 0.7,
                       ),
                     ),
                     child: Column(
-
-
                       children: [
                         Container(
                           alignment: Alignment.topRight,
-                          child: InkWell(
-                            onTap: () {
-                              ApiManager.addAndRemoveFromFavourite(placeId: category[index].id.toString());
+                          child: IconButton(
+                            onPressed: () {
+                              _toggleFavorite(place.id.toString());
                             },
-                            child: IconButton(onPressed: _toggleFavorite,icon: Icon(
-                              Icons.favorite_border,
-                              color: _isFavorited ? Colors.red : Colors.grey,
-                            ),)
+                            icon: Icon(
+                              isFavorited ? Icons.favorite : Icons.favorite_border,
+                              color: isFavorited ? Colors.red : Colors.grey,
+                            ),
                           ),
                         ),
                         Spacer(),
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            category[index].name ?? "",
+                            place.name ?? "",
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -154,7 +156,7 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                   Column(
                     children: [
                       Text(
-                        "description : ${category[index].description}",
+                        "description : ${place.description}",
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.normal,
                           color: Colors.black,
@@ -166,28 +168,40 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                   SizedBox(
                     height: 10.h,
                   ),
-
-                     InkWell(
-                       onTap: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (_)=> PlaceDicrip( PlaceId: category[index].id.toString(),)));
-                       },
-                       child: Column(
-                         children: [
-                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                             children: [
-                               Text("See More",style:GoogleFonts.poppins(
-                                   fontWeight: FontWeight.normal,
-                                   color:primaryColor  ,
-                                   fontSize: 22),),
-                               Icon(Icons.navigate_next,color: primaryColor,size: 22,)
-                             ],
-                           ),
-
-                         ],
-                       ),
-                     ),
-
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PlaceDicrip(
+                            PlaceId: place.id.toString(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "See More",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.normal,
+                                color: primaryColor,
+                                fontSize: 22,
+                              ),
+                            ),
+                            Icon(
+                              Icons.navigate_next,
+                              color: primaryColor,
+                              size: 22,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               );
             },
