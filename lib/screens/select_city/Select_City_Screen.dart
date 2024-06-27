@@ -100,20 +100,25 @@ class _SelectCityState extends State<SelectCity> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
                                 border:
-                                    Border.all(width: 0, color: Colors.black),
+                                Border.all(width: 0, color: Colors.black),
                               ),
                               child: Row(
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(10),
-                                    child: Image.network(city.imageLink ?? "",width: 100.w,height: 90.w,fit: BoxFit.cover,),
+                                    child: Image.network(
+                                      city.imageLink ?? "",
+                                      width: 100.w,
+                                      height: 90.w,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                   SizedBox(width: 20.w),
                                   Text(
                                     city.name ?? "",
                                     style: GoogleFonts.poppins(
-                                        fontSize: 20,
-                                        color:Colors.black,
+                                        fontSize: 17,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
@@ -124,28 +129,31 @@ class _SelectCityState extends State<SelectCity> {
                               child: RoundCheckBox(
                                 size: 25,
                                 onTap: (selected) {
-                                  if (selectedCountries.contains(city.name)) {
-                                    selectedCountries.remove(city.name);
-                                    selectedIDS.remove(city.id);
-                                  } else {
-                                    selectedCountries.add(city.name ?? "");
-                                    selectedIDS.add(city.id ?? 0);
-                                    widget.trip.cityName = selectedCountries;
-                                  }
+
+                                    if (selectedCountries
+                                        .contains(city.name)) {
+                                      selectedCountries
+                                          .remove(city.name);
+                                      selectedIDS.remove(city.id);
+                                    } else {
+                                      selectedCountries
+                                          .add(city.name ?? "");
+                                      selectedIDS.add(city.id ?? 0);
+                                      widget.trip.cityName =
+                                          selectedCountries;
+                                    }
 
                                 },
                                 border: Border.all(
                                   width: 1,
                                 ),
                                 uncheckedWidget:
-                                    Icon(Icons.close, color: Colors.white),
+                                Icon(Icons.close, color: Colors.white),
                               ),
                             ),
-                             // Space between each row
+                            // Space between each row
                           ],
-
                         );
-
                       }),
                     ),
                   ),
@@ -156,7 +164,7 @@ class _SelectCityState extends State<SelectCity> {
                         Color(0xFF89C9FF),
                         Colors.white,
                         "Back",
-                        () {
+                            () {
                           Navigator.pop(context);
                         },
                       ),
@@ -165,19 +173,31 @@ class _SelectCityState extends State<SelectCity> {
                         Colors.white,
                         Color(0xFF89C9FF),
                         "Continue",
-                        () {
-                          widget.trip.placesID = selectedIDS;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => DaysCounter(
-                                countrySelected: selectedCountries,
-                                trip: widget.trip,
-
-                                // Pass selected countries
+                            () {
+                          if (selectedCountries.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(textAlign: TextAlign.center,
+                                    'Please choose city to continue.',style: GoogleFonts.poppins(
+                                    fontSize: 15,
+                                    color:Colors.white,
+                                    fontWeight: FontWeight.normal),),
+                                duration:
+                                Duration(seconds: 2), // Adjust duration as needed
                               ),
-                            ),
-                          );
+                            );
+                          } else {
+                            widget.trip.placesID = selectedIDS;
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => DaysCounter(
+                                  countrySelected: selectedCountries,
+                                  trip: widget.trip,
+                                ),
+                              ),
+                            );
+                          }
                         },
                       ),
                     ],

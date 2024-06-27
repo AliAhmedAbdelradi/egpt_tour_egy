@@ -18,10 +18,10 @@ class ShapePlanCreate extends StatelessWidget {
         Image(image: AssetImage(img)),
         Container(
             margin: EdgeInsets.only(top: 15.h,left: 20.w),
-            child: Text(txt, style: GoogleFonts.poppins(color: Colors.white,fontSize: 25,fontWeight: FontWeight.w600),)),
+            child: Text(txt, style: GoogleFonts.poppins(color: Colors.white,fontSize: 25.sp,fontWeight: FontWeight.w600),)),
         Container(
             margin: EdgeInsets.only(top: 100.h,left: 45.w),
-            child: Text(txt1, style: GoogleFonts.poppins(color: Colors.white,fontSize: 12,fontWeight: FontWeight.w600),)),
+            child: Text(txt1, style: GoogleFonts.poppins(color: Colors.white,fontSize: 12.sp,fontWeight: FontWeight.w600),)),
         Container(
           width: 240.w,
           height: 33.h,

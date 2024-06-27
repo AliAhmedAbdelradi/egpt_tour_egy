@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:ept_mate/model/UserModel2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +30,8 @@ class _SingInFormState extends State<SingInForm> {
 
   TextEditingController passwordController = TextEditingController();
 
+  UserModel2 userModel2=UserModel2();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -36,12 +39,13 @@ class _SingInFormState extends State<SingInForm> {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(username: emailController.text),
+                builder: (context) => HomeScreen(username: emailController.text,),
               ),
             );
+
             Fluttertoast.showToast(
                 msg: "Successfully Logged In",
                 toastLength: Toast.LENGTH_LONG,
@@ -152,9 +156,10 @@ class _SingInFormState extends State<SingInForm> {
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
                                 formKey.currentState!.save();
-                                LoginCubit.get(context).UserLogin(
+                                LoginCubit.get(context).userLogin(
+                                  context,
                                     emailController.text,
-                                    passwordController.text,
+                                    passwordController.text
 
                                 );
                               } else {

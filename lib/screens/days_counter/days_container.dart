@@ -27,7 +27,7 @@ class _containState extends State<contain> {
         children: [
           SizedBox(width: 20.w,),
           Text(widget.txt,style: GoogleFonts.poppins(
-              fontSize: 18.sp,
+              fontSize: 17.sp,
               color:Colors.black,
               fontWeight: FontWeight.bold)),
           Spacer(),
@@ -40,7 +40,7 @@ class _containState extends State<contain> {
                   child: Icon(Icons.minimize))),
           SizedBox(width: 13.w,),
           Text("${widget.x}",style: GoogleFonts.poppins(
-              fontSize: 18.sp,
+              fontSize: 17.sp,
               color:Colors.black,
               fontWeight: FontWeight.bold),),
           SizedBox(width: 13.w,),

@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/authentication_helper.dart';
 import '../../model/UserModel1.dart';
-import '../../screens/confirm_email/Confirm_Email.dart';
 import '../../screens/sing_in.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {

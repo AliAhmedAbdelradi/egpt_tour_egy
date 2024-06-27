@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../create_name_of_Atrip/Create_name_trip.dart';
 import '../Select_Category/Select_Category_Screen.dart';
 
 class CreateTrip extends StatelessWidget {
@@ -48,21 +49,15 @@ class CreateTrip extends StatelessWidget {
                     color: Colors.black38,
                     fontSize: 15.sp,
                     fontWeight: FontWeight.w600)),
-            SizedBox(
-              height: 15.h,
-            ),
-            Text("Step 1",
-                style: GoogleFonts.poppins(
-                    color: Colors.black38,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w600)),
+
+
             SizedBox(
               height: 20.h,
             ),
             ShapePlanCreate("assets/images/create_trip.png", "Create  A  Trip",
                 "Create a fully customized day-by-day itherary \n and discover the hidden gems of egypt",
                 () {
-              Navigator.pushNamed(context, SelectCategory.routeName);
+              Navigator.pushNamed(context, CreateNameOfTrip.routeName);
             }),
             SizedBox(
               height: 35.h,

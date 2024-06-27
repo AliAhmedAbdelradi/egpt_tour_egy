@@ -33,6 +33,7 @@ import '../screens/categories/cultural/leisure_categ.dart';
 import '../screens/categories/cultural/medical_categ.dart';
 import '../screens/city_res_cat.dart';
 import '../screens/confirm_email/Confirm_Email.dart';
+import '../screens/create_name_of_Atrip/Create_name_trip.dart';
 import '../screens/customize_screen/Select_Category/Select_Category_Screen.dart';
 import '../screens/customize_screen/create_trip/create_trip_screen.dart';
 import '../screens/date_screen/date_screen.dart';
@@ -74,7 +75,7 @@ class MyApp extends StatelessWidget {
             OnBoarding.routeName: (context) => const OnBoarding(),
             SingUp.routeName: (context) => const SingUp(),
             SingIn.routeName: (context) => const SingIn(),
-            HomeScreen.routeName: (context) =>   HomeScreen(username: '',),
+            HomeScreen.routeName: (context) =>   HomeScreen(username: "" ),
             ForgetPasswordScreen.routeName: (context) =>
                 const ForgetPasswordScreen(),
             PlanType.routeName: (context) => const PlanType(),
@@ -129,6 +130,7 @@ class MyApp extends StatelessWidget {
             DetailsFloorStatusMohamedAli1.routeName:(context)=>DetailsFloorStatusMohamedAli1(),
             DetailsFloorStatusMohamedAli2.routeName:(context)=>DetailsFloorStatusMohamedAli2(),
             DetailsFloorStatusMohamedAli3.routeName:(context)=>DetailsFloorStatusMohamedAli3(),
+            CreateNameOfTrip.routeName:(context)=>CreateNameOfTrip(),
           },
         );
       },

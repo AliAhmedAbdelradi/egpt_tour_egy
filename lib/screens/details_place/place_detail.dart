@@ -1,12 +1,11 @@
 import 'package:ept_mate/constant/constant.dart';
 import 'package:ept_mate/model/PlaceDetailsByPlaceId.dart';
 import 'package:ept_mate/screens/details_place/placeImages.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import '../../api_manager/api_manager.dart';
 import '../Amanda_tempel_interactiveMap/interactiveMap_AmandaTemple.dart';
 import '../Coptic_Meusem_InteractiveMap/interactiveMap_copticMeusem.dart';
@@ -27,9 +26,11 @@ class PlaceDicrip extends StatefulWidget {
 
 class _PlaceDicripState extends State<PlaceDicrip> {
   PlaceDetailsByPlaceId list = PlaceDetailsByPlaceId();
+  FlutterTts flutterTts = FlutterTts();
 
   Future<void> _launchMaps(double latitude, double longitude) async {
-    final url = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    final url =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -46,6 +47,19 @@ class _PlaceDicripState extends State<PlaceDicrip> {
     }
   }
 
+  Future<void> _speak(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+  }
+
+  Future<void> stop(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+    await flutterTts.stop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,10 +74,13 @@ class _PlaceDicripState extends State<PlaceDicrip> {
               size: 30.w,
             )),
         actions: [
-          ImageIcon(
-            AssetImage("assets/images/logo.png"),
-            color: Colors.black,
-            size: 50.w,
+          Padding(
+            padding: EdgeInsets.only(right: 16.0.w),
+            child: ImageIcon(
+              AssetImage("assets/images/logo.png"),
+              color: Colors.black,
+              size: 50.w,
+            ),
           )
         ],
       ),
@@ -93,120 +110,161 @@ class _PlaceDicripState extends State<PlaceDicrip> {
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                       margin: EdgeInsets.only(top: 150.h),
                       child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              place.placeName ?? "",
-                              style: TextStyle(
-                                  fontSize: 25.sp,
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.bold),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                            ),
-                            SizedBox(height: 10.h),
-                            InkWell(
-                              onTap: () {
-                                _launchMaps(place.latitude ?? 0, place.longitude ?? 0);
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.location_on, size: 20.w, color: Colors.red),
-                                  Text(
-                                    "Location",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 18.sp,
-                                        color: primaryColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                place.placeName ?? "",
+                                style: TextStyle(
+                                    fontSize: 25.sp,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                               ),
-                            ),
-                            Divider(height: 20.h, color: Colors.black, thickness: 1),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
+                              SizedBox(height: 10.h),
+                              InkWell(
+                                onTap: () {
+                                  _launchMaps(
+                                      place.latitude ?? 0, place.longitude ?? 0);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("Open Time",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 17.sp,
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.bold)),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.watch_later_outlined, color: Colors.black54, size: 17.sp),
-                                        Text(
-                                          "${place.openTime?.substring(0, 5)} AM",
-                                          style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.bold),
-                                        )
-                                      ],
+                                    Icon(Icons.location_on,
+                                        size: 20.w, color: Colors.red),
+                                    Text(
+                                      "Location",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 18.sp,
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
-                                Column(
-                                  children: [
-                                    Text("Close Time",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 17.sp,
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.bold)),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.watch_later_outlined, color: Colors.black54, size: 17.w),
-                                        Text(
-                                          "${place.closeTime?.substring(0, 5)} PM",
-                                          style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.bold),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10.h),
-                            if (place.placeId == 2)
-                              Column(
+                              ),
+                              Divider(
+                                  height: 20.h,
+                                  color: Colors.black,
+                                  thickness: 1),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                  Column(
                                     children: [
-                                      Icon(Icons.book_online, size: 20.w, color: Colors.orange),
-                                      Text(
-                                        "Book Your Tickets Now!",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 18,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500),
+                                      Text("Open Time",
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 17.sp,
+                                              color: primaryColor,
+                                              fontWeight: FontWeight.bold)),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.watch_later_outlined,
+                                              color: Colors.black54, size: 17.sp),
+                                          Text(
+                                            "${place.openTime?.substring(0, 5)} AM",
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
                                       ),
                                     ],
                                   ),
-                                  InkWell(
-                                    onTap: _launchURL,
-                                    child: Text(
-                                      "Click here",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 18, color: primaryColor, fontWeight: FontWeight.w500),
-                                    ),
+                                  Column(
+                                    children: [
+                                      Text("Close Time",
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 17.sp,
+                                              color: primaryColor,
+                                              fontWeight: FontWeight.bold)),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.watch_later_outlined,
+                                              color: Colors.black54, size: 17.w),
+                                          Text(
+                                            "${place.closeTime?.substring(0, 5)} PM",
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold),
+                                          )
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            Divider(height: 30.h, color: Colors.black, thickness: 1),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: primaryColor, borderRadius: BorderRadius.circular(30)),
-                              child: Icon(Icons.keyboard_voice_outlined, size: 30.w, color: Colors.white),
-                            ),
-                            SizedBox(height: 10.h),
-                            Text(
-                              place.detailedDescription ?? "",
-                              style: GoogleFonts.poppins(fontSize: 17.sp, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(height: 20.h),
-                            _buildInteractiveMapButton(place),
-                          ],
+                              SizedBox(height: 10.h),
+                              if (place.placeId == 2)
+                                Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.book_online,
+                                            size: 20.w, color: Colors.orange),
+                                        Text(
+                                          "Book Your Tickets Now!",
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
+                                    InkWell(
+                                      onTap: _launchURL,
+                                      child: Text(
+                                        "Click here",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 18,
+                                            color: primaryColor,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              Divider(
+                                  height: 30.h,
+                                  color: Colors.black,
+                                  thickness: 1),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () =>
+                                        _speak(place.detailedDescription ?? ""),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(30)),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.keyboard_voice_outlined,
+                                              size: 30.w, color: primaryColor),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        stop(place.detailedDescription ?? "");
+                                      },
+                                      icon: Icon(Icons.pause,
+                                          size: 30.w, color: primaryColor))
+                                ],
+                              ),
+                              SizedBox(height: 10.h),
+                              Text(
+                                place.detailedDescription ?? "",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 17.sp, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 20.h),
+                              _buildInteractiveMapButton(place),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -246,8 +304,10 @@ class _PlaceDicripState extends State<PlaceDicrip> {
         return SizedBox.shrink();
     }
 
-    return ElevatedButton(
-      style: ButtonStyle(
+    return Center(
+        child: ElevatedButton(
+        style
+            : ButtonStyle(
           fixedSize: MaterialStateProperty.all(Size(100, 30)),
           backgroundColor: MaterialStateProperty.all(Colors.white),
           shape: MaterialStateProperty.all(
@@ -261,6 +321,6 @@ class _PlaceDicripState extends State<PlaceDicrip> {
         height: 100,
         width: 150,
       ),
-    );
+    ));
   }
 }

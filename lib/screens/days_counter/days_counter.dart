@@ -1,31 +1,28 @@
-import 'package:ept_mate/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../model/CustomizePlaces.dart';
+
 import '../../model/trip.dart';
 import '../date_screen/date_screen.dart';
-import '../plan_type_screen/plan_type.dart';
-
 import 'btn2.dart';
 import 'days_container.dart';
+import '../home.dart'; // Replace with correct import path for HomeScreen
 
 class DaysCounter extends StatefulWidget {
   static const String routeName = "DaysCounter";
 
+  final List<String> countrySelected;
+  final Trip trip;
+  final int? catId;
+  final int? cityId;
+
   DaysCounter({
-    super.key,
+    Key? key,
     required this.countrySelected,
     required this.trip,
-    this.cityId,
     this.catId,
-  });
-
-  final List<String> countrySelected;
-  Trip trip;
-
-  int? catId;
-  int? cityId;
+    this.cityId,
+  }) : super(key: key);
 
   @override
   State<DaysCounter> createState() => _DaysCounterState();
@@ -47,14 +44,15 @@ class _DaysCounterState extends State<DaysCounter> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {
-              Navigator.popAndPushNamed(context, HomeScreen.routeName);
-            },
-            icon: Icon(
-              Icons.cancel_outlined,
-              color: Colors.black,
-              size: 30,
-            )),
+          onPressed: () {
+            Navigator.popAndPushNamed(context, HomeScreen.routeName);
+          },
+          icon: Icon(
+            Icons.cancel_outlined,
+            color: Colors.black,
+            size: 30,
+          ),
+        ),
         actions: [
           ImageIcon(
             AssetImage("assets/images/logo.png"),
@@ -70,19 +68,25 @@ class _DaysCounterState extends State<DaysCounter> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("How many days are you staying?",
-                style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontSize: 35,
-                    fontWeight: FontWeight.w600)),
+            Text(
+              "How many days are you staying?",
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontSize: 35,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             SizedBox(
               height: 10.h,
             ),
-            Text("Step 4",
-                style: GoogleFonts.poppins(
-                    color: Colors.black38,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600)),
+            Text(
+              "Step 4",
+              style: GoogleFonts.poppins(
+                color: Colors.black38,
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             SizedBox(
               height: 10.h,
             ),
@@ -95,12 +99,12 @@ class _DaysCounterState extends State<DaysCounter> {
                       contain(
                         "${widget.countrySelected[index] ?? ""}",
                         "${daysValues[index]}",
-                            () {
+                        () {
                           setState(() {
                             daysValues[index]++;
                           });
                         },
-                            () {
+                        () {
                           setState(() {
                             if (daysValues[index] > 0) {
                               daysValues[index]--;
@@ -120,19 +124,53 @@ class _DaysCounterState extends State<DaysCounter> {
             ),
             Row(
               children: [
-                Btn2(Color(0xFF89C9FF), Colors.white, "Back", () {
-                  Navigator.pop(context);
-                }),
+                Btn2(
+                  Color(0xFF89C9FF),
+                  Colors.white,
+                  "Back",
+                  () {
+                    Navigator.pop(context);
+                  },
+                ),
                 Spacer(),
-                Btn2(Colors.white, Color(0xFF89C9FF), "Continue", () {
-                  widget.trip.dayNums = daysValues;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DateScreen(trip: widget.trip),
-                    ),
-                  );
-                }),
+                Btn2(
+                  Colors.white,
+                  Color(0xFF89C9FF),
+                  "Continue",
+                  () {
+                    // Check if all daysValues are greater than zero
+                    bool allDaysSelected = true;
+                    for (int days in daysValues) {
+                      if (days <= 0) {
+                        allDaysSelected = false;
+                        break;
+                      }
+                    }
+                    if (allDaysSelected) {
+                      widget.trip.dayNums = daysValues;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DateScreen(trip: widget.trip),
+                        ),
+                      );
+                    } else {
+                      // Show a snackbar or dialog to prompt user to select days for all countries
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            textAlign: TextAlign.center,
+                            'Number of days can not be 0',
+                            style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                color: Colors.white,
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ],
             )
           ],
