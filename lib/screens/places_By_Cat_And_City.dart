@@ -115,6 +115,8 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                       ),
                     ),
                     child: Column(
+
+
                       children: [
                         Container(
                           alignment: Alignment.topRight,
