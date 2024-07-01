@@ -1,20 +1,19 @@
 import 'package:ept_mate/model/trip.dart';
 import 'package:ept_mate/screens/home.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
 
 import 'package:ept_mate/screens/days_counter/days_counter.dart';
-
 import '../../../api_manager/api_manager.dart';
 import '../../select_city/btn1.dart';
 import '../counter_screen/daysGeneratedcounter.dart';
 
+
 class SelectCityGenerated extends StatefulWidget {
   static String routeName = "SelectCityGenerated";
-  Trip trip;
+  final Trip trip;
 
   SelectCityGenerated({required this.trip});
 
@@ -23,10 +22,8 @@ class SelectCityGenerated extends StatefulWidget {
 }
 
 class _SelectCityState extends State<SelectCityGenerated> {
-  List<String> selectedCountries = []; // List to store selected countries
-  List<int> selectedIDS = []; // List to store selected countries ids
-
-  // Fetching state
+  List<String> selectedCountries = [];
+  List<int> selectedIDS = [];
   bool isDataLoading = false;
 
   @override
@@ -88,7 +85,6 @@ class _SelectCityState extends State<SelectCityGenerated> {
                     ),
                   ),
                   SizedBox(height: 30.h),
-                  // Displaying categories
                   SingleChildScrollView(
                     child: Column(
                       children: List.generate(categories.length, (index) {
@@ -101,8 +97,7 @@ class _SelectCityState extends State<SelectCityGenerated> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
-                                border:
-                                Border.all(width: 0, color: Colors.black),
+                                border: Border.all(width: 0, color: Colors.black),
                               ),
                               child: Row(
                                 children: [
@@ -132,28 +127,23 @@ class _SelectCityState extends State<SelectCityGenerated> {
                                 size: 25,
                                 onTap: (selected) {
 
-                                    if (selectedCountries
-                                        .contains(city.name)) {
-                                      selectedCountries
-                                          .remove(city.name);
+                                    if (selectedCountries.contains(city.name)) {
+                                      selectedCountries.remove(city.name);
                                       selectedIDS.remove(city.id);
                                     } else {
-                                      selectedCountries
-                                          .add(city.name ?? "");
+                                      selectedCountries.add(city.name ?? "");
                                       selectedIDS.add(city.id ?? 0);
-                                      widget.trip.cityName =
-                                          selectedCountries;
+                                      widget.trip.cityName = selectedCountries;
+                                      SharedDataCity.selectedCityIds = selectedIDS; // Update shared data
                                     }
 
                                 },
                                 border: Border.all(
                                   width: 1,
                                 ),
-                                uncheckedWidget:
-                                Icon(Icons.close, color: Colors.white),
+                                uncheckedWidget: Icon(Icons.close, color: Colors.white),
                               ),
                             ),
-                            // Space between each row
                           ],
                         );
                       }),
@@ -179,13 +169,16 @@ class _SelectCityState extends State<SelectCityGenerated> {
                           if (selectedCountries.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(textAlign: TextAlign.center,
-                                    'Please choose city to continue.',style: GoogleFonts.poppins(
+                                content: Text(
+                                  'Please choose city to continue.',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
                                     fontSize: 15,
-                                    color:Colors.white,
-                                    fontWeight: FontWeight.normal),),
-                                duration:
-                                Duration(seconds: 2), // Adjust duration as needed
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                duration: Duration(seconds: 2),
                               ),
                             );
                           } else {
@@ -212,4 +205,8 @@ class _SelectCityState extends State<SelectCityGenerated> {
       ),
     );
   }
+}
+
+class SharedDataCity {
+  static List<int> selectedCityIds = [];
 }

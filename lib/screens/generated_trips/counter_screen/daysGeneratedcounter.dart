@@ -1,15 +1,15 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../model/trip.dart';
-import '../../date_screen/date_screen.dart';
+
 import '../../days_counter/btn2.dart';
 import '../../days_counter/days_container.dart';
 import '../../home.dart';
 import '../data_screen/dateGeneratedscreen.dart';
-
-
 
 class DaysGeneratedCounter extends StatefulWidget {
   static const String routeName = "DaysGeneratedCounter";
@@ -32,14 +32,14 @@ class DaysGeneratedCounter extends StatefulWidget {
 }
 
 class _DaysCounterState extends State<DaysGeneratedCounter> {
-  // Create a list to hold the values for each country
-  List<int> daysValues = [];
+  // Reference to the shared data instance
+  SharedDataCounter _sharedData = SharedDataCounter();
 
   @override
   void initState() {
     super.initState();
     // Initialize the daysValues list with zeros
-    daysValues = List<int>.filled(widget.countrySelected.length, 0);
+    _sharedData.daysValues = List<int>.filled(widget.countrySelected.length, 0);
   }
 
   @override
@@ -101,18 +101,18 @@ class _DaysCounterState extends State<DaysGeneratedCounter> {
                     children: [
                       contain(
                         "${widget.countrySelected[index] ?? ""}",
-                        "${daysValues[index]}",
-                        () {
+                        "${_sharedData.daysValues[index]}",
+                            () {
                           setState(() {
-                            daysValues[index]++;
+                            _sharedData.daysValues[index]++;
                           });
                         },
-                        () {
+                            () {
                           setState(() {
-                            if (daysValues[index] > 0) {
-                              daysValues[index]--;
+                            if (_sharedData.daysValues[index] > 0) {
+                              _sharedData.daysValues[index]--;
                             } else {
-                              daysValues[index] = 0;
+                              _sharedData.daysValues[index] = 0;
                             }
                           });
                         },
@@ -131,7 +131,7 @@ class _DaysCounterState extends State<DaysGeneratedCounter> {
                   Color(0xFF89C9FF),
                   Colors.white,
                   "Back",
-                  () {
+                      () {
                     Navigator.pop(context);
                   },
                 ),
@@ -140,17 +140,17 @@ class _DaysCounterState extends State<DaysGeneratedCounter> {
                   Colors.white,
                   Color(0xFF89C9FF),
                   "Continue",
-                  () {
+                      () {
                     // Check if all daysValues are greater than zero
                     bool allDaysSelected = true;
-                    for (int days in daysValues) {
+                    for (int days in _sharedData.daysValues) {
                       if (days <= 0) {
                         allDaysSelected = false;
                         break;
                       }
                     }
                     if (allDaysSelected) {
-                      widget.trip.dayNums = daysValues;
+                      widget.trip.dayNums = _sharedData.daysValues;
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -162,12 +162,13 @@ class _DaysCounterState extends State<DaysGeneratedCounter> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            textAlign: TextAlign.center,
                             'Number of days can not be 0',
                             style: GoogleFonts.poppins(
-                                fontSize: 15,
-                                color: Colors.white,
-                                fontWeight: FontWeight.normal),
+                              fontSize: 15,
+                              color: Colors.white,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       );
@@ -182,3 +183,20 @@ class _DaysCounterState extends State<DaysGeneratedCounter> {
     );
   }
 }
+
+
+// shared_data.dart
+
+class SharedDataCounter {
+  List<int> daysValues = [];
+
+  // Singleton instance
+  static final SharedDataCounter _instance = SharedDataCounter._internal();
+
+  factory SharedDataCounter() {
+    return _instance;
+  }
+
+  SharedDataCounter._internal();
+}
+

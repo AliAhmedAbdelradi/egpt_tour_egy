@@ -1,3 +1,4 @@
+import 'package:ept_mate/model/Generated.dart';
 import 'package:ept_mate/screens/AddPlace.dart';
 import 'package:ept_mate/screens/home.dart';
 import 'package:ept_mate/screens/tabs/tripPlans_tab.dart';
@@ -9,23 +10,27 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../api_manager/api_manager.dart';
 import '../../../model/trip.dart';
 import '../../select_city/btn1.dart';
+import '../counter_screen/daysGeneratedcounter.dart';
 import '../name_screen/shareData.dart';
+import '../selectCategory_screen/SelectCategory_screen.dart';
+import '../selectCity_screen/SelectCityGenerated_Screen.dart';
 
+class AddGeneratedScreen extends StatefulWidget {
+  static const String routeName = "AddGeneratedScreen";
 
-class AddGenenratedScreen extends StatefulWidget {
-  static const String routeName = "AddGenenratedScreen";
+  final Trip trip;
 
-  AddGenenratedScreen({required this.trip});
-
-  Trip trip;
+  AddGeneratedScreen({super.key, required this.trip});
 
   @override
-  State<AddGenenratedScreen> createState() => _planDetailsState();
+  State<AddGeneratedScreen> createState() => _PlanDetailsState();
 }
 
-class _planDetailsState extends State<AddGenenratedScreen> {
+class _PlanDetailsState extends State<AddGeneratedScreen> {
   List<List<String>> places = [];
   String tripName = SharedData().tripName;
+  List<int> selectedCityIds = SharedDataCity.selectedCityIds;
+ // List<int> daysValues = SharedDataCounter().daysValues;
 
 
 
@@ -36,14 +41,13 @@ class _planDetailsState extends State<AddGenenratedScreen> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
+    print(SharedDataCounter().daysValues);
 
     DateTime? start = widget.trip.startDate;
     var dates = List.generate(widget.trip.dayNums!.length + 1, (index) {
       return start!.add(Duration(
-          days:
-          widget.trip.dayNums!.sublist(0, index).fold(0, (a, b) => a + b)));
+          days: widget.trip.dayNums!.sublist(0, index).fold(0, (a, b) => a + b)));
     });
 
     return Scaffold(
@@ -70,10 +74,9 @@ class _planDetailsState extends State<AddGenenratedScreen> {
         ],
       ),
       body: FutureBuilder(
-        future: ApiManager.getGeneratedTrips(categoryIDs:[7,8] ,cityIDs:[6,8] ,durations:[7,8] ,name:tripName
+        future: ApiManager.getGeneratedTrips(categoryIDs:SelectedCategoryIds.ids,cityIDs:selectedCityIds ,durations:SharedDataCounter().daysValues ,name:tripName
           ),
         builder: (context, snapshot) {
-          print(snapshot.data?.data);
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
@@ -81,8 +84,7 @@ class _planDetailsState extends State<AddGenenratedScreen> {
             return Center(child: Text("no data entered"));
           }
 
-          final category = snapshot.data?.data ?? [];
-
+          final category = snapshot.data?.data??[];
 
 
 
@@ -102,7 +104,7 @@ class _planDetailsState extends State<AddGenenratedScreen> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("${category[index].tripName}",
+                              child: Text("${category[index].cityName}",
                                   style: GoogleFonts.poppins(
                                       fontSize: 25,
                                       color: Colors.white,
@@ -121,7 +123,7 @@ class _planDetailsState extends State<AddGenenratedScreen> {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image:
-                                AssetImage("assets/images/Aswan_place.png"),
+                                 NetworkImage(category[index].cityImage??""),
                                 // This should be dynamic
                                 fit: BoxFit.fill,
                                 opacity: .9),
@@ -155,6 +157,7 @@ class _planDetailsState extends State<AddGenenratedScreen> {
                                 (placeIndex) {
                               return Row(
                                 children: [
+
                                   Container(
                                     margin: EdgeInsets.only(left: 13.w),
                                     height: 40.h,
@@ -236,8 +239,7 @@ class _planDetailsState extends State<AddGenenratedScreen> {
             ],
           );
         },
-      )
+      ),
     );
   }
-
 }

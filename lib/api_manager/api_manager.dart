@@ -9,6 +9,7 @@ import '../model/AllPlaces.dart';
 import '../model/CityAfterEdit.dart';
 import '../model/FastTripPlan.dart';
 import '../model/FavouriteModel.dart';
+import '../model/Generated.dart';
 import '../model/GeneratedTrip.dart';
 import '../model/GetFastTripsById.dart';
 import '../model/GetReadyMateById.dart';
@@ -365,28 +366,35 @@ class ApiManager {
     }
   }
 
-  static Future<GeneratedTrip?> getGeneratedTrips({
-    required String name,
-    required List <int>categoryIDs,
-    required List <int>cityIDs,
-    required List <int>durations,
 
+
+  static Future<Generated?> getGeneratedTrips({
+    required String name,
+    required List<int> categoryIDs,
+    required List<int> cityIDs,
+    required List<int> durations,
   }) async {
     Dio dio = Dio();
-    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com/GetTrips';
     String? token = await getToken(); // Get token asynchronously
     if (token != null) {
-      dio.options.headers = {'Authorization': 'bearer $token'};
+      dio.options.headers = {'Authorization': 'Bearer $token'};
     }
-    var response = await dio.get("$url//GetTrips?Name=ali%20ahmed&categoryIDs=7&categoryIDs=8&cityIDs=6&cityIDs=8&durations=2&durations=1");
-    var generatedTrips = GeneratedTrip.fromJson(response.data);
+
+    // Creating the query parameters map
+    final Map<String, dynamic> queryParams = {
+      'Name': name,
+      'categoryIDs': categoryIDs,
+      'cityIDs': cityIDs,
+      'durations': durations,
+    };
+
+    var response = await dio.get(url, queryParameters: queryParams);
+    var generatedTrips = Generated.fromJson(response.data);
     return generatedTrips;
   }
 
 
-
-
-
-
 }
+
 
