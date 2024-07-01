@@ -89,12 +89,12 @@ class _PlanDetailsState extends State<AddGeneratedScreen> {
 
           final category = snapshot.data?.data ?? [];
           final detailsPlaces =
-              snapshot.data?.data?[generated.data?.length ?? 0].places ?? [];
+              snapshot.data?.data![generated.data?.length ?? 0].places ?? [];
 
           return ListView.builder(
             shrinkWrap: true,
             physics: ClampingScrollPhysics(),
-            itemCount: widget.trip.dayNums!.length,
+            itemCount: category.length,
             itemBuilder: (context, index) {
               if (index >= dates.length - 1) {
                 return SizedBox.shrink(); // Ensure no overflow
