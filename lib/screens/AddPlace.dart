@@ -19,11 +19,19 @@ class AddPlace extends StatefulWidget {
 class _Places_By_cat_And_CityState extends State<AddPlace> {
 
 
-  void _passBackSelectedData(String data,) {
-    Navigator.pop(context, data);
+  void _passBackSelectedData(String data, int id) {
+    // Create a Map to pass both data and id
+    Map<String, dynamic> result = {
+      'data': data,
+      'id': id,
+    };
 
-    print(data);// Pass back data to previous screen
+    // Pass the result Map back to the previous screen
+    Navigator.pop(context, result);
+
+    print(result); // Print the Map containing data and id
   }
+
   @override
   Widget build(BuildContext context) {
 
@@ -102,7 +110,7 @@ class _Places_By_cat_And_CityState extends State<AddPlace> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    _passBackSelectedData(category[index].imageLink ?? "");
+                    _passBackSelectedData(category[index].imageLink ?? "", category[index].id ?? 0);
 
                   },
                   child: Column(
