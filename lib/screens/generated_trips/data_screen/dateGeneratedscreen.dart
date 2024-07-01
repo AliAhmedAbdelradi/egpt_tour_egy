@@ -145,7 +145,7 @@ class _DateScreenState extends State<DateGeneratedScreen>
                 Spacer(),
                 Btn(Colors.white, Color(0xFF89C9FF), "Continue", () async{
                   await  ApiManager.addTrip(widget.trip);
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AddGenenratedScreen(trip: widget.trip,)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AddGeneratedScreen(trip: widget.trip,)));
                 }),
               ],
             )

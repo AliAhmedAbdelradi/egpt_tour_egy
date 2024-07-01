@@ -144,6 +144,8 @@ class _SelectCategoryState extends State<SelectCategoryGenerated> {
     );
   }
 
+  // Inside _SelectCategoryState class
+
   Widget buildCategorySelection(dynamic category, int index) {
     return Row(
       children: [
@@ -175,23 +177,24 @@ class _SelectCategoryState extends State<SelectCategoryGenerated> {
           ),
         ),
         SizedBox(width: 5.w),
+
         InkWell(
           child: RoundCheckBox(
             size: 25.sp,
             onTap: (selected) {
 
-              categorySelected[index] = selected!;
-              if (selected) {
-                selectedIDS.add(category.id ?? 0);
-              } else {
-                selectedIDS.remove(category.id ?? 0);
-              }
+                categorySelected[index] = selected!;
+                if (selected) {
+                  selectedIDS.add(category.id ?? 0);
+                  SelectedCategoryIds.ids.add(category.id ?? 0); // Add to shared class
+                } else {
+                  selectedIDS.remove(category.id ?? 0);
+                  SelectedCategoryIds.ids.remove(category.id ?? 0); // Remove from shared class
+                }
 
             },
             isChecked: categorySelected[index],
-            border: Border.all(
-              width: 1.w,
-            ),
+            border: Border.all(width: 1.w),
             uncheckedWidget: Icon(Icons.close, color: Colors.white),
           ),
           onTap: () {},
@@ -199,4 +202,9 @@ class _SelectCategoryState extends State<SelectCategoryGenerated> {
       ],
     );
   }
+
 }
+class SelectedCategoryIds {
+  static List<int> ids = []; // List to hold selected category IDs
+}
+
