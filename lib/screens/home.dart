@@ -34,24 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
     ProfileTab()
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    _saveUsername(widget.username);
-  }
 
-  Future<void> _saveUsername(String username) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('username', username);
-  }
 
-  Future<String?> _getUsername() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('username');
-  }
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       drawer: Drawer(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
@@ -97,22 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushNamed(context, FavouriteScreen.routeName);
               },
             ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(Icons.settings),
-                  SizedBox(width: 10.w),
-                  Text('Settings',
-                      style: GoogleFonts.poppins(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black)),
-                ],
-              ),
-              onTap: () {
-                // Navigator.pushNamed(context, PlanType.routeName);
-              },
-            ),
+
           ],
         ),
       ),
@@ -140,7 +114,12 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         title: Text(
           "Hi ${widget.username}",
-          style: TextStyle(fontSize: 24.sp),
+          overflow:TextOverflow.ellipsis ,
+          style: GoogleFonts.poppins(
+            color: Colors.black,
+            fontSize: 25.sp,
+            fontWeight: FontWeight.normal,
+          ),
         ),
         backgroundColor: primaryColor,
       ),

@@ -56,7 +56,7 @@ class _SingUpFormState extends State<SingUpForm> {
           } else if (state is RegisterErrorState) {
             awesomeDialog(
                 'error',
-                'Oops!! Something Went Wrong, Please Try Again',
+                'Oops!! may be user or email already exist',
                 context,
                 DialogType.error);
           }

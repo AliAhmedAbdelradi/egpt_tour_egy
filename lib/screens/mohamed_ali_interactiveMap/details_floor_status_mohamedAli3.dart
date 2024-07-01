@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../api_manager/api_manager.dart';
+import '../../constant/constant.dart';
 
 class DetailsFloorStatusMohamedAli3 extends StatefulWidget {
   const DetailsFloorStatusMohamedAli3({super.key});
@@ -13,6 +15,19 @@ class DetailsFloorStatusMohamedAli3 extends StatefulWidget {
 }
 
 class _DetailsFloorStatusState extends State<DetailsFloorStatusMohamedAli3> {
+  FlutterTts flutterTts = FlutterTts();
+  Future<void> _speak(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+  }
+
+  Future<void> stop(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+    await flutterTts.stop();
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -86,6 +101,31 @@ class _DetailsFloorStatusState extends State<DetailsFloorStatusMohamedAli3> {
                             fontSize: 18.sp,
                             color: Colors.black,
                           ),),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () =>
+                                    _speak(data[0].description ?? ""),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30)),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.keyboard_voice_outlined,
+                                          size: 30.w, color: primaryColor),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () {
+                                    stop(data[0].description ?? "");
+                                  },
+                                  icon: Icon(Icons.pause,
+                                      size: 30.w, color: primaryColor))
+                            ],
+                          ),
                           _buildInfoText("", data[0].description),
 
                         ],

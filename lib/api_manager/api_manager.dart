@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:ept_mate/model/CategoryModel.dart';
 import 'package:ept_mate/model/trip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../model/AddOrRemoveFavourites.dart';
 import '../model/AllPlaces.dart';
 import '../model/CityAfterEdit.dart';
 import '../model/FastTripPlan.dart';
 import '../model/FavouriteModel.dart';
+import '../model/GeneratedTrip.dart';
 import '../model/GetFastTripsById.dart';
 import '../model/GetReadyMateById.dart';
 import '../model/InteractiveMapByPlaceId.dart';
@@ -15,7 +19,8 @@ import '../model/PlaceFloorRoomsById.dart';
 import '../model/PlaceFloorRoomsStatusAfter.dart';
 import '../model/PlaceModel.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import '../model/ReadyMateModel4.dart'; // Import PrettyDioLogger
+import '../model/ReadyMateModel4.dart';
+import '../model/delete.dart'; // Import PrettyDioLogger
 
 class ApiManager {
   static Future<String?> getToken() async {
@@ -238,7 +243,12 @@ class ApiManager {
     return interactiveMap;
   }
 
+  static List<FavouriteModel> favouritse = [];
+  static Set<String> favouriteId = {};
+
   static Future<FavouriteModel?> getFavourite() async {
+    favouritse.clear();
+    favouriteId.clear();
     Dio dio = Dio();
     String url = 'https://egyptttourmate-001-site1.gtempurl.com';
     String? token = await getToken(); // Get token asynchronously
@@ -250,29 +260,61 @@ class ApiManager {
     return fav;
   }
 
-  static Future<AllPlaces?> getAllPlacess({String? query}) async {
+  static Future<void> addAndRemoveFromFavourite(
+      {required String placeId}) async {
+    Dio dio = Dio();
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
+    String? token = await getToken(); // Get token asynchronously
+
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+
+    var response = await dio.post("$url/api/UserFavorits/Add",
+        data: {"id": 0, "userId": "string", "placeId": placeId});
+
+    if (response.data is Map<String, dynamic>) {
+      var responsy = response.data as Map<String, dynamic>;
+      if (responsy['success'] == true) {
+        if (favouriteId.contains(placeId)) {
+          favouriteId.remove(placeId);
+          favouritse.remove(placeId);
+        } else {
+          favouriteId.add(placeId);
+          favouritse.add(placeId as FavouriteModel);
+        }
+      }
+    }
+  }
+
+
+
+  static Future<AllPlaces?> getAllPlaces({String? query}) async {
     Dio dio = Dio();
     String url =
         'https://egyptttourmate-001-site1.gtempurl.com/api/Places/GetAll';
     String? token = await getToken(); // Get token asynchronously
+
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
-    List<AllPlaces> result = [];
 
-    var response = await dio.get(url);
-    var placess = AllPlaces.fromJson(response.data);
+    try {
+      var response = await dio.get(url);
+      AllPlaces allPlaces = AllPlaces.fromJson(response.data);
 
-    /*
-   if (query != null && query.isNotEmpty) {
-      placess = placess.where((element) {
-        final name = element['name'];
-        return name != null && name.toString().toLowerCase().contains(query.toLowerCase());
-      }).toList();
+      if (query != null && query.isNotEmpty) {
+        allPlaces.data = allPlaces.data
+            ?.where((place) =>
+                place.name!.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      }
+
+      return allPlaces;
+    } catch (e) {
+      print('Error fetching places: $e');
+      return null;
     }
-    */
-
-    return placess;
   }
 
   static Future<GetFastTripsById?> getFastTripsById({
@@ -284,9 +326,67 @@ class ApiManager {
     if (token != null) {
       dio.options.headers = {'Authorization': 'bearer $token'};
     }
-    var response = await dio.get(
-        "$url/api/ReadyTrips/GetFastTripsById?Id=$fastTripsId");
+    var response =
+        await dio.get("$url/api/ReadyTrips/GetFastTripsById?Id=$fastTripsId");
     var fstrip = GetFastTripsById.fromJson(response.data);
     return fstrip;
   }
+
+  static Future<Response> DelFavourite(
+      {required String favId}) async {
+    Dio dio = Dio();
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
+    String? token = await getToken(); // Get token asynchronously
+
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+
+    var response = await dio.delete(
+        "$url/api/UserFavorits/Delete?ID=$favId");
+    return response ;
+
+
+  }
+  void removeFavorite(String favId) async {
+    try {
+      var response = await ApiManager.DelFavourite(favId: favId);
+
+      if (response.statusCode == 200) {
+        // Handle successful deletion
+        print("Favorite deleted successfully");
+      } else {
+        // Handle unsuccessful deletion
+        print("Failed to delete favorite: ${response.statusMessage}");
+      }
+    } catch (e) {
+      // Handle any errors that occur during the API call
+      print("Error: $e");
+    }
+  }
+
+  static Future<GeneratedTrip?> getGeneratedTrips({
+    required String name,
+    required List <int>categoryIDs,
+    required List <int>cityIDs,
+    required List <int>durations,
+
+  }) async {
+    Dio dio = Dio();
+    String url = 'https://egyptttourmate-001-site1.gtempurl.com';
+    String? token = await getToken(); // Get token asynchronously
+    if (token != null) {
+      dio.options.headers = {'Authorization': 'bearer $token'};
+    }
+    var response = await dio.get("$url//GetTrips?Name=ali%20ahmed&categoryIDs=7&categoryIDs=8&cityIDs=6&cityIDs=8&durations=2&durations=1");
+    var generatedTrips = GeneratedTrip.fromJson(response.data);
+    return generatedTrips;
+  }
+
+
+
+
+
+
 }
+

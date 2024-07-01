@@ -26,7 +26,7 @@ class _SingInFormState extends State<SingInForm> {
   IconData visibleIcon = Icons.visibility_off;
   final GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
-  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
 
@@ -42,7 +42,7 @@ class _SingInFormState extends State<SingInForm> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(username: emailController.text,),
+                builder: (context) => HomeScreen(username: usernameController.text,),
               ),
             );
 
@@ -86,7 +86,7 @@ class _SingInFormState extends State<SingInForm> {
                         }
                         return null;
                       },
-                      controller: emailController,
+                      controller: usernameController,
                       hint: 'Enter Your User Name',
                       keyboardType: TextInputType.emailAddress),
                   Container(
@@ -158,7 +158,7 @@ class _SingInFormState extends State<SingInForm> {
                                 formKey.currentState!.save();
                                 LoginCubit.get(context).userLogin(
                                   context,
-                                    emailController.text,
+                                    usernameController.text,
                                     passwordController.text
 
                                 );

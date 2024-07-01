@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../customize_screen/create_trip/create_trip_screen.dart';
+
+
+import '../generated_trips/create_trip_generated/Create_GeneratedTrip.dart';
 import '../home.dart';
 import '../readyTrips/readytrip.dart';
 class PlanType extends StatelessWidget {
@@ -61,7 +64,10 @@ class PlanType extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            ShapePlan("assets/images/2.png", "Generate", () {}),
+            ShapePlan("assets/images/2.png", "Generate", () {
+
+              Navigator.pushNamed(context, CreateGenerated.routeName);
+            }),
             SizedBox(
               height: 20.h,
             ),

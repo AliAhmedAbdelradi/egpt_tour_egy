@@ -1,6 +1,3 @@
-
-
-
 import 'package:ept_mate/screens/Coptic_Meusem_InteractiveMap/details_floor_status_copticMeusem1.dart';
 import 'package:ept_mate/screens/Coptic_Meusem_InteractiveMap/details_floor_status_copticMeusem2.dart';
 import 'package:ept_mate/screens/Meusem_of_IslamicArt_IteractiveMap/details_floor_status_MeusemOfIslamicArt1.dart';
@@ -16,6 +13,7 @@ import 'package:ept_mate/weather/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../model/trip.dart';
 import '../screens/Amanda_tempel_interactiveMap/details_floor_status_Amanda.dart';
 import '../screens/Amanda_tempel_interactiveMap/interactiveMap_AmandaTemple.dart';
 import '../screens/Coptic_Meusem_InteractiveMap/details_floor_status_copticMeusem.dart';
@@ -44,6 +42,9 @@ import '../screens/fastTrip/FastTrip.dart';
 import '../screens/fastTrip/number of placesFastTrip.dart';
 import '../screens/favourte_screen/favourite_Screen.dart';
 import '../screens/forget_password.dart';
+import '../screens/generated_trips/create_trip_generated/Create_GeneratedTrip.dart';
+import '../screens/generated_trips/name_screen/name_generated_screen.dart';
+import '../screens/generated_trips/selectCategory_screen/SelectCategory_screen.dart';
 import '../screens/home.dart';
 import '../screens/mohamed_ali_interactiveMap/details_floor_status_mohamedAli.dart';
 import '../screens/mohamed_ali_interactiveMap/interactiveMap_mohamedAli.dart';
@@ -51,18 +52,19 @@ import '../screens/onboarding_screen.dart';
 import '../screens/plan_type_screen/plan_type.dart';
 import '../screens/readyTrips/number of places.dart';
 import '../screens/request_ride/ride_request.dart';
-import '../screens/select_city/Select_City_Screen.dart';
 import '../screens/sing_in.dart';
 import '../screens/sing_up.dart';
 import '../screens/tabs/tripPlans_tab.dart';
 
 class MyApp extends StatelessWidget {
   final bool isLoggedIn;
+
   const MyApp({super.key, required this.isLoggedIn});
 
   // This widget is the root of  application.
   @override
   Widget build(BuildContext context) {
+    final Trip trip;
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -70,12 +72,13 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute:isLoggedIn ? HomeScreen.routeName : OnBoarding.routeName ,
+          initialRoute:
+              isLoggedIn ? HomeScreen.routeName : OnBoarding.routeName,
           routes: {
             OnBoarding.routeName: (context) => const OnBoarding(),
             SingUp.routeName: (context) => const SingUp(),
             SingIn.routeName: (context) => const SingIn(),
-            HomeScreen.routeName: (context) =>   HomeScreen(username: "" ),
+            HomeScreen.routeName: (context) => HomeScreen(username: '',),
             ForgetPasswordScreen.routeName: (context) =>
                 const ForgetPasswordScreen(),
             PlanType.routeName: (context) => const PlanType(),
@@ -92,7 +95,9 @@ class MyApp extends StatelessWidget {
             PlaceDic.routeName: (context) => PlaceDic(),
             TripPlansTab.routeName: (context) => TripPlansTab(),
             //SelectCity.routeName: (context) =>    SelectCity(),
-            PlaceDicrip.routeName: (context) => PlaceDicrip(PlaceId: '',),
+            PlaceDicrip.routeName: (context) => PlaceDicrip(
+                  PlaceId: '',
+                ),
             RideRiquest.routeName: (context) => RideRiquest(),
             weatherView.routeName: (context) => weatherView(),
             SelectCategory.routeName: (context) => SelectCategory(
@@ -103,34 +108,64 @@ class MyApp extends StatelessWidget {
                 ),
             Readymade.routeName: (context) => Readymade(),
             InteractiveMap.routeName: (context) => InteractiveMap(),
-            InteractiveMapAboSample.routeName: (context) => InteractiveMapAboSample(),
-            InteractiveMapMohamedAli.routeName: (context) => InteractiveMapMohamedAli(),
-            InteractiveMapCopticMeusem.routeName: (context) => InteractiveMapCopticMeusem(),
+            InteractiveMapAboSample.routeName: (context) =>
+                InteractiveMapAboSample(),
+            InteractiveMapMohamedAli.routeName: (context) =>
+                InteractiveMapMohamedAli(),
+            InteractiveMapCopticMeusem.routeName: (context) =>
+                InteractiveMapCopticMeusem(),
             InteractiveMapAmanda.routeName: (context) => InteractiveMapAmanda(),
-            InteractiveMapMeusemOfIslamicArt.routeName: (context) => InteractiveMapMeusemOfIslamicArt(),
-            NumOfPlaceReadyTrip.routeName: (context) => NumOfPlaceReadyTrip(id: 0,),
-            NumOfPlaceFastTrip.routeName: (context) => NumOfPlaceFastTrip(id: 0,),
+            InteractiveMapMeusemOfIslamicArt.routeName: (context) =>
+                InteractiveMapMeusemOfIslamicArt(),
+            NumOfPlaceReadyTrip.routeName: (context) => NumOfPlaceReadyTrip(
+                  id: 0,
+                ),
+            NumOfPlaceFastTrip.routeName: (context) => NumOfPlaceFastTrip(
+                  id: 0,
+                ),
             //DaysCounter.routeName: (context) => const DaysCounter(),
             //Places_By_cat_And_City.routeName: (context) => Places_By_cat_And_City(),
-            FastTrip.routeName:(context)=>FastTrip(),
-            EmailConfirmationScreen.routeName:(context)=>EmailConfirmationScreen(),
-            PlaceFloorRoomStatues.routeName:(context)=>PlaceFloorRoomStatues(),
-            PlaceFloorRoomStatues2.routeName:(context)=>PlaceFloorRoomStatues2(),
-            DetailsFloorStatusAmanda.routeName:(context)=>DetailsFloorStatusAmanda(),
-            DetailsFloorStatus.routeName:(context)=>DetailsFloorStatus(),
-            DetailsFloorStatus1.routeName:(context)=>DetailsFloorStatus1(),
-            DetailsFloorStatus2.routeName:(context)=>DetailsFloorStatus2(),
-            DetailsFloorStatusMeusemOfIslamicArt.routeName:(context)=>DetailsFloorStatusMeusemOfIslamicArt(),
-            DetailsFloorStatusMeusemOfIslamicArt1.routeName:(context)=>DetailsFloorStatusMeusemOfIslamicArt1(),
-            DetailsFloorStatusMeusemOfIslamicArt2.routeName:(context)=>DetailsFloorStatusMeusemOfIslamicArt2(),
-            DetailsFloorStatusCopticMeusem.routeName:(context)=>DetailsFloorStatusCopticMeusem(),
-            DetailsFloorStatusCopticMeusem1.routeName:(context)=>DetailsFloorStatusCopticMeusem1(),
-            DetailsFloorStatusCopticMeusem2.routeName:(context)=>DetailsFloorStatusCopticMeusem2(),
-            DetailsFloorStatusMohamedAli.routeName:(context)=>DetailsFloorStatusMohamedAli(),
-            DetailsFloorStatusMohamedAli1.routeName:(context)=>DetailsFloorStatusMohamedAli1(),
-            DetailsFloorStatusMohamedAli2.routeName:(context)=>DetailsFloorStatusMohamedAli2(),
-            DetailsFloorStatusMohamedAli3.routeName:(context)=>DetailsFloorStatusMohamedAli3(),
-            CreateNameOfTrip.routeName:(context)=>CreateNameOfTrip(),
+            FastTrip.routeName: (context) => FastTrip(),
+            EmailConfirmationScreen.routeName: (context) =>
+                EmailConfirmationScreen(),
+            PlaceFloorRoomStatues.routeName: (context) =>
+                PlaceFloorRoomStatues(),
+            PlaceFloorRoomStatues2.routeName: (context) =>
+                PlaceFloorRoomStatues2(),
+            DetailsFloorStatusAmanda.routeName: (context) =>
+                DetailsFloorStatusAmanda(),
+            DetailsFloorStatus.routeName: (context) => DetailsFloorStatus(),
+            DetailsFloorStatus1.routeName: (context) => DetailsFloorStatus1(),
+            DetailsFloorStatus2.routeName: (context) => DetailsFloorStatus2(),
+            DetailsFloorStatusMeusemOfIslamicArt.routeName: (context) =>
+                DetailsFloorStatusMeusemOfIslamicArt(),
+            DetailsFloorStatusMeusemOfIslamicArt1.routeName: (context) =>
+                DetailsFloorStatusMeusemOfIslamicArt1(),
+            DetailsFloorStatusMeusemOfIslamicArt2.routeName: (context) =>
+                DetailsFloorStatusMeusemOfIslamicArt2(),
+            DetailsFloorStatusCopticMeusem.routeName: (context) =>
+                DetailsFloorStatusCopticMeusem(),
+            DetailsFloorStatusCopticMeusem1.routeName: (context) =>
+                DetailsFloorStatusCopticMeusem1(),
+            DetailsFloorStatusCopticMeusem2.routeName: (context) =>
+                DetailsFloorStatusCopticMeusem2(),
+            DetailsFloorStatusMohamedAli.routeName: (context) =>
+                DetailsFloorStatusMohamedAli(),
+            DetailsFloorStatusMohamedAli1.routeName: (context) =>
+                DetailsFloorStatusMohamedAli1(),
+            DetailsFloorStatusMohamedAli2.routeName: (context) =>
+                DetailsFloorStatusMohamedAli2(),
+            DetailsFloorStatusMohamedAli3.routeName: (context) =>
+                DetailsFloorStatusMohamedAli3(),
+            CreateNameOfTrip.routeName: (context) => CreateNameOfTrip(),
+            CreateGenerated.routeName: (context) =>
+                const CreateGenerated(),
+            CreateNameOfGeneratedTrip.routeName: (context) =>
+                CreateNameOfGeneratedTrip(),
+            SelectCategoryGenerated.routeName: (context) =>
+                SelectCategoryGenerated(
+                  CategoryId: '',
+                ),
           },
         );
       },

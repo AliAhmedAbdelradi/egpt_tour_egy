@@ -5,9 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/constant.dart';
-import 'days_counter/btn2.dart';
 import 'details_place/place_detail.dart';
-import 'details_place/place_disc.dart';
 
 class Places_By_cat_And_City extends StatefulWidget {
   static String routeName = 'Places_By_cat_And_City';
@@ -21,6 +19,16 @@ class Places_By_cat_And_City extends StatefulWidget {
 }
 
 class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
+  // Store favorite status for each place
+  Map<String, bool> favoriteStatus = {};
+
+  void _toggleFavorite(String placeId) {
+    setState(() {
+      favoriteStatus[placeId] = !(favoriteStatus[placeId] ?? false);
+    });
+    ApiManager.addAndRemoveFromFavourite(placeId: placeId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +49,7 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
               hintText: "Search",
               hintStyle: const TextStyle(color: Colors.grey, fontSize: 15),
               border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(50.w)),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(50.w)),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.blue),
                 borderRadius: BorderRadius.circular(50.w),
@@ -92,6 +100,9 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
           return ListView.separated(
             padding: const EdgeInsets.all(16),
             itemBuilder: (context, index) {
+              final place = category[index];
+              final isFavorited = favoriteStatus[place.id.toString()] ?? false;
+
               return Column(
                 children: [
                   Container(
@@ -102,7 +113,7 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(15),
                       image: DecorationImage(
-                        image: NetworkImage(category[index].imageLink ?? ""),
+                        image: NetworkImage(place.imageLink ?? ""),
                         fit: BoxFit.cover,
                         opacity: 0.7,
                       ),
@@ -111,16 +122,21 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                       children: [
                         Container(
                           alignment: Alignment.topRight,
-                          child: Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
+                          child: IconButton(
+                            onPressed: () {
+                              _toggleFavorite(place.id.toString());
+                            },
+                            icon: Icon(
+                              isFavorited ? Icons.favorite : Icons.favorite_border,
+                              color: isFavorited ? Colors.red : Colors.grey,
+                            ),
                           ),
                         ),
                         Spacer(),
                         Container(
                           alignment: Alignment.bottomLeft,
                           child: Text(
-                            category[index].name ?? "",
+                            place.name ?? "",
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -131,42 +147,61 @@ class _Places_By_cat_And_CityState extends State<Places_By_cat_And_City> {
                       ],
                     ),
                   ),
-
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Column(
                     children: [
                       Text(
-                        textAlign: TextAlign.center,
-                        "${category[index].description}",
+                        "description : ${place.description}",
                         style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.normal,
                           color: Colors.black,
-                          fontSize: 17,
+                          fontSize: 20,
                         ),
                       ),
                     ],
                   ),
-                   
-                     InkWell(
-                       onTap: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (_)=> PlaceDicrip( PlaceId: category[index].id.toString(),)));
-                       },
-                       child: Column(
-                         children: [
-                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                             children: [
-                               Text("See More",style:GoogleFonts.poppins(
-                                   fontWeight: FontWeight.normal,
-                                   color:primaryColor  ,
-                                   fontSize: 22),),
-                               Icon(Icons.navigate_next,color: primaryColor,size: 22,)
-                             ],
-                           ),
-
-                         ],
-                       ),
-                     ),
-
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PlaceDicrip(
+                            PlaceId: place.id.toString(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "See More",
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.normal,
+                                color: primaryColor,
+                                fontSize: 22,
+                              ),
+                            ),
+                            Icon(
+                              Icons.navigate_next,
+                              color: primaryColor,
+                              size: 22,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               );
             },

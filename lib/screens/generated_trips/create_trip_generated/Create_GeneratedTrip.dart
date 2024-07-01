@@ -1,15 +1,13 @@
-import 'package:ept_mate/screens/customize_screen/create_trip/shape_plan_create.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../create_name_of_Atrip/Create_name_trip.dart';
-import '../Select_Category/Select_Category_Screen.dart';
+import '../../customize_screen/create_trip/shape_plan_create.dart';
+import '../name_screen/name_generated_screen.dart';
 
-class CreateTrip extends StatelessWidget {
-  const CreateTrip({super.key});
-
-  static const String routeName = "create";
+class CreateGenerated extends StatelessWidget {
+  const CreateGenerated({super.key});
+  static const String routeName = "CreateGenerated";
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +54,9 @@ class CreateTrip extends StatelessWidget {
             ),
             ShapePlanCreate("assets/images/create_trip.png", "Create  A  Trip",
                 "Create a fully customized day-by-day itherary \n and discover the hidden gems of egypt",
-                () {
-              Navigator.pushNamed(context, CreateNameOfTrip.routeName);
-            }),
+                    () {
+                  Navigator.pushNamed(context, CreateNameOfGeneratedTrip.routeName);
+                }),
             SizedBox(
               height: 35.h,
             ),
@@ -66,7 +64,7 @@ class CreateTrip extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, CreateNameOfTrip.routeName);
+                    Navigator.pushNamed(context, CreateNameOfGeneratedTrip.routeName);
 
                   },
                   child: Row(

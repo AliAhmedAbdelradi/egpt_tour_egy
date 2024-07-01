@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../constant/constant.dart';
 import '../customize_screen/create_trip/create_trip_screen.dart';
 import '../fastTrip/FastTrip.dart';
+import '../generated_trips/create_trip_generated/Create_GeneratedTrip.dart';
 import '../plan_type_screen/shape_plan.dart';
 import '../readyTrips/readytrip.dart';
 import '../request_ride/categ_ride.dart';
@@ -24,15 +25,15 @@ class TripPlansTab extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Trip Plans ",
+              Text("Trip Plans",
                   style: GoogleFonts.poppins(
                       color: Colors.black,
-                      fontSize: 35,
+                      fontSize: 35.sp,
                       fontWeight: FontWeight.w600)),
               Text("Choose Type",
                   style: GoogleFonts.poppins(
                       color: Colors.black38,
-                      fontSize: 15,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.w600)),
               SizedBox(
                 height: 30.h,
@@ -43,7 +44,11 @@ class TripPlansTab extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              ShapePlan("assets/images/2.png", "Generate", () {}),
+              ShapePlan("assets/images/2.png", "Generate", () {
+
+                Navigator.pushNamed(context, CreateGenerated.routeName);
+
+              }),
               SizedBox(
                 height: 20.h,
               ),
@@ -58,7 +63,7 @@ class TripPlansTab extends StatelessWidget {
 
                   ){
                 Navigator.pushNamed(context, FastTrip.routeName);
-              }, child: Text("are you need fast trip?",style: TextStyle(color: primaryColor,fontWeight: FontWeight.bold,fontSize: 19),))
+              }, child: Text("are you need fast trip?",style: TextStyle(color: primaryColor,fontWeight: FontWeight.bold,fontSize: 19.sp),))
             ],
           ),
         ),
